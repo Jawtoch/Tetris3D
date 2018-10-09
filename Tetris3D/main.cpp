@@ -28,10 +28,10 @@ int main(int argc, const char * argv[]) {
     SDL_RenderClear(renderer);
     SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
     
-    Point p1 = Point(0, 0);
-    Point p2 = Point(0, 100);
-    Point p3 = Point(100, 100);
-    Point p4 = Point(100, 0);
+    Point2D p1 = Point2D(200, 300);
+    Point2D p2 = Point2D(300, 300);
+    Point2D p3 = Point2D(300, 200);
+    Point2D p4 = Point2D(200, 200);
     
     Square s = Square(p1, p2, p3, p4);
     s.rotate(0.2);

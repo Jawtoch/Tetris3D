@@ -13,15 +13,15 @@
 #include <math.h>
 #include <SDL2/SDL.h>
 
-class Point {
+class Point2D {
     
 private:
     double x;
     double y;
     
 public:
-    Point();
-    Point(int abscisse, int ordonnee);
+    Point2D();
+    Point2D(double abscisse, double ordonnee);
     double getX();
     double getY();
 };
@@ -29,37 +29,53 @@ public:
 class Segment {
     
 private:
-    Point p1;
-    Point p2;
+    Point2D p1;
+    Point2D p2;
     
 public:
     Segment();
-    Segment(Point a, Point b);
-    Point getP1();
-    Point getP2();
-    Point centre();
+    Segment(Point2D a, Point2D b);
+    Point2D getP1();
+    Point2D getP2();
+    Point2D centre();
     void RenderDrawSegment(SDL_Renderer* renderer);
 };
 
 class Square {
     
 private:
-    Point enBasAGauche;
-    Point enBasADroite;
-    Point enHautAGauche;
-    Point enHautADroite;
+    Point2D enBasAGauche;
+    Point2D enBasADroite;
+    Point2D enHautAGauche;
+    Point2D enHautADroite;
     
 public:
     Square();
-    Square(Point bg, Point bd, Point hg, Point hd);
-    Point coinEnBasAGauche();
-    Point coinEnBasADroite();
-    Point coinEnHautAGauche();
-    Point coinEnHautADroite();
-    Point getCentre();
-    Point* getPoints();
+    Square(Point2D bg, Point2D bd, Point2D hg, Point2D hd);
+    Point2D coinEnBasAGauche();
+    Point2D coinEnBasADroite();
+    Point2D coinEnHautAGauche();
+    Point2D coinEnHautADroite();
+    Point2D getCentre();
+    Point2D* getPoints();
     void RenderDrawSquare(SDL_Renderer* renderer);
     void rotate(double alpha);
+    
+};
+
+class Point3D {
+    
+private:
+    double x;
+    double y;
+    double z;
+
+public:
+    Point3D();
+    Point3D(double a, double b, double c);
+    double getX();
+    double getY();
+    double getZ();
     
 };
 

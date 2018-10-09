@@ -10,42 +10,42 @@
 #include <math.h>
 #include <SDL2/SDL.h>
 
-// Point Methods
-Point::Point() {
+// Point2D Methods
+Point2D::Point2D() {
     x = 0;
     y = 0;
 }
 
-Point::Point(int abscisse, int ordonnee) {
+Point2D::Point2D(double abscisse, double ordonnee) {
     x = abscisse;
     y = ordonnee;
 }
 
-double Point::getX() {
+double Point2D::getX() {
     return x;
 }
 
-double Point::getY() {
+double Point2D::getY() {
     return y;
 }
-// End Point Methods
+// End Point2D Methods
 
 // Segment Methods
 Segment::Segment() {
-    p1 = Point();
-    p2 = Point();
+    p1 = Point2D();
+    p2 = Point2D();
 }
 
-Segment::Segment(Point a, Point b) {
+Segment::Segment(Point2D a, Point2D b) {
     p1 = a;
     p2 = b;
 }
 
-Point Segment::getP1() {
+Point2D Segment::getP1() {
     return p1;
 }
 
-Point Segment::getP2() {
+Point2D Segment::getP2() {
     return p2;
 }
 
@@ -97,37 +97,37 @@ void Segment::RenderDrawSegment(SDL_Renderer* renderer) {
 
 // Square Methods
 Square::Square() {
-    enBasAGauche = Point();
-    enBasADroite = Point();
-    enHautAGauche = Point();
-    enHautADroite = Point();
+    enBasAGauche = Point2D();
+    enBasADroite = Point2D();
+    enHautAGauche = Point2D();
+    enHautADroite = Point2D();
 }
 
-Square::Square(Point bg, Point bd, Point hg, Point hd) {
+Square::Square(Point2D bg, Point2D bd, Point2D hd, Point2D hg) {
     enBasAGauche = bg;
     enBasADroite = bd;
     enHautAGauche = hg;
     enHautADroite = hd;
 }
 
-Point Square::coinEnBasAGauche() {
+Point2D Square::coinEnBasAGauche() {
     return enBasAGauche;
 }
 
-Point Square::coinEnBasADroite() {
+Point2D Square::coinEnBasADroite() {
     return enBasADroite;
 }
 
-Point Square::coinEnHautAGauche() {
+Point2D Square::coinEnHautAGauche() {
     return enHautAGauche;
 }
 
-Point Square::coinEnHautADroite() {
+Point2D Square::coinEnHautADroite() {
     return enHautADroite;
 }
 
-Point Square::getCentre() {
-    return Point((enBasAGauche.getX() + enHautADroite.getX())/2, (enBasAGauche.getY() + enHautADroite.getY())/2);
+Point2D Square::getCentre() {
+    return Point2D((enBasAGauche.getX() + enHautADroite.getX())/2, (enBasAGauche.getY() + enHautADroite.getY())/2);
 }
 
 void Square::RenderDrawSquare(SDL_Renderer* renderer) {
@@ -137,36 +137,40 @@ void Square::RenderDrawSquare(SDL_Renderer* renderer) {
     Segment s3 = Segment(coinEnHautADroite(), coinEnHautAGauche());
     Segment s4 = Segment(coinEnHautAGauche(), coinEnBasAGauche());
 
+    SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
     s1.RenderDrawSegment(renderer);
+    SDL_SetRenderDrawColor(renderer, 0, 255, 0, 255);
     s2.RenderDrawSegment(renderer);
+    SDL_SetRenderDrawColor(renderer, 0, 0, 255, 255);
     s3.RenderDrawSegment(renderer);
+    SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
     s4.RenderDrawSegment(renderer);
     
 }
 
-Point* Square::getPoints() {
+Point2D* Square::getPoints() {
 
-    Point tab[] = {coinEnBasAGauche(), coinEnBasADroite(), coinEnHautADroite(), coinEnHautAGauche()};
+    Point2D tab[] = {coinEnBasAGauche(), coinEnBasADroite(), coinEnHautADroite(), coinEnHautAGauche()};
     return tab;
 }
 
 void Square::rotate(double alpha) {
     
-    Point centre = Point(
+    Point2D centre = Point2D(
                          (coinEnBasAGauche().getX() + coinEnHautADroite().getX()) / 2,
                          (coinEnBasAGauche().getY() + coinEnHautADroite().getY()) / 2
                          );
 
-    Point tab[] = {Point(),Point(),Point(),Point()};
+    Point2D tab[] = {Point2D(),Point2D(),Point2D(),Point2D()};
     
     for (int i = 0; i < 4; i++) {
-        Point p = getPoints()[i];
-        int a = p.getX() - centre.getX();
-        int b = p.getY() - centre.getY();
-        double d = hypot((double)b,(double)a);
-        double theta  = atan2((double)b, (double)a) + alpha;
+        Point2D p = getPoints()[i];
+        double a = p.getX() - centre.getX();
+        double b = p.getY() - centre.getY();
+        double d = hypot(b,a);
+        double theta  = atan2(b, a) + alpha;
         
-        tab[i] = Point(centre.getX() + d * cos(theta), centre.getY() + d * sin(theta));
+        tab[i] = Point2D(centre.getX() + d * cos(theta), centre.getY() + d * sin(theta));
     }
     enBasAGauche = tab[0];
     enBasADroite = tab[1];
@@ -175,3 +179,31 @@ void Square::rotate(double alpha) {
 }
 
 // End Square Methods
+
+// Point3D Methods
+
+Point3D::Point3D() {
+    x = 0;
+    y = 0;
+    z = 0;
+}
+
+Point3D::Point3D(double a, double b, double c) {
+    x = a;
+    y = b;
+    z = c;
+}
+
+double Point3D::getX() {
+    return x;
+}
+
+double Point3D::getY() {
+    return y;
+}
+
+double Point3D::getZ() {
+    return z;
+}
+
+// End Point3D Methods
