@@ -8,6 +8,13 @@
 
 /* Begin PBXBuildFile section */
 		A2917968216D3A9D0086294B /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A2917967216D3A9D0086294B /* main.cpp */; };
+		A2917972216D3AE30086294B /* game.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A291796E216D3AE30086294B /* game.cpp */; };
+		A2917973216D3AE30086294B /* Makefile in Sources */ = {isa = PBXBuildFile; fileRef = A2917971216D3AE30086294B /* Makefile */; };
+		A291797A216D3B550086294B /* SDL_mixer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A2917975216D3B550086294B /* SDL_mixer.framework */; };
+		A291797B216D3B550086294B /* SDL_ttf.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A2917976216D3B550086294B /* SDL_ttf.framework */; };
+		A291797C216D3B550086294B /* SDL_image.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A2917977216D3B550086294B /* SDL_image.framework */; };
+		A291797D216D3B550086294B /* SDL2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A2917978216D3B550086294B /* SDL2.framework */; };
+		A291797E216D3B550086294B /* SDL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A2917979216D3B550086294B /* SDL.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -25,6 +32,15 @@
 /* Begin PBXFileReference section */
 		A2917964216D3A9C0086294B /* Tetris3D */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Tetris3D; sourceTree = BUILT_PRODUCTS_DIR; };
 		A2917967216D3A9D0086294B /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		A291796E216D3AE30086294B /* game.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = game.cpp; sourceTree = "<group>"; };
+		A291796F216D3AE30086294B /* game.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = game.hpp; sourceTree = "<group>"; };
+		A2917970216D3AE30086294B /* main.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = main.hpp; sourceTree = "<group>"; };
+		A2917971216D3AE30086294B /* Makefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
+		A2917975216D3B550086294B /* SDL_mixer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL_mixer.framework; path = ../../../../../../../Library/Frameworks/SDL_mixer.framework; sourceTree = "<group>"; };
+		A2917976216D3B550086294B /* SDL_ttf.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL_ttf.framework; path = ../../../../../../../Library/Frameworks/SDL_ttf.framework; sourceTree = "<group>"; };
+		A2917977216D3B550086294B /* SDL_image.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL_image.framework; path = ../../../../../../../Library/Frameworks/SDL_image.framework; sourceTree = "<group>"; };
+		A2917978216D3B550086294B /* SDL2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2.framework; path = ../../../../../../../Library/Frameworks/SDL2.framework; sourceTree = "<group>"; };
+		A2917979216D3B550086294B /* SDL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL.framework; path = ../../../../../../../Library/Frameworks/SDL.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -32,6 +48,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A291797A216D3B550086294B /* SDL_mixer.framework in Frameworks */,
+				A291797B216D3B550086294B /* SDL_ttf.framework in Frameworks */,
+				A291797C216D3B550086294B /* SDL_image.framework in Frameworks */,
+				A291797D216D3B550086294B /* SDL2.framework in Frameworks */,
+				A291797E216D3B550086294B /* SDL.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -43,6 +64,7 @@
 			children = (
 				A2917966216D3A9C0086294B /* Tetris3D */,
 				A2917965216D3A9C0086294B /* Products */,
+				A2917974216D3B540086294B /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -58,8 +80,24 @@
 			isa = PBXGroup;
 			children = (
 				A2917967216D3A9D0086294B /* main.cpp */,
+				A2917970216D3AE30086294B /* main.hpp */,
+				A291796E216D3AE30086294B /* game.cpp */,
+				A291796F216D3AE30086294B /* game.hpp */,
+				A2917971216D3AE30086294B /* Makefile */,
 			);
 			path = Tetris3D;
+			sourceTree = "<group>";
+		};
+		A2917974216D3B540086294B /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				A2917977216D3B550086294B /* SDL_image.framework */,
+				A2917975216D3B550086294B /* SDL_mixer.framework */,
+				A2917976216D3B550086294B /* SDL_ttf.framework */,
+				A2917979216D3B550086294B /* SDL.framework */,
+				A2917978216D3B550086294B /* SDL2.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -118,7 +156,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A2917973216D3AE30086294B /* Makefile in Sources */,
 				A2917968216D3A9D0086294B /* main.cpp in Sources */,
+				A2917972216D3AE30086294B /* game.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -241,6 +281,10 @@
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = R72YBJYJW5;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(LOCAL_LIBRARY_DIR)/Frameworks",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -250,6 +294,10 @@
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = R72YBJYJW5;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(LOCAL_LIBRARY_DIR)/Frameworks",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
