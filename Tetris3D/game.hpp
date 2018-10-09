@@ -57,7 +57,7 @@ public:
     Point2D coinEnHautAGauche();
     Point2D coinEnHautADroite();
     Point2D getCentre();
-    Point2D* getPoints();
+    Point2D* getNodes();
     void RenderDrawSquare(SDL_Renderer* renderer);
     void rotate(double alpha);
     
@@ -77,6 +77,25 @@ public:
     double getY();
     double getZ();
     
+};
+
+class Cube {
+    
+private:
+    Point3D enBasAGaucheDevant;
+    Point3D enBasADroiteDevant;
+    Point3D enHautAGaucheDevant;
+    Point3D enHautADroiteDevant;
+    Point3D enBasAGaucheDerriere;
+    Point3D enBasADroiteDerriere;
+    Point3D enHautAGaucheDerriere;
+    Point3D enHautADroiteDerriere;
+    
+public:
+    Cube();
+    Cube(Point3D origineEnBasAGaucheDevant, double taille);
+    void RenderDrawCube(SDL_Renderer* renderer);
+    void getNodes(Point3D tab[2][2][2]);
 };
 
 #endif /* game_hpp */

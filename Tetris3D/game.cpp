@@ -148,7 +148,7 @@ void Square::RenderDrawSquare(SDL_Renderer* renderer) {
     
 }
 
-Point2D* Square::getPoints() {
+Point2D* Square::getNodes() {
 
     Point2D tab[] = {coinEnBasAGauche(), coinEnBasADroite(), coinEnHautADroite(), coinEnHautAGauche()};
     return tab;
@@ -164,7 +164,7 @@ void Square::rotate(double alpha) {
     Point2D tab[] = {Point2D(),Point2D(),Point2D(),Point2D()};
     
     for (int i = 0; i < 4; i++) {
-        Point2D p = getPoints()[i];
+        Point2D p = getNodes()[i];
         double a = p.getX() - centre.getX();
         double b = p.getY() - centre.getY();
         double d = hypot(b,a);
@@ -207,3 +207,83 @@ double Point3D::getZ() {
 }
 
 // End Point3D Methods
+
+// Cube Methods
+
+Cube::Cube() {
+    enBasAGaucheDevant = Point3D();
+    enBasADroiteDevant = Point3D();
+    enHautAGaucheDevant = Point3D();
+    enHautADroiteDevant = Point3D();
+    enBasAGaucheDerriere = Point3D();
+    enBasADroiteDerriere = Point3D();
+    enHautAGaucheDerriere = Point3D();
+    enHautADroiteDerriere = Point3D();
+}
+
+Cube::Cube(Point3D origineEnBasAGaucheDevant, double taille) {
+    
+    enBasAGaucheDevant = origineEnBasAGaucheDevant;
+    enBasADroiteDevant = Point3D(
+                                 origineEnBasAGaucheDevant.getX() + taille,
+                                 origineEnBasAGaucheDevant.getY(),
+                                 origineEnBasAGaucheDevant.getZ()
+                                 );
+    enHautAGaucheDevant = Point3D(
+                                  origineEnBasAGaucheDevant.getX(),
+                                  origineEnBasAGaucheDevant.getY() + taille,
+                                  origineEnBasAGaucheDevant.getZ()
+                                  );
+    enHautADroiteDevant = Point3D(
+                                  origineEnBasAGaucheDevant.getX() + taille,
+                                  origineEnBasAGaucheDevant.getY() + taille,
+                                  origineEnBasAGaucheDevant.getZ()
+                                  );
+    enBasAGaucheDerriere = Point3D(
+                                   origineEnBasAGaucheDevant.getX(),
+                                   origineEnBasAGaucheDevant.getY(),
+                                   origineEnBasAGaucheDevant.getZ() + taille
+                                   );
+    enBasADroiteDerriere = Point3D(
+                                   origineEnBasAGaucheDevant.getX() + taille,
+                                   origineEnBasAGaucheDevant.getY(),
+                                   origineEnBasAGaucheDevant.getZ() + taille
+                                   );
+    enHautAGaucheDerriere = Point3D(
+                                    origineEnBasAGaucheDevant.getX(),
+                                    origineEnBasAGaucheDevant.getY() + taille,
+                                    origineEnBasAGaucheDevant.getZ() + taille
+                                    );
+    enHautADroiteDerriere = Point3D(
+                                    origineEnBasAGaucheDevant.getX() + taille,
+                                    origineEnBasAGaucheDevant.getY() + taille,
+                                    origineEnBasAGaucheDevant.getZ() + taille
+                                    );
+}
+
+void Cube::getNodes(Point3D tab[2][2][2]) {
+    /*tab[z][y][x]
+     
+        1,1,0 ------ 1,1,1
+         /|           / |
+        / |          /  |
+       /  |         /   |
+     0,1,0 ------ 0,1,1 |
+       |1,0,0 ------|-1,0,1
+       |  /         |  /
+       | /          | /
+       |/           |/
+     0,0,0 ------ 0,0,1
+    
+     */
+    tab[0][0][0] = enBasAGaucheDevant;
+    tab[0][0][1] = enBasADroiteDevant;
+    tab[0][1][0] = enHautAGaucheDevant;
+    tab[0][1][1] = enHautADroiteDevant;
+    tab[1][0][0] = enBasAGaucheDerriere;
+    tab[1][0][1] = enBasADroiteDerriere;
+    tab[1][1][0] = enHautAGaucheDerriere;
+    tab[1][1][1] = enHautADroiteDerriere;
+    
+}
+// End Cube Methods
