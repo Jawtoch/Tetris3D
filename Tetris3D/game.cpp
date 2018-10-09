@@ -130,18 +130,48 @@ Point Square::getCentre() {
     return Point((enBasAGauche.getX() + enHautADroite.getX())/2, (enBasAGauche.getY() + enHautADroite.getY())/2);
 }
 
-void Square::RenderDrawSquare(SDL_Renderer* renderer, Square square) {
+void Square::RenderDrawSquare(SDL_Renderer* renderer) {
     
-    Segment s1 = Segment(square.coinEnBasAGauche(), square.coinEnBasADroite());
-    Segment s2 = Segment(square.coinEnBasADroite(), square.coinEnHautAGauche());
-    Segment s3 = Segment(square.coinEnHautAGauche(), square.coinEnHautADroite());
-    Segment s4 = Segment(square.coinEnHautADroite(), square.coinEnBasAGauche());
+    Segment s1 = Segment(coinEnBasAGauche(), coinEnBasADroite());
+    Segment s2 = Segment(coinEnBasADroite(), coinEnHautADroite());
+    Segment s3 = Segment(coinEnHautADroite(), coinEnHautAGauche());
+    Segment s4 = Segment(coinEnHautAGauche(), coinEnBasAGauche());
 
     s1.RenderDrawSegment(renderer);
     s2.RenderDrawSegment(renderer);
     s3.RenderDrawSegment(renderer);
     s4.RenderDrawSegment(renderer);
     
+}
+
+Point* Square::getPoints() {
+
+    Point tab[] = {coinEnBasAGauche(), coinEnBasADroite(), coinEnHautADroite(), coinEnHautAGauche()};
+    return tab;
+}
+
+void Square::rotate(double alpha) {
+    
+    Point centre = Point(
+                         (coinEnBasAGauche().getX() + coinEnHautADroite().getX()) / 2,
+                         (coinEnBasAGauche().getY() + coinEnHautADroite().getY()) / 2
+                         );
+
+    Point tab[] = {Point(),Point(),Point(),Point()};
+    
+    for (int i = 0; i < 4; i++) {
+        Point p = getPoints()[i];
+        int a = p.getX() - centre.getX();
+        int b = p.getY() - centre.getY();
+        double d = hypot((double)b,(double)a);
+        double theta  = atan2((double)b, (double)a) + alpha;
+        
+        tab[i] = Point(centre.getX() + d * cos(theta), centre.getY() + d * sin(theta));
+    }
+    enBasAGauche = tab[0];
+    enBasADroite = tab[1];
+    enHautADroite = tab[2];
+    enHautAGauche = tab[3];
 }
 
 // End Square Methods

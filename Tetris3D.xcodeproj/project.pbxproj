@@ -9,12 +9,7 @@
 /* Begin PBXBuildFile section */
 		A2917968216D3A9D0086294B /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A2917967216D3A9D0086294B /* main.cpp */; };
 		A2917972216D3AE30086294B /* game.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A291796E216D3AE30086294B /* game.cpp */; };
-		A2917973216D3AE30086294B /* Makefile in Sources */ = {isa = PBXBuildFile; fileRef = A2917971216D3AE30086294B /* Makefile */; };
-		A291797A216D3B550086294B /* SDL_mixer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A2917975216D3B550086294B /* SDL_mixer.framework */; };
-		A291797B216D3B550086294B /* SDL_ttf.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A2917976216D3B550086294B /* SDL_ttf.framework */; };
-		A291797C216D3B550086294B /* SDL_image.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A2917977216D3B550086294B /* SDL_image.framework */; };
 		A291797D216D3B550086294B /* SDL2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A2917978216D3B550086294B /* SDL2.framework */; };
-		A291797E216D3B550086294B /* SDL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A2917979216D3B550086294B /* SDL.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -48,11 +43,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A291797A216D3B550086294B /* SDL_mixer.framework in Frameworks */,
-				A291797B216D3B550086294B /* SDL_ttf.framework in Frameworks */,
-				A291797C216D3B550086294B /* SDL_image.framework in Frameworks */,
 				A291797D216D3B550086294B /* SDL2.framework in Frameworks */,
-				A291797E216D3B550086294B /* SDL.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -156,7 +147,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A2917973216D3AE30086294B /* Makefile in Sources */,
 				A2917968216D3A9D0086294B /* main.cpp in Sources */,
 				A2917972216D3AE30086294B /* game.cpp in Sources */,
 			);

@@ -57,7 +57,9 @@ public:
     Point coinEnHautAGauche();
     Point coinEnHautADroite();
     Point getCentre();
-    void RenderDrawSquare(SDL_Renderer* renderer, Square square);
+    Point* getPoints();
+    void RenderDrawSquare(SDL_Renderer* renderer);
+    void rotate(double alpha);
     
 };
 
