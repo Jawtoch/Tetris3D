@@ -76,7 +76,7 @@ public:
     double getX();
     double getY();
     double getZ();
-    
+    Point2D toPoint2D();
 };
 
 class Cube {

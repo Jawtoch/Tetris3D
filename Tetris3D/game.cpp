@@ -9,6 +9,7 @@
 #include <stdlib.h>
 #include <math.h>
 #include <SDL2/SDL.h>
+#include <iostream>
 
 // Point2D Methods
 Point2D::Point2D() {
@@ -66,10 +67,9 @@ void Segment::RenderDrawSegment(SDL_Renderer* renderer) {
     if (dlig < 0) {
         sensLig = -1;
     }
-    
     if (abscol > abslig) {
         cumul = abscol;
-        while (col != (getP2().getX() + sensCol)) {
+        while (col != (int)(getP2().getX() + sensCol)) {
             SDL_RenderDrawPoint(renderer, col, lig);
             cumul += 2 * abslig;
             if (cumul >= 2 * abscol) {
@@ -80,7 +80,7 @@ void Segment::RenderDrawSegment(SDL_Renderer* renderer) {
         }
     } else {
         cumul = abslig;
-        while (lig != (getP2().getY() + sensLig)) {
+        while (lig != (int)(getP2().getY() + sensLig)) {
             SDL_RenderDrawPoint(renderer, col, lig);
             cumul += 2 * abscol;
             if (cumul >= 2 * abslig) {
@@ -155,12 +155,11 @@ Point2D* Square::getNodes() {
 }
 
 void Square::rotate(double alpha) {
-    
     Point2D centre = Point2D(
                          (coinEnBasAGauche().getX() + coinEnHautADroite().getX()) / 2,
                          (coinEnBasAGauche().getY() + coinEnHautADroite().getY()) / 2
                          );
-
+    
     Point2D tab[] = {Point2D(),Point2D(),Point2D(),Point2D()};
     
     for (int i = 0; i < 4; i++) {
@@ -285,5 +284,15 @@ void Cube::getNodes(Point3D tab[2][2][2]) {
     tab[1][1][0] = enHautAGaucheDerriere;
     tab[1][1][1] = enHautADroiteDerriere;
     
+}
+
+void Cube::RenderDrawCube(SDL_Renderer *renderer) {
+    Point3D tab[2][2][2];
+    getNodes(tab);
+    Square s1 = Square(tab[0][0][0].toPoint2D(), tab[0][0][0].toPoint2D(), tab[0][0][0].toPoint2D(), tab[0][0][0].toPoint2D());
+}
+
+Point2D Point3D::toPoint2D() {
+    return Point2D(getX(), getY());
 }
 // End Cube Methods

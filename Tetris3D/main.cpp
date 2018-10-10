@@ -34,7 +34,7 @@ int main(int argc, const char * argv[]) {
     Point2D p4 = Point2D(200, 200);
     
     Square s = Square(p1, p2, p3, p4);
-    s.rotate(0.2);
+    s.rotate(1.1);
     s.RenderDrawSquare(renderer);
     SDL_RenderPresent(renderer);
     
