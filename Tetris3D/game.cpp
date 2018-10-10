@@ -51,45 +51,7 @@ Point2D Segment::getP2() {
 }
 
 void Segment::RenderDrawSegment(SDL_Renderer* renderer) {
-    int dlig = getP2().getY() - getP1().getY();
-    int dcol = getP2().getX() - getP1().getX();
-    int abscol = abs(dcol);
-    int abslig = abs(dlig);
-    int col = getP1().getX();
-    int lig = getP1().getY();
-    int sensLig = 1;
-    int sensCol = 1;
-    int cumul = 0;
-    
-    if (dcol < 0) {
-        sensCol = -1;
-    }
-    if (dlig < 0) {
-        sensLig = -1;
-    }
-    if (abscol > abslig) {
-        cumul = abscol;
-        while (col != (int)(getP2().getX() + sensCol)) {
-            SDL_RenderDrawPoint(renderer, col, lig);
-            cumul += 2 * abslig;
-            if (cumul >= 2 * abscol) {
-                lig += sensLig;
-                cumul -= 2 * abscol;
-            }
-            col += sensCol;
-        }
-    } else {
-        cumul = abslig;
-        while (lig != (int)(getP2().getY() + sensLig)) {
-            SDL_RenderDrawPoint(renderer, col, lig);
-            cumul += 2 * abscol;
-            if (cumul >= 2 * abslig) {
-                col += sensCol;
-                cumul -= 2 * abslig;
-            }
-            lig += sensLig;
-        }
-    }
+    SDL_RenderDrawLine(renderer, p1.getX(), p1.getY(), p2.getX(), p2.getY());
     
 }
 
@@ -286,13 +248,20 @@ void Cube::getNodes(Point3D tab[2][2][2]) {
     
 }
 
-void Cube::RenderDrawCube(SDL_Renderer *renderer) {
+void Cube::RenderDrawCube(SDL_Renderer *renderer, double angle) {
     Point3D tab[2][2][2];
     getNodes(tab);
-    Square s1 = Square(tab[0][0][0].toPoint2D(), tab[0][0][0].toPoint2D(), tab[0][0][0].toPoint2D(), tab[0][0][0].toPoint2D());
+    Square s1 = Square(tab[0][0][0].toPoint2D(angle), tab[0][0][1].toPoint2D(angle), tab[0][1][1].toPoint2D(angle), tab[0][1][0].toPoint2D(angle));
+    s1.RenderDrawSquare(renderer);
+    Square s2 = Square(tab[1][0][0].toPoint2D(angle), tab[1][0][1].toPoint2D(angle), tab[1][1][1].toPoint2D(angle), tab[1][1][0].toPoint2D(angle));
+    s2.RenderDrawSquare(renderer);
+    Square s3 = Square(tab[0][0][1].toPoint2D(angle), tab[1][0][1].toPoint2D(angle), tab[1][1][1].toPoint2D(angle), tab[0][1][1].toPoint2D(angle));
+    s3.RenderDrawSquare(renderer);
+    Square s4 = Square(tab[0][0][0].toPoint2D(angle), tab[1][0][0].toPoint2D(angle), tab[1][1][0].toPoint2D(angle), tab[0][1][0].toPoint2D(angle));
+    s4.RenderDrawSquare(renderer);
 }
 
-Point2D Point3D::toPoint2D() {
-    return Point2D(getX(), getY());
+Point2D Point3D::toPoint2D(double i) {
+    return Point2D(getX() + cos(i) * getZ(), getY() + sin(i) * getZ());
 }
 // End Cube Methods

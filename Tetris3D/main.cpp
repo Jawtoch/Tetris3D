@@ -12,6 +12,9 @@
 #include <SDL2/SDL.h>
 #include "game.hpp"
 
+#include <thread>
+#include <chrono>
+
 #define WINDOW_WIDTH 600
 
 int main(int argc, const char * argv[]) {
@@ -28,7 +31,7 @@ int main(int argc, const char * argv[]) {
     SDL_RenderClear(renderer);
     SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
     
-    Point2D p1 = Point2D(200, 300);
+    /*Point2D p1 = Point2D(200, 300);
     Point2D p2 = Point2D(300, 300);
     Point2D p3 = Point2D(300, 200);
     Point2D p4 = Point2D(200, 200);
@@ -36,6 +39,10 @@ int main(int argc, const char * argv[]) {
     Square s = Square(p1, p2, p3, p4);
     s.rotate(1.1);
     s.RenderDrawSquare(renderer);
+    SDL_RenderPresent(renderer);*/
+    
+    Cube c = Cube(Point3D(100, 100, 100), 100.);
+    c.RenderDrawCube(renderer, 32);
     SDL_RenderPresent(renderer);
     
     while (1) {

@@ -76,7 +76,7 @@ public:
     double getX();
     double getY();
     double getZ();
-    Point2D toPoint2D();
+    Point2D toPoint2D(double i);
 };
 
 class Cube {
@@ -94,7 +94,7 @@ private:
 public:
     Cube();
     Cube(Point3D origineEnBasAGaucheDevant, double taille);
-    void RenderDrawCube(SDL_Renderer* renderer);
+    void RenderDrawCube(SDL_Renderer* renderer, double angle);
     void getNodes(Point3D tab[2][2][2]);
 };
 
