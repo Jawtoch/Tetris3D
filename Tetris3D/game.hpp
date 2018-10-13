@@ -63,6 +63,21 @@ public:
     
 };
 
+class Camera {
+    
+private:
+    int x;
+    int y;
+    int z;
+    
+public:
+    Camera();
+    Camera(int a, int b, int c);
+    int getX();
+    int getY();
+    int getZ();
+};
+
 class Point3D {
     
 private:
@@ -76,25 +91,39 @@ public:
     double getX();
     double getY();
     double getZ();
-    Point2D toPoint2D(double i);
+    Point2D toPoint2D();
+    //Créer une fonction qui transforme des coordonnées classiques
+    /*
+     y
+     ^
+     |
+     |
+     |
+     ------->x
+     
+     en coordonnées SDL
+     
+     ------> x
+     |
+     |
+     |
+     |
+     v
+     y
+     
+     */
 };
 
 class Cube {
     
 private:
-    Point3D enBasAGaucheDevant;
-    Point3D enBasADroiteDevant;
-    Point3D enHautAGaucheDevant;
-    Point3D enHautADroiteDevant;
-    Point3D enBasAGaucheDerriere;
-    Point3D enBasADroiteDerriere;
-    Point3D enHautAGaucheDerriere;
-    Point3D enHautADroiteDerriere;
+    Point3D origine;
+    double taille;
     
 public:
     Cube();
-    Cube(Point3D origineEnBasAGaucheDevant, double taille);
-    void RenderDrawCube(SDL_Renderer* renderer, double angle);
+    Cube(Point3D origine, double taille);
+    void RenderDrawCube(SDL_Renderer* renderer, int a, int b, int c);
     void getNodes(Point3D tab[2][2][2]);
 };
 

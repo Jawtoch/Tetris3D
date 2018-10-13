@@ -12,10 +12,15 @@
 #include <SDL2/SDL.h>
 #include "game.hpp"
 
-#include <thread>
-#include <chrono>
-
 #define WINDOW_WIDTH 600
+
+void drawAxes(SDL_Renderer *renderer, int x, int y) {
+    for(int i = 0; i <= WINDOW_WIDTH; i++) {
+        SDL_RenderDrawPoint(renderer, x, i);
+    }
+    SDL_RenderDrawLine(renderer, x, y,x + WINDOW_WIDTH,(y + WINDOW_WIDTH) * cos(1.5707963268));
+    SDL_RenderDrawLine(renderer, x, y,x - WINDOW_WIDTH,(y - WINDOW_WIDTH) * cos(1.5707963268));
+}
 
 int main(int argc, const char * argv[]) {
     // insert code here...
@@ -41,11 +46,36 @@ int main(int argc, const char * argv[]) {
     s.RenderDrawSquare(renderer);
     SDL_RenderPresent(renderer);*/
     
-    Cube c = Cube(Point3D(100, 100, 100), 100.);
-    c.RenderDrawCube(renderer, 32);
-    SDL_RenderPresent(renderer);
+    /*for(int i = 0; i < WINDOW_WIDTH; i++) {
+        SDL_RenderDrawPoint(renderer, i, i*cos(0.5236));
+        SDL_RenderDrawPoint(renderer, WINDOW_WIDTH/2, i);
+        SDL_RenderDrawPoint(renderer, i, WINDOW_WIDTH - i*cos(0.5236));
+        
+    }*/
+    //drawAxes(renderer, WINDOW_WIDTH / 2, WINDOW_WIDTH / 2);
     
+    int x,y;
+    double angle = 0.9546951008;
     while (1) {
+        SDL_SetRenderDrawColor(renderer, 0, 0, 0, 0);
+        SDL_RenderClear(renderer);
+        SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
+        for(int i = 0; i < WINDOW_WIDTH; i++) {
+            SDL_GetMouseState(&x, &y);
+            SDL_RenderDrawPoint(renderer, x + i, y + i*cos(angle));
+            SDL_RenderDrawPoint(renderer, x - i, y - i*cos(angle));
+            
+            SDL_RenderDrawPoint(renderer, x + i, y + (-i)*cos(angle));
+            SDL_RenderDrawPoint(renderer, x - i, y - (-i)*cos(angle));
+            
+            SDL_RenderDrawPoint(renderer, x, y + i);
+            SDL_RenderDrawPoint(renderer, x, y - i);
+            
+            Cube c1 = Cube(Point3D(x, y, 0), 10.);
+            c1.RenderDrawCube(renderer, x, y, 0);
+            
+        }
+        SDL_RenderPresent(renderer);
         if (SDL_PollEvent(&event) && event.type == SDL_QUIT)
             break;
     }
