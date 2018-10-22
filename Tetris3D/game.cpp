@@ -9,6 +9,7 @@
 #include <stdlib.h>
 #include <math.h>
 #include <SDL2/SDL.h>
+#include <iostream>
 
 // Point2D Methods
 Point2D::Point2D() {
@@ -98,7 +99,7 @@ void Square::RenderDrawSquare(SDL_Renderer* renderer) {
     Segment s3 = Segment(coinEnHautADroite(), coinEnHautAGauche());
     Segment s4 = Segment(coinEnHautAGauche(), coinEnBasAGauche());
 
-    SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
+    SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
     s1.RenderDrawSegment(renderer);
     s2.RenderDrawSegment(renderer);
     s3.RenderDrawSegment(renderer);
@@ -133,6 +134,32 @@ void Square::rotate(double alpha) {
     enBasADroite = tab[1];
     enHautADroite = tab[2];
     enHautAGauche = tab[3];
+}
+
+void Square::remplir(SDL_Renderer* renderer) {
+    
+    Point2D A = coinEnBasAGauche();
+    Point2D B = coinEnBasADroite();
+    Point2D C = coinEnHautAGauche();
+    Point2D D = coinEnHautADroite();
+    
+    SDL_SetRenderDrawColor(renderer, 0, 255, 0, 255);
+    
+    double deltaX = abs(C.getX() - A.getX());
+    if (deltaX == 0) {
+        for (int i = 0; i < 2 * abs(A.getY() - B.getY()); i++) {
+            SDL_RenderDrawLine(renderer, A.getX(), A.getY() + i, B.getX(), B.getY() + i);
+        }
+    } else {
+        double deltaY = abs(C.getY() - A.getY());
+        int i = 0;
+        double y = 0;
+        while (i != deltaX){
+            y += (deltaY / deltaX);
+            SDL_RenderDrawLine(renderer, A.getX() - i, A.getY() + y, B.getX() - i, B.getY() + y);
+            i++;
+        }
+    }
 }
 
 // End Square Methods
@@ -172,98 +199,63 @@ Point2D Point3D::toPoint2D() {
 // Cube Methods
 
 Cube::Cube() {
-    origine = Point3D();
     taille = 0.;
+    exist = false;
 }
 
-Cube::Cube(Point3D origine, double taille) {
-    this->origine = origine;
+Cube::Cube(double taille) {
     this->taille = taille;
+    if (taille == 0) {
+        exist = false;
+    } else {
+        exist = true;
+    }
 }
 
-void Cube::getNodes(Point3D tab[2][2][2]) {
-    /*tab[z][y][x]
-     
-        1,1,0 ------ 1,1,1
-         /|           / |
-        / |          /  |
-       /  |         /   |
-     0,1,0 ------ 0,1,1 |
-       |1,0,0 ------|-1,0,1
-       |  /         |  /
-       | /          | /
-       |/           |/
-     0,0,0 ------ 0,0,1
-    
-     */
-    tab[0][0][0] = origine;
-    tab[0][0][1] = Point3D(origine.getX() + taille, origine.getY(), origine.getZ());
-    tab[0][1][0] = Point3D(origine.getX(), origine.getY() + taille, origine.getZ());
-    tab[0][1][1] = Point3D(origine.getX() + taille, origine.getY() + taille, origine.getZ());
-    
-    tab[1][0][0] = Point3D(origine.getX(), origine.getY(), origine.getZ() + taille);
-    tab[1][0][1] = Point3D(origine.getX() + taille, origine.getY(), origine.getZ() + taille);
-    tab[1][1][0] = Point3D(origine.getX(), origine.getY() + taille, origine.getZ() + taille);
-    tab[1][1][1] = Point3D(origine.getX() + taille, origine.getY() + taille, origine.getZ() + taille);
-    
-}
-
-void Cube::RenderDrawCube(SDL_Renderer *renderer, int a, int b, int c) {
+void Cube::RenderDrawCube(SDL_Renderer *renderer, int x, int y, int z, int shiftX, int shiftY) {
     double angle = 0.9546951008;
-    /*Point3D tab[2][2][2];
-    getNodes(tab);
-    Square s1 = Square(tab[0][0][0].toPoint2D(), tab[0][0][1].toPoint2D(), tab[0][1][1].toPoint2D(), tab[0][1][0].toPoint2D());
-    s1.RenderDrawSquare(renderer);
-    Square s2 = Square(tab[1][0][0].toPoint2D(), tab[1][0][1].toPoint2D(), tab[1][1][1].toPoint2D(), tab[1][1][0].toPoint2D());
-    s2.RenderDrawSquare(renderer);
-    Square s3 = Square(tab[0][0][1].toPoint2D(), tab[1][0][1].toPoint2D(), tab[1][1][1].toPoint2D(), tab[0][1][1].toPoint2D());
-    s3.RenderDrawSquare(renderer);
-    Square s4 = Square(tab[0][0][0].toPoint2D(), tab[1][0][0].toPoint2D(), tab[1][1][0].toPoint2D(), tab[0][1][0].toPoint2D());
-    s4.RenderDrawSquare(renderer);*/
-    int taille = 20;
-    Point2D A = Point2D(a - b, (a + b) * cos(angle) + 2 * c * cos(angle));
-    Point2D B = Point2D(a - b + taille, (a + b + taille) * cos(angle) + 2 * (c) * cos(angle));
-    Point2D C = Point2D(a - b, (a + b + 2 * taille) * cos(angle) + 2 * c * cos(angle));
-    Point2D D = Point2D(a - b - taille, (a + b + taille) * cos(angle) + 2 * c * cos(angle));
-    Point2D E = Point2D(a - b, (a + b) * cos(angle) + 2 * (c + taille) * cos(angle));
-    Point2D F = Point2D(a - b + taille, (a + b + taille) * cos(angle) + 2 * (c + taille) * cos(angle));
-    Point2D G = Point2D(a - b, (a + b + 2 * taille) * cos(angle) + 2 * (c + taille) * cos(angle));
-    Point2D H = Point2D(a - b - taille, (a + b + taille) * cos(angle) + 2 * (c + taille) * cos(angle));
+    int a = x * taille;
+    int b = y * taille;
+    int c = z * taille;
+    
+    
+    Point2D A = Point2D(a - b + shiftX, (a + b) * cos(angle) + 2 * c * cos(angle) + shiftY);
+    Point2D B = Point2D(a - b + taille + shiftX, (a + b + taille) * cos(angle) + 2 * (c) * cos(angle) + shiftY);
+    Point2D C = Point2D(a - b + shiftX, (a + b + 2 * taille) * cos(angle) + 2 * c * cos(angle) + shiftY);
+    Point2D D = Point2D(a - b - taille + shiftX, (a + b + taille) * cos(angle) + 2 * c * cos(angle) + shiftY);
+    Point2D E = Point2D(a - b + shiftX, (a + b) * cos(angle) + 2 * (c + taille) * cos(angle) + shiftY);
+    Point2D F = Point2D(a - b + taille + shiftX, (a + b + taille) * cos(angle) + 2 * (c + taille) * cos(angle) + shiftY);
+    Point2D G = Point2D(a - b + shiftX, (a + b + 2 * taille) * cos(angle) + 2 * (c + taille) * cos(angle) + shiftY);
+    Point2D H = Point2D(a - b - taille + shiftX, (a + b + taille) * cos(angle) + 2 * (c + taille) * cos(angle) + shiftY);
     
     Square s1 = Square(A, B, C, D);
-    Square s2 = Square(E, F, G, H);
-    Square s3 = Square(A, E, H, D);
-    Square s4 = Square(B, C, G, F);
+    Square s2 = Square(B, C, G, F);
+    Square s3 = Square(C, D, H, G);
     
+    s1.remplir(renderer);
     s1.RenderDrawSquare(renderer);
+    s2.remplir(renderer);
     s2.RenderDrawSquare(renderer);
+    s3.remplir(renderer);
     s3.RenderDrawSquare(renderer);
-    s4.RenderDrawSquare(renderer);
     
+}
+
+bool Cube::doesExist() {
+    return exist;
 }
 // End Cube Methods
 
-// Camera Methods
-
-Camera::Camera() {
-    x = 0;
-    y = 0;
-    z = 0;
-}
-
-Camera::Camera(int a, int b, int c) {
-    x = a;
-    y = b;
-    z = c;
-}
-
-int Camera::getX() {
-    return x;
-}
-int Camera::getY() {
-    return y;
-}
-int Camera::getZ() {
-    return z;
+Cube*** creer_tableau(int taille1, int taille2, int taille3) {
+    Cube*** T = new Cube**[taille1];
+    if (T == NULL)
+        exit(EXIT_FAILURE);
+    for(int i = 0; i < taille1; i++) {
+        T[i] = new Cube*[taille2];
+        for(int j = 0; j < taille2; j++) {
+            T[i][j] = new Cube[taille3];
+        }
+    }
+    return T;
 }
 // End Camera Methods

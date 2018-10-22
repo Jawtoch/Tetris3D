@@ -60,22 +60,8 @@ public:
     Point2D* getNodes();
     void RenderDrawSquare(SDL_Renderer* renderer);
     void rotate(double alpha);
+    void remplir(SDL_Renderer* renderer);
     
-};
-
-class Camera {
-    
-private:
-    int x;
-    int y;
-    int z;
-    
-public:
-    Camera();
-    Camera(int a, int b, int c);
-    int getX();
-    int getY();
-    int getZ();
 };
 
 class Point3D {
@@ -92,39 +78,34 @@ public:
     double getY();
     double getZ();
     Point2D toPoint2D();
-    //Créer une fonction qui transforme des coordonnées classiques
-    /*
-     y
-     ^
-     |
-     |
-     |
-     ------->x
-     
-     en coordonnées SDL
-     
-     ------> x
-     |
-     |
-     |
-     |
-     v
-     y
-     
-     */
 };
 
 class Cube {
     
 private:
-    Point3D origine;
     double taille;
+    bool exist;
     
 public:
     Cube();
-    Cube(Point3D origine, double taille);
-    void RenderDrawCube(SDL_Renderer* renderer, int a, int b, int c);
-    void getNodes(Point3D tab[2][2][2]);
+    Cube(double taille);
+    void RenderDrawCube(SDL_Renderer* renderer, int a, int b, int c, int shiftX, int shiftY);
+    bool doesExist();
+};
+
+Cube*** creer_tableau(int taille1, int taille2, int taille3);
+
+class Piece {
+    
+private:
+    Point3D origine;
+    Cube*** elements;
+    int colors[];
+
+public:
+    Point3D getOrigine();
+    void addElement();
+    Cube*** getElements();
 };
 
 #endif /* game_hpp */
