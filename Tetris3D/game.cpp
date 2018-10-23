@@ -11,6 +11,8 @@
 #include <SDL2/SDL.h>
 #include <iostream>
 
+#include "Classes/Cube.hpp"
+
 // Point2D Methods
 Point2D::Point2D() {
     x = 0;
@@ -141,7 +143,6 @@ void Square::remplir(SDL_Renderer* renderer) {
     Point2D A = coinEnBasAGauche();
     Point2D B = coinEnBasADroite();
     Point2D C = coinEnHautAGauche();
-    Point2D D = coinEnHautADroite();
     
     SDL_SetRenderDrawColor(renderer, 0, 255, 0, 255);
     
@@ -213,7 +214,7 @@ Cube::Cube(double taille) {
 }
 
 void Cube::RenderDrawCube(SDL_Renderer *renderer, int x, int y, int z, int shiftX, int shiftY) {
-    double angle = 0.9546951008;
+    double angle = ANGLE;
     int a = x * taille;
     int b = y * taille;
     int c = z * taille;
@@ -223,7 +224,7 @@ void Cube::RenderDrawCube(SDL_Renderer *renderer, int x, int y, int z, int shift
     Point2D B = Point2D(a - b + taille + shiftX, (a + b + taille) * cos(angle) + 2 * (c) * cos(angle) + shiftY);
     Point2D C = Point2D(a - b + shiftX, (a + b + 2 * taille) * cos(angle) + 2 * c * cos(angle) + shiftY);
     Point2D D = Point2D(a - b - taille + shiftX, (a + b + taille) * cos(angle) + 2 * c * cos(angle) + shiftY);
-    Point2D E = Point2D(a - b + shiftX, (a + b) * cos(angle) + 2 * (c + taille) * cos(angle) + shiftY);
+    //Point2D E = Point2D(a - b + shiftX, (a + b) * cos(angle) + 2 * (c + taille) * cos(angle) + shiftY);
     Point2D F = Point2D(a - b + taille + shiftX, (a + b + taille) * cos(angle) + 2 * (c + taille) * cos(angle) + shiftY);
     Point2D G = Point2D(a - b + shiftX, (a + b + 2 * taille) * cos(angle) + 2 * (c + taille) * cos(angle) + shiftY);
     Point2D H = Point2D(a - b - taille + shiftX, (a + b + taille) * cos(angle) + 2 * (c + taille) * cos(angle) + shiftY);
@@ -258,4 +259,28 @@ Cube*** creer_tableau(int taille1, int taille2, int taille3) {
     }
     return T;
 }
-// End Camera Methods
+
+
+// Piece Methods
+/*
+ */
+Piece::Piece() {
+    
+}
+
+Piece::Piece(Cube*** elements) {
+    
+}
+
+Point3D Piece::getOrigine() {
+    return Point3D();
+}
+
+void Piece::addElement() {
+    
+}
+
+Cube*** Piece::getElements() {
+    return NULL;
+}
+// End Piece Methods

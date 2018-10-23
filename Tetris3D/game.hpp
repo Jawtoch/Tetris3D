@@ -13,6 +13,8 @@
 #include <math.h>
 #include <SDL2/SDL.h>
 
+#define ANGLE 0.9546951008
+
 class Point2D {
     
 private:
@@ -103,6 +105,8 @@ private:
     int colors[];
 
 public:
+    Piece();
+    Piece(Cube*** elements);
     Point3D getOrigine();
     void addElement();
     Cube*** getElements();

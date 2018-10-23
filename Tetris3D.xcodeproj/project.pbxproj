@@ -36,6 +36,7 @@
 		A2917977216D3B550086294B /* SDL_image.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL_image.framework; path = ../../../../../../../Library/Frameworks/SDL_image.framework; sourceTree = "<group>"; };
 		A2917978216D3B550086294B /* SDL2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2.framework; path = ../../../../../../../Library/Frameworks/SDL2.framework; sourceTree = "<group>"; };
 		A2917979216D3B550086294B /* SDL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL.framework; path = ../../../../../../../Library/Frameworks/SDL.framework; sourceTree = "<group>"; };
+		A2DB2EC8217E4423006AD1EB /* Classes */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Classes; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -70,6 +71,7 @@
 		A2917966216D3A9C0086294B /* Tetris3D */ = {
 			isa = PBXGroup;
 			children = (
+				A2DB2EC8217E4423006AD1EB /* Classes */,
 				A2917967216D3A9D0086294B /* main.cpp */,
 				A2917970216D3AE30086294B /* main.hpp */,
 				A291796E216D3AE30086294B /* game.cpp */,
