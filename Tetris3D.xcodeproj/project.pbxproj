@@ -16,6 +16,7 @@
 		A2917972216D3AE30086294B /* game.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A291796E216D3AE30086294B /* game.cpp */; };
 		A291797D216D3B550086294B /* SDL2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A2917978216D3B550086294B /* SDL2.framework */; };
 		A2C6323621862051006EE1BD /* container.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A2C6323421862051006EE1BD /* container.cpp */; };
+		A2C6323A21862CDC006EE1BD /* cube.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A2C6323821862CDC006EE1BD /* cube.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -54,6 +55,8 @@
 		A2917979216D3B550086294B /* SDL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL.framework; path = ../../../../../../../Library/Frameworks/SDL.framework; sourceTree = "<group>"; };
 		A2C6323421862051006EE1BD /* container.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = container.cpp; sourceTree = "<group>"; };
 		A2C6323521862051006EE1BD /* container.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = container.hpp; sourceTree = "<group>"; };
+		A2C6323821862CDC006EE1BD /* cube.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = cube.cpp; sourceTree = "<group>"; };
+		A2C6323921862CDC006EE1BD /* cube.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = cube.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,6 +82,8 @@
 				A255283821821FC800CF733A /* square.hpp */,
 				A255283A2182218400CF733A /* point3D.cpp */,
 				A255283B2182218400CF733A /* point3D.hpp */,
+				A2C6323821862CDC006EE1BD /* cube.cpp */,
+				A2C6323921862CDC006EE1BD /* cube.hpp */,
 				A255283D2182234000CF733A /* form.cpp */,
 				A255283E2182234000CF733A /* form.hpp */,
 				A2C6323421862051006EE1BD /* container.cpp */,
@@ -187,6 +192,7 @@
 			files = (
 				A255283321821D4200CF733A /* point2D.cpp in Sources */,
 				A255283621821DDD00CF733A /* segment.cpp in Sources */,
+				A2C6323A21862CDC006EE1BD /* cube.cpp in Sources */,
 				A2917968216D3A9D0086294B /* main.cpp in Sources */,
 				A255283C2182218400CF733A /* point3D.cpp in Sources */,
 				A2C6323621862051006EE1BD /* container.cpp in Sources */,
