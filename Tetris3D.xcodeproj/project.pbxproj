@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		A25528302181F0CF00CF733A /* cube.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A255282E2181F0CF00CF733A /* cube.cpp */; };
 		A255283321821D4200CF733A /* point2D.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A255283121821D4200CF733A /* point2D.cpp */; };
 		A255283621821DDD00CF733A /* segment.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A255283421821DDD00CF733A /* segment.cpp */; };
 		A255283921821FC800CF733A /* square.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A255283721821FC800CF733A /* square.cpp */; };
@@ -32,8 +31,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		A255282E2181F0CF00CF733A /* cube.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = cube.cpp; sourceTree = "<group>"; };
-		A255282F2181F0CF00CF733A /* cube.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = cube.hpp; sourceTree = "<group>"; };
 		A255283121821D4200CF733A /* point2D.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = point2D.cpp; sourceTree = "<group>"; };
 		A255283221821D4200CF733A /* point2D.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = point2D.hpp; sourceTree = "<group>"; };
 		A255283421821DDD00CF733A /* segment.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = segment.cpp; sourceTree = "<group>"; };
@@ -82,8 +79,6 @@
 				A255283821821FC800CF733A /* square.hpp */,
 				A255283A2182218400CF733A /* point3D.cpp */,
 				A255283B2182218400CF733A /* point3D.hpp */,
-				A255282E2181F0CF00CF733A /* cube.cpp */,
-				A255282F2181F0CF00CF733A /* cube.hpp */,
 				A255283D2182234000CF733A /* form.cpp */,
 				A255283E2182234000CF733A /* form.hpp */,
 				A2C6323421862051006EE1BD /* container.cpp */,
@@ -198,7 +193,6 @@
 				A2917972216D3AE30086294B /* game.cpp in Sources */,
 				A255283F2182234000CF733A /* form.cpp in Sources */,
 				A255283921821FC800CF733A /* square.cpp in Sources */,
-				A25528302181F0CF00CF733A /* cube.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
