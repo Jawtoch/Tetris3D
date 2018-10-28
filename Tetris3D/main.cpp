@@ -6,20 +6,16 @@
 //  Copyright © 2018 ugocottin. All rights reserved.
 //
 
-#include <iostream>
-#include <stdlib.h>
-#include <math.h>
-#include <SDL2/SDL.h>
+#include "main.hpp"
 #include "game.hpp"
-#include "Classes/Cube.hpp"
 
 #define WINDOW_WIDTH 600
 
 void renderArray(SDL_Renderer *renderer, int x, int y, Cube*** T) {
     Cube *c = new Cube(sizeof(Cube));
-    for(int i = 0; i < 10; i++) {
-        for(int j = 0; j < 10; j++) {
-            for(int k = 9; k >= 0; k--) {
+    for(int i = 0; i < (sizeof(Cube)/sizeof(Cube*)); i++) {
+        for(int j = 0; j < (sizeof(Cube*)/sizeof(Cube**)); j++) {
+            for(int k = (sizeof(Cube**)/sizeof(Cube***)) - 1; k >= 0; k--) {
                 *c = T[i][j][k];
                 if (c->doesExist())
                     c->RenderDrawCube(renderer, i, j, k, x, y);
@@ -48,42 +44,53 @@ int main(int argc, const char * argv[]) {
     SDL_Event *event = new SDL_Event;
     SDL_Renderer *renderer;
     SDL_Window *window;
-    
     SDL_Init(SDL_INIT_VIDEO);
     SDL_CreateWindowAndRenderer(WINDOW_WIDTH, WINDOW_WIDTH, 0, &window, &renderer);
     SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
     SDL_RenderClear(renderer);
     SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
     
-    Cube*** T = creer_tableau(10, 10, 10);
-    /*for(int i = 0; i < 10; i++) {
-        for(int j = 0; j < 10; j++) {
-            for(int k = 0; k < 10; k++) {
-                T[i][j][k] = Cube(0);
-            }
-        }
-    }*/
-    T[0][0][0] = Cube(20);
+    Cube*** T = createArray(3, 3, 3);
+    
     T[0][0][0] = Cube(20);
     T[0][0][1] = Cube(20);
-    T[0][0][2] = Cube(20);
-    T[0][0][3] = Cube(20);
-    T[1][0][3] = Cube(20);
-    T[2][0][3] = Cube(20);
-    T[3][0][3] = Cube(20);
-    T[3][1][3] = Cube(20);
-    T[3][2][3] = Cube(20);
-    T[3][3][3] = Cube(20);
-    T[2][3][3] = Cube(20);
-    T[1][3][3] = Cube(20);
-    T[0][3][3] = Cube(20);
+    T[0][1][1] = Cube(20);
+    T[1][1][1] = Cube(20);
+    
+    Form f1 = Form(T);
+    /*freeArray(T);
+    T = createArray(3, 3, 3);
+    
+    T[1][0][0] = Cube(20);
+    T[2][1][0] = Cube(20);
+    T[2][2][0] = Cube(20);
+    Form f2 = Form(T);
+    freeArray(T);*/
 
+    Cube*** container = createArray(10, 10, 10);
+    
+    Cube *c = new Cube(sizeof(Cube));
+    Point3D *p3 = new Point3D;
+    
+    for(int i = 0; i < 3; i++) {
+        for(int j = 0; j < 3; j++) {
+            for(int k = 0; k < 3; k++) {
+                *c = f1.getElements()[i][j][k];
+                if (c->doesExist()) {
+                    *p3 = f1.getOrigine();
+                    container[i + (int)(p3->getX())][j + (int)(p3->getY())][k + (int)(p3->getZ())] = *c;
+                }
+            }
+        }
+    }
+    
+    
     while (1) {
         SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
         SDL_RenderClear(renderer);
         SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
         RenderDrawAxes(renderer, WINDOW_WIDTH/2, WINDOW_WIDTH/2);
-        renderArray(renderer, WINDOW_WIDTH/2, WINDOW_WIDTH / 2, T);
+        renderArray(renderer, WINDOW_WIDTH/2, WINDOW_WIDTH / 2, container);
         SDL_RenderPresent(renderer);
         if (SDL_PollEvent(event) && event->type == SDL_QUIT)
             break;
