@@ -33,3 +33,4 @@ Cube*** createArray(int taille1, int taille2, int taille3);
 
 void freeArray(Cube*** cTab);
 #endif /* cube_hpp */
+
