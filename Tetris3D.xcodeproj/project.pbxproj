@@ -7,9 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A25528302181F0CF00CF733A /* cube.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A255282E2181F0CF00CF733A /* cube.cpp */; };
+		A255283321821D4200CF733A /* point2D.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A255283121821D4200CF733A /* point2D.cpp */; };
+		A255283621821DDD00CF733A /* segment.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A255283421821DDD00CF733A /* segment.cpp */; };
+		A255283921821FC800CF733A /* square.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A255283721821FC800CF733A /* square.cpp */; };
+		A255283C2182218400CF733A /* point3D.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A255283A2182218400CF733A /* point3D.cpp */; };
+		A255283F2182234000CF733A /* form.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A255283D2182234000CF733A /* form.cpp */; };
 		A2917968216D3A9D0086294B /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A2917967216D3A9D0086294B /* main.cpp */; };
 		A2917972216D3AE30086294B /* game.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A291796E216D3AE30086294B /* game.cpp */; };
 		A291797D216D3B550086294B /* SDL2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A2917978216D3B550086294B /* SDL2.framework */; };
+		A2C6323621862051006EE1BD /* container.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A2C6323421862051006EE1BD /* container.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -25,6 +32,18 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		A255282E2181F0CF00CF733A /* cube.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = cube.cpp; sourceTree = "<group>"; };
+		A255282F2181F0CF00CF733A /* cube.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = cube.hpp; sourceTree = "<group>"; };
+		A255283121821D4200CF733A /* point2D.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = point2D.cpp; sourceTree = "<group>"; };
+		A255283221821D4200CF733A /* point2D.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = point2D.hpp; sourceTree = "<group>"; };
+		A255283421821DDD00CF733A /* segment.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = segment.cpp; sourceTree = "<group>"; };
+		A255283521821DDD00CF733A /* segment.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = segment.hpp; sourceTree = "<group>"; };
+		A255283721821FC800CF733A /* square.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = square.cpp; sourceTree = "<group>"; };
+		A255283821821FC800CF733A /* square.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = square.hpp; sourceTree = "<group>"; };
+		A255283A2182218400CF733A /* point3D.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = point3D.cpp; sourceTree = "<group>"; };
+		A255283B2182218400CF733A /* point3D.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = point3D.hpp; sourceTree = "<group>"; };
+		A255283D2182234000CF733A /* form.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = form.cpp; sourceTree = "<group>"; };
+		A255283E2182234000CF733A /* form.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = form.hpp; sourceTree = "<group>"; };
 		A2917964216D3A9C0086294B /* Tetris3D */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Tetris3D; sourceTree = BUILT_PRODUCTS_DIR; };
 		A2917967216D3A9D0086294B /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		A291796E216D3AE30086294B /* game.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = game.cpp; sourceTree = "<group>"; };
@@ -36,7 +55,8 @@
 		A2917977216D3B550086294B /* SDL_image.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL_image.framework; path = ../../../../../../../Library/Frameworks/SDL_image.framework; sourceTree = "<group>"; };
 		A2917978216D3B550086294B /* SDL2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2.framework; path = ../../../../../../../Library/Frameworks/SDL2.framework; sourceTree = "<group>"; };
 		A2917979216D3B550086294B /* SDL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL.framework; path = ../../../../../../../Library/Frameworks/SDL.framework; sourceTree = "<group>"; };
-		A2DB2EC8217E4423006AD1EB /* Classes */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Classes; sourceTree = "<group>"; };
+		A2C6323421862051006EE1BD /* container.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = container.cpp; sourceTree = "<group>"; };
+		A2C6323521862051006EE1BD /* container.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = container.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -51,6 +71,27 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A255282D2181F0B300CF733A /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				A255283121821D4200CF733A /* point2D.cpp */,
+				A255283221821D4200CF733A /* point2D.hpp */,
+				A255283421821DDD00CF733A /* segment.cpp */,
+				A255283521821DDD00CF733A /* segment.hpp */,
+				A255283721821FC800CF733A /* square.cpp */,
+				A255283821821FC800CF733A /* square.hpp */,
+				A255283A2182218400CF733A /* point3D.cpp */,
+				A255283B2182218400CF733A /* point3D.hpp */,
+				A255282E2181F0CF00CF733A /* cube.cpp */,
+				A255282F2181F0CF00CF733A /* cube.hpp */,
+				A255283D2182234000CF733A /* form.cpp */,
+				A255283E2182234000CF733A /* form.hpp */,
+				A2C6323421862051006EE1BD /* container.cpp */,
+				A2C6323521862051006EE1BD /* container.hpp */,
+			);
+			path = Classes;
+			sourceTree = "<group>";
+		};
 		A291795B216D3A9C0086294B = {
 			isa = PBXGroup;
 			children = (
@@ -71,7 +112,7 @@
 		A2917966216D3A9C0086294B /* Tetris3D */ = {
 			isa = PBXGroup;
 			children = (
-				A2DB2EC8217E4423006AD1EB /* Classes */,
+				A255282D2181F0B300CF733A /* Classes */,
 				A2917967216D3A9D0086294B /* main.cpp */,
 				A2917970216D3AE30086294B /* main.hpp */,
 				A291796E216D3AE30086294B /* game.cpp */,
@@ -149,8 +190,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A255283321821D4200CF733A /* point2D.cpp in Sources */,
+				A255283621821DDD00CF733A /* segment.cpp in Sources */,
 				A2917968216D3A9D0086294B /* main.cpp in Sources */,
+				A255283C2182218400CF733A /* point3D.cpp in Sources */,
+				A2C6323621862051006EE1BD /* container.cpp in Sources */,
 				A2917972216D3AE30086294B /* game.cpp in Sources */,
+				A255283F2182234000CF733A /* form.cpp in Sources */,
+				A255283921821FC800CF733A /* square.cpp in Sources */,
+				A25528302181F0CF00CF733A /* cube.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
