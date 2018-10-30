@@ -46,6 +46,7 @@ int main(int argc, const char * argv[]) {
     SDL_Renderer *renderer;
     SDL_Window *window;
     SDL_Init(SDL_INIT_VIDEO);
+    SDL_SetWindowTitle(window, "Tetris3D");
     SDL_CreateWindowAndRenderer(WINDOW_WIDTH, WINDOW_WIDTH, 0, &window, &renderer);
     SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
     SDL_RenderClear(renderer);
@@ -87,18 +88,61 @@ int main(int argc, const char * argv[]) {
     }
     */
     
-    while (1) {
+    int gameover = 0;
+    const Uint8 *keystate;
+    int temps = 0;
+    
+    while (!gameover) {
+        temps += 1;
+        /* look for an event */
+        if (SDL_PollEvent(event)) {
+            /* an event was found */
+            switch (event->type) {
+                    /* close button clicked */
+                case SDL_QUIT:
+                    gameover = 1;
+                    break;
+                    /* handle the keyboard */
+                case SDL_KEYDOWN:
+                    switch (event->key.keysym.sym) {
+                        case SDLK_ESCAPE:
+                        case SDLK_q:
+                            gameover = 1;
+                            break;
+                            /* do nothing for other keys */
+                        default:
+                            break;
+                    }
+                    break;
+            }
+        }
+        if (temps%6 == 0) {
+            keystate = SDL_GetKeyboardState(NULL);
+            if (keystate[SDL_SCANCODE_LEFT]) {
+                //if (f1.getOrigine().getX() > 0)
+                    f1.move(-1, 0, 0);
+            }
+            if (keystate[SDL_SCANCODE_RIGHT]) {
+                //if (f1.getOrigine().getX() < 2)
+                f1.move(1, 0, 0);
+            }
+            if (keystate[SDL_SCANCODE_UP]) {
+                //if (f1.getOrigine().getZ() > 2)
+                    f1.move(0, 0, -1);
+            }
+            if (keystate[SDL_SCANCODE_DOWN]) {
+                //if (f1.getOrigine().getZ() > 0)
+                    f1.move(0, 0, 1);
+            }
+        }
         SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
         SDL_RenderClear(renderer);
         SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
         RenderDrawAxes(renderer, WINDOW_WIDTH/2, WINDOW_WIDTH/2);
         f1.RenderDrawForm(renderer, WINDOW_WIDTH/2, WINDOW_WIDTH/2);
         f2.RenderDrawForm(renderer, WINDOW_WIDTH/2, WINDOW_WIDTH/2);
-        //renderArray(renderer, WINDOW_WIDTH/2, WINDOW_WIDTH / 2, f1.getElements());
-        //renderArray(renderer, WINDOW_WIDTH/2, WINDOW_WIDTH / 2, f2.getElements());
         SDL_RenderPresent(renderer);
-        if (SDL_PollEvent(event) && event->type == SDL_QUIT)
-            break;
+        
     }
     delete event;
     SDL_DestroyRenderer(renderer);

@@ -60,7 +60,7 @@ void Form::RenderDrawForm(SDL_Renderer* renderer, int shiftX, int shiftY) {
     Cube *c = new Cube(sizeof(Cube));
     for(int i = 0; i < 3; i++) {
         for(int j = 0; j < 3; j++) {
-            for(int k = 2; k >= 0; k--) {
+            for(int k = 0; k < 3; k++) {
                 *c = getElements()[i][j][k];
                 if (c->doesExist())
                     c->RenderDrawCube(renderer,
