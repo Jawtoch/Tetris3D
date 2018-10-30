@@ -45,6 +45,16 @@ Point2D Square::getCentre() {
 
 void Square::RenderDrawSquare(SDL_Renderer* renderer) {
     
+    Uint8 r = 0;
+    Uint8 g = 0;
+    Uint8 b = 0;
+    Uint8 a = 0;
+    int test = SDL_GetRenderDrawColor(renderer, &r, &g, &b, &a);
+    if (test == 0)
+        printf("Colors saved\n");
+    else
+        SDL_GetError();
+    
     Segment s1 = Segment(coinEnBasAGauche(), coinEnBasADroite());
     Segment s2 = Segment(coinEnBasADroite(), coinEnHautADroite());
     Segment s3 = Segment(coinEnHautADroite(), coinEnHautAGauche());
@@ -56,6 +66,7 @@ void Square::RenderDrawSquare(SDL_Renderer* renderer) {
     s3.RenderDrawSegment(renderer);
     s4.RenderDrawSegment(renderer);
     
+    SDL_SetRenderDrawColor(renderer, r, g, b, a);
 }
 
 Point2D* Square::getNodes() {
@@ -92,9 +103,7 @@ void Square::remplir(SDL_Renderer* renderer) {
     Point2D A = coinEnBasAGauche();
     Point2D B = coinEnBasADroite();
     Point2D C = coinEnHautAGauche();
-    
-    SDL_SetRenderDrawColor(renderer, 0, 255, 0, 255);
-    
+        
     double deltaX = abs(C.getX() - A.getX());
     if (deltaX == 0) {
         for (int i = 0; i < 2 * abs(A.getY() - B.getY()); i++) {

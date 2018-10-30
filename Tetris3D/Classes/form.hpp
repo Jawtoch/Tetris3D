@@ -28,6 +28,8 @@ public:
     void addElement(Cube e, int x, int y, int z);
     Cube*** getElements();
     void move(int x, int y, int z);
+    void RenderDrawForm(SDL_Renderer* renderer, int shiftX, int shiftY);
+    
 };
 
 #endif /* form_hpp */

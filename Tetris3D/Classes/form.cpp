@@ -20,18 +20,17 @@ Form::Form() {
 Form::Form(Cube*** elements) {
     origine = Point3D();
     this->elements = createArray(3, 3, 3);
-    memcpy(this->elements, elements, 3*3*3*sizeof(Cube));
-    /*for (int i = 0; i < 3; i++) {
+    for (int i = 0; i < 3; i++) {
         for (int j = 0; j < 3; j++) {
             for (int k = 0; k < 3; k++) {
                 this->elements[i][j][k] = elements[i][j][k];
             }
         }
-    }*/
+    }
     color = new int[3];
-    color[0] = 100;
-    color[1] = 100;
-    color[2] = 100;
+    color[0] = rand()%256;
+    color[1] = rand()%256;
+    color[2] = rand()%256;
 }
 
 Point3D Form::getOrigine() {
@@ -53,4 +52,24 @@ Cube*** Form::getElements() {
 
 void Form::move(int x, int y, int z) {
     origine = Point3D(origine.getX() + x, origine.getY() + y, origine.getZ() + z);
+};
+
+void Form::RenderDrawForm(SDL_Renderer* renderer, int shiftX, int shiftY) {
+    SDL_SetRenderDrawColor(renderer, this->color[0], this->color[1], this->color[2], 255);
+    
+    Cube *c = new Cube(sizeof(Cube));
+    for(int i = 0; i < 3; i++) {
+        for(int j = 0; j < 3; j++) {
+            for(int k = 2; k >= 0; k--) {
+                *c = getElements()[i][j][k];
+                if (c->doesExist())
+                    c->RenderDrawCube(renderer,
+                                      i + (int)(getOrigine().getX()),
+                                      j + (int)(getOrigine().getY()),
+                                      k + (int)(getOrigine().getZ()),
+                                      shiftX, shiftY);
+            }
+        }
+    }
+    delete c;
 };

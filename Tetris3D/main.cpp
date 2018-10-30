@@ -13,9 +13,10 @@
 
 void renderArray(SDL_Renderer *renderer, int x, int y, Cube*** T) {
     Cube *c = new Cube(sizeof(Cube));
-    for(int i = 0; i < (sizeof(Cube)/sizeof(Cube*)); i++) {
-        for(int j = 0; j < (sizeof(Cube*)/sizeof(Cube**)); j++) {
-            for(int k = (sizeof(Cube**)/sizeof(Cube***)) - 1; k >= 0; k--) {
+    
+    for(int i = 0; i < 3; i++) {
+        for(int j = 0; j < 3; j++) {
+            for(int k = 2; k >= 0; k--) {
                 *c = T[i][j][k];
                 if (c->doesExist())
                     c->RenderDrawCube(renderer, i, j, k, x, y);
@@ -50,7 +51,7 @@ int main(int argc, const char * argv[]) {
     SDL_RenderClear(renderer);
     SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
     
-    Cube*** T = createArray(3, 3, 3);
+    Cube*** T = createArray(5, 5, 5);
     
     T[0][0][0] = Cube(20);
     T[0][0][1] = Cube(20);
@@ -58,16 +59,17 @@ int main(int argc, const char * argv[]) {
     T[1][1][1] = Cube(20);
     
     Form f1 = Form(T);
-    /*freeArray(T);
+    f1.move(1, 0, 0);
+    freeArray(T);
     T = createArray(3, 3, 3);
     
-    T[1][0][0] = Cube(20);
-    T[2][1][0] = Cube(20);
-    T[2][2][0] = Cube(20);
+    T[0][0][0] = Cube(20);
+    T[1][1][0] = Cube(20);
+    T[1][2][0] = Cube(20);
     Form f2 = Form(T);
-    freeArray(T);*/
+    freeArray(T);
 
-    Cube*** container = createArray(10, 10, 10);
+    /*Cube*** container = createArray(10, 10, 10);
     
     Cube *c = new Cube(sizeof(Cube));
     Point3D *p3 = new Point3D;
@@ -83,14 +85,17 @@ int main(int argc, const char * argv[]) {
             }
         }
     }
-    
+    */
     
     while (1) {
         SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
         SDL_RenderClear(renderer);
         SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
         RenderDrawAxes(renderer, WINDOW_WIDTH/2, WINDOW_WIDTH/2);
-        renderArray(renderer, WINDOW_WIDTH/2, WINDOW_WIDTH / 2, container);
+        f1.RenderDrawForm(renderer, WINDOW_WIDTH/2, WINDOW_WIDTH/2);
+        f2.RenderDrawForm(renderer, WINDOW_WIDTH/2, WINDOW_WIDTH/2);
+        //renderArray(renderer, WINDOW_WIDTH/2, WINDOW_WIDTH / 2, f1.getElements());
+        //renderArray(renderer, WINDOW_WIDTH/2, WINDOW_WIDTH / 2, f2.getElements());
         SDL_RenderPresent(renderer);
         if (SDL_PollEvent(event) && event->type == SDL_QUIT)
             break;
@@ -99,7 +104,6 @@ int main(int argc, const char * argv[]) {
     SDL_DestroyRenderer(renderer);
     SDL_DestroyWindow(window);
     SDL_Quit();
-    
     
     return 0;
 }

@@ -59,7 +59,7 @@ bool Cube::doesExist() {
 // End Cube Methods
 
 Cube*** createArray(int taille1, int taille2, int taille3) {
-    Cube*** T = new Cube**[taille1];
+    /*Cube*** T = new Cube**[taille1];
     if (T == NULL)
         exit(EXIT_FAILURE);
     for(int i = 0; i < taille1; i++) {
@@ -68,16 +68,28 @@ Cube*** createArray(int taille1, int taille2, int taille3) {
             T[i][j] = new Cube[taille3];
         }
     }
-    return T;
+    return T;*/
+    Cube*** array;
+    array = new Cube**[taille1];
+    for(int x = 0; x < taille1; ++x) {
+        array[x] = new Cube*[taille2];
+        for(int y = 0; y < taille2; ++y) {
+            array[x][y] = new Cube[taille3];
+            for(int z = 0; z < taille3; ++z) {
+                array[x][y][z] = Cube();
+            }
+        }
+    }
+    return array;
 }
 
 void freeArray(Cube*** cTab) {
     for(int i = 0; i < (sizeof(Cube**)/sizeof(Cube***)); i++) {
         for(int j = 0; j < (sizeof(Cube*)/sizeof(Cube**)); j++) {
-            delete cTab[i][j];
+            delete[] cTab[i][j];
         }
-        delete cTab[i];
+        delete[] cTab[i];
     }
-    delete cTab;
+    delete[] cTab;
 }
 

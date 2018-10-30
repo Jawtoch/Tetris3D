@@ -13,6 +13,7 @@
 #include <SDL2/SDL.h>
 #include "point2D.hpp"
 #include "square.hpp"
+#include <iostream>
 
 #include "point3D.hpp" //Get ANGLE constant
 
