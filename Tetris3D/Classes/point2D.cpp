@@ -8,15 +8,14 @@
 
 #include "point2D.hpp"
 
-// Point2D Methods
 Point2D::Point2D() {
     x = 0;
     y = 0;
 }
 
-Point2D::Point2D(double abscisse, double ordonnee) {
-    x = abscisse;
-    y = ordonnee;
+Point2D::Point2D(double abscissa, double ordinate) {
+    x = abscissa;
+    y = ordinate;
 }
 
 double Point2D::getX() {
@@ -26,4 +25,3 @@ double Point2D::getX() {
 double Point2D::getY() {
     return y;
 }
-// End Point2D Methods

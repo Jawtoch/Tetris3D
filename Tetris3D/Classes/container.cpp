@@ -7,3 +7,19 @@
 //
 
 #include "container.hpp"
+
+Container::Container() {
+    
+}
+/*
+Container::~Container() {
+    
+}*/
+
+void Container::extendFrom(unsigned int delta) {
+    
+};
+
+void Container::shrinkFrom(unsigned int delta) {
+    
+};

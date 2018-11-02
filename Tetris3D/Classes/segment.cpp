@@ -8,7 +8,6 @@
 
 #include "segment.hpp"
 
-// Segment Methods
 Segment::Segment() {
     p1 = Point2D();
     p2 = Point2D();
@@ -27,9 +26,13 @@ Point2D Segment::getP2() {
     return p2;
 }
 
-void Segment::RenderDrawSegment(SDL_Renderer* renderer) {
-    SDL_RenderDrawLine(renderer, p1.getX(), p1.getY(), p2.getX(), p2.getY());
-    
+Point2D Segment::center() {
+    return Point2D(
+                   (getP1().getX() + getP2().getX()) / 2,
+                   (getP1().getY() + getP2().getY()) / 2);
 }
 
-// End Segment Methods
+void Segment::RenderDrawSegment(SDL_Renderer* renderer) {
+    SDL_RenderDrawLine(renderer, getP1().getX(), getP1().getY(), getP2().getX(), getP2().getY());
+    
+}

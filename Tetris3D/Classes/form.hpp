@@ -14,20 +14,84 @@
 #include "point3D.hpp"
 #include "cube.hpp"
 
+
+/**
+ This structure is intended to represent a form, composed of cubes. The form dimension is 3x3x3
+ */
 class Form {
     
 private:
-    Point3D origine;
+    
+    /**
+     The origin of the form, from where she shoud be represented
+     */
+    Point3D origin;
+    
+    /**
+     An array of cubes, elements the form, of dimension 3x3x3
+     */
     Cube*** elements;
+    
+    /**
+     An array of 3 integers (red, green, blue)
+     */
     int* color;
     
 public:
+    
+    /**
+     Constructor of an empty form, of origin in (0,0,0), zero elements and black color
+     */
     Form();
+    
+    //~Form();
+    /**
+     Constructor of a form, of origin in (0,0,0), random color, and given elements
+     
+     @param elements The elements who compose the form
+     */
     Form(Cube*** elements);
-    Point3D getOrigine();
-    void addElement(Cube e, int x, int y, int z);
+    
+    /**
+     Return the origin of the form
+     
+     @return The origin of the form
+     */
+    Point3D getOrigin();
+    
+    /**
+     Return the elements of the form
+     
+     @return An array of cubes, representing the elements of the form
+     */
     Cube*** getElements();
+    
+    /**
+     Add a given element to the form, on given coordinates (each coordinate in [0;3[)
+     
+     @param e The element who shoud be added
+     @param x The x coordiante of the added element
+     @param y The y coordiante of the added element
+     @param z The z coordiante of the added element
+     
+     @warning If the x,y or z coordiante is incorrect, print an error message and do nothing. Please check that x,y and z are in [0;3[
+     */
+    void addElement(Cube e, unsigned int x, unsigned int y, unsigned int z);
+    
+    /**
+     Move the form
+     
+     @param x The shift on the x axis
+     @param y The shift on the y axis
+     @param z The shift on the z axis
+     */
     void move(int x, int y, int z);
+    
+    /**
+     Add the form to the renderer
+     
+     @param renderer A structure representing rendering state
+     */
     void RenderDrawForm(SDL_Renderer* renderer, int shiftX, int shiftY);
     
 };

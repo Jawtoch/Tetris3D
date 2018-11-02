@@ -14,13 +14,44 @@
 class Point2D {
     
 private:
+    
+    /**
+     The abscissa of the point
+     */
     double x;
+    
+    /**
+     The ordinate of the point
+     */
     double y;
     
 public:
+    
+    /**
+     Constructor of a 2D point in (0,0)
+     */
     Point2D();
-    Point2D(double abscisse, double ordonnee);
+    
+    /**
+     Constructor of a 2D point of given abscissa and ordinate
+     
+     @param abscissa A abscissa
+     @param ordinate A ordinate
+     */
+    Point2D(double abscissa, double ordinate);
+    
+    /**
+     Return the abscissa of the 2D point
+     
+     @return x
+     */
     double getX();
+    
+    /**
+     Return the ordinate of the 2D point
+     
+     @return y
+     */
     double getY();
 };
 

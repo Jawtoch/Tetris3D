@@ -39,6 +39,7 @@ void RenderDrawAxes(SDL_Renderer *renderer, int x, int y) {
     }
 }
 
+
 int main(int argc, const char * argv[]) {
     // insert code here...
     std::cout << "Hello, World!\n";
@@ -46,12 +47,11 @@ int main(int argc, const char * argv[]) {
     SDL_Renderer *renderer;
     SDL_Window *window;
     SDL_Init(SDL_INIT_VIDEO);
-    SDL_SetWindowTitle(window, "Tetris3D");
     SDL_CreateWindowAndRenderer(WINDOW_WIDTH, WINDOW_WIDTH, 0, &window, &renderer);
+    SDL_SetWindowTitle(window, "Tetris3D");
     SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
     SDL_RenderClear(renderer);
     SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
-    
     Cube*** T = createArray(5, 5, 5);
     
     T[0][0][0] = Cube(20);
@@ -61,15 +61,24 @@ int main(int argc, const char * argv[]) {
     
     Form f1 = Form(T);
     f1.move(1, 0, 0);
-    freeArray(T);
+    freeArray(T,3,3,3);
     T = createArray(3, 3, 3);
     
     T[0][0][0] = Cube(20);
+    T[1][0][0] = Cube(20);
     T[1][1][0] = Cube(20);
     T[1][2][0] = Cube(20);
     Form f2 = Form(T);
-    freeArray(T);
+    freeArray(T,3,3,3);
+    
+    T = createArray(3, 3, 3);
 
+    T[0][0][0] = Cube(20);
+    T[0][0][1] = Cube(20);
+    T[0][0][2] = Cube(20);
+    Form f3 = Form(T);
+    freeArray(T,3,3,3);
+    
     /*Cube*** container = createArray(10, 10, 10);
     
     Cube *c = new Cube(sizeof(Cube));
@@ -106,7 +115,7 @@ int main(int argc, const char * argv[]) {
                 case SDL_KEYDOWN:
                     switch (event->key.keysym.sym) {
                         case SDLK_ESCAPE:
-                        case SDLK_q:
+                        //case SDLK_q:
                             gameover = 1;
                             break;
                             /* do nothing for other keys */
@@ -116,23 +125,25 @@ int main(int argc, const char * argv[]) {
                     break;
             }
         }
-        if (temps%6 == 0) {
+        if (temps%50 == 0) {
             keystate = SDL_GetKeyboardState(NULL);
-            if (keystate[SDL_SCANCODE_LEFT]) {
-                //if (f1.getOrigine().getX() > 0)
-                    f1.move(-1, 0, 0);
+            if (keystate[SDL_SCANCODE_Q]) {
+                f1.move(-1, 0, 0);
             }
-            if (keystate[SDL_SCANCODE_RIGHT]) {
-                //if (f1.getOrigine().getX() < 2)
+            if (keystate[SDL_SCANCODE_D]) {
                 f1.move(1, 0, 0);
             }
-            if (keystate[SDL_SCANCODE_UP]) {
-                //if (f1.getOrigine().getZ() > 2)
-                    f1.move(0, 0, -1);
+            if (keystate[SDL_SCANCODE_Z]) {
+                f1.move(0, 0, -1);
             }
-            if (keystate[SDL_SCANCODE_DOWN]) {
-                //if (f1.getOrigine().getZ() > 0)
-                    f1.move(0, 0, 1);
+            if (keystate[SDL_SCANCODE_S]) {
+                f1.move(0, 0, 1);
+            }
+            if (keystate[SDL_SCANCODE_A]) {
+                f1.move(0, -1, 0);
+            }
+            if (keystate[SDL_SCANCODE_E]) {
+                f1.move(0, 1, 0);
             }
         }
         SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
@@ -141,6 +152,7 @@ int main(int argc, const char * argv[]) {
         RenderDrawAxes(renderer, WINDOW_WIDTH/2, WINDOW_WIDTH/2);
         f1.RenderDrawForm(renderer, WINDOW_WIDTH/2, WINDOW_WIDTH/2);
         f2.RenderDrawForm(renderer, WINDOW_WIDTH/2, WINDOW_WIDTH/2);
+        f3.RenderDrawForm(renderer, WINDOW_WIDTH/2, WINDOW_WIDTH/2);
         SDL_RenderPresent(renderer);
         
     }
@@ -149,5 +161,5 @@ int main(int argc, const char * argv[]) {
     SDL_DestroyWindow(window);
     SDL_Quit();
     
-    return 0;
+    return 1;
 }

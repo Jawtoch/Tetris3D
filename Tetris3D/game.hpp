@@ -12,6 +12,8 @@
 #include <stdlib.h>
 #include <math.h>
 #include <SDL2/SDL.h>
+#include <iostream>
+
 #include "Classes/point2D.hpp"
 #include "Classes/cube.hpp"
 #include "Classes/segment.hpp"
@@ -19,5 +21,6 @@
 #include "Classes/point3D.hpp"
 #include "Classes/cube.hpp"
 #include "Classes/form.hpp"
+#include "Classes/container.hpp"
 
 #endif /* game_hpp */

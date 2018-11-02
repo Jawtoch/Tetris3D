@@ -20,18 +20,75 @@
 class Cube {
     
 private:
-    double taille;
+
+    /**
+     The size of the cube on one dimension. All sides are the same size
+     */
+    double size;
+    
+    /**
+     Tell if the cube exist or not. If true, the cube exist, and if false, not
+     */
     bool exist;
     
 public:
+    
+    /**
+     Constructor of an empty cube. His size is 0
+     */
     Cube();
-    Cube(double taille);
-    void RenderDrawCube(SDL_Renderer* renderer, int a, int b, int c, int shiftX, int shiftY);
+    
+    /**
+     Constructor of a cube of given size
+     
+     @param size The size of the cube
+     */
+    Cube(double size);
+    
+    /**
+     Return the size of the cube
+     
+     @return the size of the cube
+     */
+    double getSize();
+    
+    /**
+     Return the state of the cube, if it exist or not
+     
+     @return the state of cube
+     */
     bool doesExist();
+    
+    /**
+     Add the cube to the renderer
+     
+     @param renderer A structure representing rendering state
+     */
+    void RenderDrawCube(SDL_Renderer* renderer, int a, int b, int c, int shiftX, int shiftY);
 };
 
-Cube*** createArray(int taille1, int taille2, int taille3);
+/**
+ Create an 3D array of cubes of given size (x,y,z)
+ 
+ @param xSize The x size of the array
+ @param ySize The y size of the array
+ @param zSize The z size of the array
+ @warning After use, de-allocate the array with the "freeArray" function
+ @return A 3D array of cubes
+ */
+Cube*** createArray(int xSize, int ySize, int zSize);
 
-void freeArray(Cube*** cTab);
+
+/**
+ De-allocate the given array of given size
+ 
+ @param cTab The array who need to be freed
+ @param xSize The x size of the array
+ @param ySize The y size of the array
+ @param zSize The z size of the array
+ @warning Be sure of the dimension of the array
+ */
+void freeArray(Cube*** cTab, int xSize, int ySize, int zSize);
+
 #endif /* cube_hpp */
 
