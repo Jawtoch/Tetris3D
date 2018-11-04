@@ -11,10 +11,10 @@
 
 #include <stdio.h>
 #include <SDL2/SDL.h>
-#include "point2D.hpp"
-#include "square.hpp"
 #include <iostream>
 
+#include "point2D.hpp"
+#include "square.hpp"
 #include "point3D.hpp" //Get ANGLE constant
 
 class Cube {
@@ -91,4 +91,3 @@ Cube*** createArray(int xSize, int ySize, int zSize);
 void freeArray(Cube*** cTab, int xSize, int ySize, int zSize);
 
 #endif /* cube_hpp */
-

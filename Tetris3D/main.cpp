@@ -7,11 +7,10 @@
 //
 
 #include "main.hpp"
-#include "game.hpp"
 
 #define WINDOW_WIDTH 600
 
-void renderArray(SDL_Renderer *renderer, int x, int y, Cube*** T) {
+/*void renderArray(SDL_Renderer *renderer, int x, int y, Cube*** T) {
     Cube *c = new Cube(sizeof(Cube));
     
     for(int i = 0; i < 3; i++) {
@@ -24,7 +23,7 @@ void renderArray(SDL_Renderer *renderer, int x, int y, Cube*** T) {
         }
     }
     delete c;
-}
+}*/
 
 void RenderDrawAxes(SDL_Renderer *renderer, int x, int y) {
     for(int i = 0; i < WINDOW_WIDTH; i++) {
@@ -60,7 +59,6 @@ int main(int argc, const char * argv[]) {
     T[1][1][1] = Cube(20);
     
     Form f1 = Form(T);
-    f1.move(1, 0, 0);
     freeArray(T,3,3,3);
     T = createArray(3, 3, 3);
     

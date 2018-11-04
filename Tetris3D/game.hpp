@@ -15,7 +15,6 @@
 #include <iostream>
 
 #include "Classes/point2D.hpp"
-#include "Classes/cube.hpp"
 #include "Classes/segment.hpp"
 #include "Classes/square.hpp"
 #include "Classes/point3D.hpp"

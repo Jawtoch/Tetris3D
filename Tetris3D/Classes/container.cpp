@@ -11,10 +11,10 @@
 Container::Container() {
     
 }
-/*
+
 Container::~Container() {
     
-}*/
+}
 
 void Container::extendFrom(unsigned int delta) {
     

@@ -1,7 +1,7 @@
 SYSCONF_LINK = g++
 CPPFLAGS     = -Wall -Wextra -Weffc++ -pedantic -std=c++98 -O3
 LDFLAGS      = 
-LIBS         = -lm `sdl-config --cflags --libs`
+LIBS         = -lm `sdl2-config --cflags --libs`
 
 DESTDIR = ./
 TARGET  = main

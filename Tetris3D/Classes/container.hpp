@@ -32,7 +32,7 @@ public:
     /**
      Destructor of a container, with no forms inside.
      */
-    //~Container();
+    ~Container();
     
     /**
      Extend the size of the forms array

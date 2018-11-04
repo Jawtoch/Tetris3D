@@ -60,9 +60,6 @@ void Cube::RenderDrawCube(SDL_Renderer *renderer, int x, int y, int z, int shift
     
 }
 
-
-// End Cube Methods
-
 Cube*** createArray(int xSize, int ySize, int zSize) {
     Cube*** array;
     array = new Cube**[xSize];
@@ -87,4 +84,3 @@ void freeArray(Cube*** cTab, int xSize, int ySize, int zSize) {
     }
     delete[] cTab;
 }
-
