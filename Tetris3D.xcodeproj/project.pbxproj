@@ -11,8 +11,8 @@
 		A255283621821DDD00CF733A /* segment.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A255283421821DDD00CF733A /* segment.cpp */; };
 		A255283921821FC800CF733A /* square.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A255283721821FC800CF733A /* square.cpp */; };
 		A255283C2182218400CF733A /* point3D.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A255283A2182218400CF733A /* point3D.cpp */; };
-		A255283F2182234000CF733A /* form.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A255283D2182234000CF733A /* form.cpp */; };
 		A27D739A218F6C3C00E8F8C1 /* cube.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A2C6323821862CDC006EE1BD /* cube.cpp */; };
+		A27D739C218F70B100E8F8C1 /* form.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A255283D2182234000CF733A /* form.cpp */; };
 		A2917968216D3A9D0086294B /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A2917967216D3A9D0086294B /* main.cpp */; };
 		A2917972216D3AE30086294B /* game.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A291796E216D3AE30086294B /* game.cpp */; };
 		A291797D216D3B550086294B /* SDL2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A2917978216D3B550086294B /* SDL2.framework */; };
@@ -192,12 +192,12 @@
 			files = (
 				A255283321821D4200CF733A /* point2D.cpp in Sources */,
 				A255283621821DDD00CF733A /* segment.cpp in Sources */,
+				A27D739C218F70B100E8F8C1 /* form.cpp in Sources */,
 				A27D739A218F6C3C00E8F8C1 /* cube.cpp in Sources */,
 				A2917968216D3A9D0086294B /* main.cpp in Sources */,
 				A255283C2182218400CF733A /* point3D.cpp in Sources */,
 				A2C6323621862051006EE1BD /* container.cpp in Sources */,
 				A2917972216D3AE30086294B /* game.cpp in Sources */,
-				A255283F2182234000CF733A /* form.cpp in Sources */,
 				A255283921821FC800CF733A /* square.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

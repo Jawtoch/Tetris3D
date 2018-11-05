@@ -37,6 +37,11 @@ private:
      */
     int* color;
     
+    /**
+     Tell if the form exist or not. If true, the form exist, and if false, not
+     */
+    bool exist;
+    
 public:
     
     /**
@@ -44,7 +49,7 @@ public:
      */
     Form();
     
-    //~Form();
+    ~Form();
     /**
      Constructor of a form, of origin in (0,0,0), random color, and given elements
      
@@ -86,6 +91,13 @@ public:
      @param z The shift on the z axis
      */
     void move(int x, int y, int z);
+    
+    /**
+     Return the state of the form, if it exist or not
+     
+     @return the state of form
+     */
+    bool doesExist();
     
     /**
      Add the form to the renderer

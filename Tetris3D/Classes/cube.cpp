@@ -13,7 +13,7 @@
 Cube::Cube() {
     size = 0.;
     exist = false;
-}
+};
 
 Cube::Cube(double size) {
     this->size = size;
@@ -22,7 +22,7 @@ Cube::Cube(double size) {
     } else {
         exist = true;
     }
-}
+};
 
 double Cube::getSize() {
     return this->size;
@@ -30,7 +30,7 @@ double Cube::getSize() {
 
 bool Cube::doesExist() {
     return exist;
-}
+};
 
 void Cube::RenderDrawCube(SDL_Renderer *renderer, int x, int y, int z, int shiftX, int shiftY) {
     int a = x * getSize();
@@ -58,7 +58,7 @@ void Cube::RenderDrawCube(SDL_Renderer *renderer, int x, int y, int z, int shift
     s3.fill(renderer);
     s3.RenderDrawSquare(renderer);
     
-}
+};
 
 Cube*** createArray(int xSize, int ySize, int zSize) {
     Cube*** array;
@@ -73,7 +73,7 @@ Cube*** createArray(int xSize, int ySize, int zSize) {
         }
     }
     return array;
-}
+};
 
 void freeArray(Cube*** cTab, int xSize, int ySize, int zSize) {
     for(int i = 0; i < xSize; i++) {
@@ -83,4 +83,4 @@ void freeArray(Cube*** cTab, int xSize, int ySize, int zSize) {
         delete[] cTab[i];
     }
     delete[] cTab;
-}
+};

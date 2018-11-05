@@ -19,9 +19,15 @@ class Container {
 private:
     
     /**
+     The size of the container
+     */
+    int size;
+    
+    /**
      An array of forms which contains all the forms which need to be manipulated during the game
      */
-    Form* forms;
+    Form forms[3];
+    
 public:
     
     /**
@@ -47,6 +53,27 @@ public:
      @param delta The number of cells which need to be deleted
      */
     void shrinkFrom(unsigned int delta);
+    
+    /**
+     Add form to the container
+     
+     @param addedForm The form which shoud be added
+     */
+    void addForm(Form addedForm);
+    
+    /**
+     Return the size of the container
+     
+     @return the size of the container
+     */
+    int getSize();
+    
+    /**
+     Add the container to the renderer
+     
+     @param renderer A structure representing rendering state
+     */
+    void RenderDrawContainer(SDL_Renderer* renderer, int shiftX, int shiftY);
 };
 
 #endif /* container_hpp */

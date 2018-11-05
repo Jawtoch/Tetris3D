@@ -8,9 +8,6 @@
 
 #include "form.hpp"
 
-/**
- *
- */
 Form::Form() {
     origin = Point3D();
     elements = NULL;
@@ -18,12 +15,12 @@ Form::Form() {
     color[0] = 0;
     color[1] = 0;
     color[2] = 0;
+    exist = false;
     
 }
-/*
+
 Form ::~Form() {
-    delete [] color;
-}*/
+}
 
 Form::Form(Cube*** elements) {
     origin = Point3D();
@@ -39,6 +36,7 @@ Form::Form(Cube*** elements) {
     color[0] = rand()%256;
     color[1] = rand()%256;
     color[2] = rand()%256;
+    exist = true;
 }
 
 Point3D Form::getOrigin() {
@@ -64,6 +62,10 @@ Cube*** Form::getElements() {
 
 void Form::move(int x, int y, int z) {
     origin = Point3D(getOrigin().getX() + x, getOrigin().getY() + y, getOrigin().getZ() + z);
+};
+
+bool Form::doesExist() {
+    return exist;
 };
 
 void Form::RenderDrawForm(SDL_Renderer* renderer, int shiftX, int shiftY) {

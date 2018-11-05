@@ -42,7 +42,8 @@ void RenderDrawAxes(SDL_Renderer *renderer, int x, int y) {
 int main(int argc, const char * argv[]) {
     // insert code here...
     std::cout << "Hello, World!\n";
-    SDL_Event *event = new SDL_Event;
+    //SDL_Event *event = new SDL_Event;
+    SDL_Event event;
     SDL_Renderer *renderer;
     SDL_Window *window;
     SDL_Init(SDL_INIT_VIDEO);
@@ -51,8 +52,11 @@ int main(int argc, const char * argv[]) {
     SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
     SDL_RenderClear(renderer);
     SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
+    
+    Container board = Container();
     Cube*** T = createArray(5, 5, 5);
     
+    //First form
     T[0][0][0] = Cube(20);
     T[0][0][1] = Cube(20);
     T[0][1][1] = Cube(20);
@@ -60,6 +64,9 @@ int main(int argc, const char * argv[]) {
     
     Form f1 = Form(T);
     freeArray(T,3,3,3);
+    board.addForm(f1);
+    
+    //Second form
     T = createArray(3, 3, 3);
     
     T[0][0][0] = Cube(20);
@@ -68,7 +75,9 @@ int main(int argc, const char * argv[]) {
     T[1][2][0] = Cube(20);
     Form f2 = Form(T);
     freeArray(T,3,3,3);
+    board.addForm(f2);
     
+    //Third form
     T = createArray(3, 3, 3);
 
     T[0][0][0] = Cube(20);
@@ -76,24 +85,7 @@ int main(int argc, const char * argv[]) {
     T[0][0][2] = Cube(20);
     Form f3 = Form(T);
     freeArray(T,3,3,3);
-    
-    /*Cube*** container = createArray(10, 10, 10);
-    
-    Cube *c = new Cube(sizeof(Cube));
-    Point3D *p3 = new Point3D;
-    
-    for(int i = 0; i < 3; i++) {
-        for(int j = 0; j < 3; j++) {
-            for(int k = 0; k < 3; k++) {
-                *c = f1.getElements()[i][j][k];
-                if (c->doesExist()) {
-                    *p3 = f1.getOrigine();
-                    container[i + (int)(p3->getX())][j + (int)(p3->getY())][k + (int)(p3->getZ())] = *c;
-                }
-            }
-        }
-    }
-    */
+    board.addForm(f3);
     
     int gameover = 0;
     const Uint8 *keystate;
@@ -102,16 +94,16 @@ int main(int argc, const char * argv[]) {
     while (!gameover) {
         temps += 1;
         /* look for an event */
-        if (SDL_PollEvent(event)) {
+        if (SDL_PollEvent(&event)) {
             /* an event was found */
-            switch (event->type) {
+            switch (event.type) {
                     /* close button clicked */
                 case SDL_QUIT:
                     gameover = 1;
                     break;
                     /* handle the keyboard */
                 case SDL_KEYDOWN:
-                    switch (event->key.keysym.sym) {
+                    switch (event.key.keysym.sym) {
                         case SDLK_ESCAPE:
                         //case SDLK_q:
                             gameover = 1;
@@ -151,10 +143,11 @@ int main(int argc, const char * argv[]) {
         f1.RenderDrawForm(renderer, WINDOW_WIDTH/2, WINDOW_WIDTH/2);
         f2.RenderDrawForm(renderer, WINDOW_WIDTH/2, WINDOW_WIDTH/2);
         f3.RenderDrawForm(renderer, WINDOW_WIDTH/2, WINDOW_WIDTH/2);
+        //board.RenderDrawContainer(renderer, WINDOW_WIDTH/2, WINDOW_WIDTH/2);
         SDL_RenderPresent(renderer);
         
     }
-    delete event;
+    //delete event;
     SDL_DestroyRenderer(renderer);
     SDL_DestroyWindow(window);
     SDL_Quit();
