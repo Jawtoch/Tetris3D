@@ -2,6 +2,12 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:Tetris3D.xcodeproj">
+      location = "group:/Users/ugocottin/OneDrive/Documents/Cours L2info/Programmation avance&#x301;e/Tetris3D/Tetris3D/cmake">
+   </FileRef>
+   <FileRef
+      location = "group:/Users/ugocottin/OneDrive/Documents/Cours L2info/Programmation avance&#x301;e/Tetris3D/Tetris3D/CMakeLists.txt">
+   </FileRef>
+   <FileRef
+      location = "self:">
    </FileRef>
 </Workspace>

@@ -14,12 +14,12 @@
 #include <SDL2/SDL.h>
 #include <iostream>
 
-#include "Classes/point2D.hpp"
-#include "Classes/segment.hpp"
-#include "Classes/square.hpp"
-#include "Classes/point3D.hpp"
-#include "Classes/cube.hpp"
-#include "Classes/form.hpp"
-#include "Classes/container.hpp"
+#include "libClasses/point2D.hpp"
+#include "libClasses/segment.hpp"
+#include "libClasses/square.hpp"
+#include "libClasses/point3D.hpp"
+#include "libClasses/cube.hpp"
+#include "libClasses/form.hpp"
+#include "libClasses/container.hpp"
 
 #endif /* game_hpp */
