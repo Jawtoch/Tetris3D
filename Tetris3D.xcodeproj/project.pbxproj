@@ -41,6 +41,7 @@
 		A27AD1402194A189005C0DE7 /* CMakeLists.txt */ = {isa = PBXFileReference; lastKnownFileType = text; name = CMakeLists.txt; path = "/Users/ugocottin/OneDrive/Documents/Cours L2info/Programmation avancée/Tetris3D/Tetris3D/CMakeLists.txt"; sourceTree = "<absolute>"; };
 		A27AD1442194A1F5005C0DE7 /* FindSDL2.cmake */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = FindSDL2.cmake; sourceTree = "<group>"; };
 		A27AD1452194A225005C0DE7 /* CMakeLists.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = CMakeLists.txt; sourceTree = "<group>"; };
+		A28D86B92194AA2B001E3BC8 /* build.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = build.sh; sourceTree = "<group>"; };
 		A2917964216D3A9C0086294B /* Tetris3D */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Tetris3D; sourceTree = BUILT_PRODUCTS_DIR; };
 		A2917967216D3A9D0086294B /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		A291796E216D3AE30086294B /* game.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = game.cpp; sourceTree = "<group>"; };
@@ -127,6 +128,7 @@
 				A291796F216D3AE30086294B /* game.hpp */,
 				A27AD1432194A1DB005C0DE7 /* cmake */,
 				A27AD13F2194A006005C0DE7 /* conf.sh */,
+				A28D86B92194AA2B001E3BC8 /* build.sh */,
 				A27AD1402194A189005C0DE7 /* CMakeLists.txt */,
 			);
 			path = Tetris3D;
