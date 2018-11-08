@@ -42,8 +42,7 @@ void RenderDrawAxes(SDL_Renderer *renderer, int x, int y) {
 int main(int argc, const char * argv[]) {
     // insert code here...
     std::cout << "Hello, World!\n";
-    //SDL_Event *event = new SDL_Event;
-    SDL_Event event;
+    SDL_Event *event = new SDL_Event;
     SDL_Renderer *renderer;
     SDL_Window *window;
     SDL_Init(SDL_INIT_VIDEO);
@@ -53,7 +52,7 @@ int main(int argc, const char * argv[]) {
     SDL_RenderClear(renderer);
     SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
     
-    Container board = Container();
+    //Container board = Container();
     Cube*** T = createArray(5, 5, 5);
     
     //First form
@@ -64,7 +63,7 @@ int main(int argc, const char * argv[]) {
     
     Form f1 = Form(T);
     freeArray(T,3,3,3);
-    board.addForm(f1);
+    //board.addForm(f1);
     
     //Second form
     T = createArray(3, 3, 3);
@@ -75,7 +74,7 @@ int main(int argc, const char * argv[]) {
     T[1][2][0] = Cube(20);
     Form f2 = Form(T);
     freeArray(T,3,3,3);
-    board.addForm(f2);
+    //board.addForm(f2);
     
     //Third form
     T = createArray(3, 3, 3);
@@ -85,7 +84,7 @@ int main(int argc, const char * argv[]) {
     T[0][0][2] = Cube(20);
     Form f3 = Form(T);
     freeArray(T,3,3,3);
-    board.addForm(f3);
+    //board.addForm(f3);
     
     int gameover = 0;
     const Uint8 *keystate;
@@ -94,16 +93,16 @@ int main(int argc, const char * argv[]) {
     while (!gameover) {
         temps += 1;
         /* look for an event */
-        if (SDL_PollEvent(&event)) {
+        if (SDL_PollEvent(event)) {
             /* an event was found */
-            switch (event.type) {
+            switch (event->type) {
                     /* close button clicked */
                 case SDL_QUIT:
                     gameover = 1;
                     break;
                     /* handle the keyboard */
                 case SDL_KEYDOWN:
-                    switch (event.key.keysym.sym) {
+                    switch (event->key.keysym.sym) {
                         case SDLK_ESCAPE:
                         //case SDLK_q:
                             gameover = 1;
@@ -147,7 +146,7 @@ int main(int argc, const char * argv[]) {
         SDL_RenderPresent(renderer);
         
     }
-    //delete event;
+    delete event;
     SDL_DestroyRenderer(renderer);
     SDL_DestroyWindow(window);
     SDL_Quit();
