@@ -52,7 +52,7 @@ int main(int argc, const char * argv[]) {
     SDL_RenderClear(renderer);
     SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
     
-    //Container board = Container();
+    Container board = Container();
     Cube*** T = createArray(5, 5, 5);
     
     //First form
@@ -63,7 +63,7 @@ int main(int argc, const char * argv[]) {
     
     Form f1 = Form(T);
     freeArray(T,3,3,3);
-    //board.addForm(f1);
+    board.addForm(f1);
     
     //Second form
     T = createArray(3, 3, 3);
@@ -74,7 +74,7 @@ int main(int argc, const char * argv[]) {
     T[1][2][0] = Cube(20);
     Form f2 = Form(T);
     freeArray(T,3,3,3);
-    //board.addForm(f2);
+    board.addForm(f2);
     
     //Third form
     T = createArray(3, 3, 3);
@@ -84,7 +84,9 @@ int main(int argc, const char * argv[]) {
     T[0][0][2] = Cube(20);
     Form f3 = Form(T);
     freeArray(T,3,3,3);
-    //board.addForm(f3);
+    board.addForm(f3);
+    
+    int selector = 0;
     
     int gameover = 0;
     const Uint8 *keystate;
@@ -116,33 +118,35 @@ int main(int argc, const char * argv[]) {
         }
         if (temps%50 == 0) {
             keystate = SDL_GetKeyboardState(NULL);
+            if (keystate[SDL_SCANCODE_RETURN]) {
+                selector += 1;
+                if (selector == board.getSize())
+                    selector = 0;
+            }
             if (keystate[SDL_SCANCODE_Q]) {
-                f1.move(-1, 0, 0);
+                board.getForm(selector)->move(-1, 0, 0);
             }
             if (keystate[SDL_SCANCODE_D]) {
-                f1.move(1, 0, 0);
+                board.getForm(selector)->move(1, 0, 0);
             }
             if (keystate[SDL_SCANCODE_Z]) {
-                f1.move(0, 0, -1);
+                board.getForm(selector)->move(0, 0, -1);
             }
             if (keystate[SDL_SCANCODE_S]) {
-                f1.move(0, 0, 1);
+                board.getForm(selector)->move(0, 0, 1);
             }
             if (keystate[SDL_SCANCODE_A]) {
-                f1.move(0, -1, 0);
+                board.getForm(selector)->move(0, -1, 0);
             }
             if (keystate[SDL_SCANCODE_E]) {
-                f1.move(0, 1, 0);
+                board.getForm(selector)->move(0, 1, 0);
             }
         }
         SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
         SDL_RenderClear(renderer);
         SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
-        RenderDrawAxes(renderer, WINDOW_WIDTH/2, WINDOW_WIDTH/2);
-        f1.RenderDrawForm(renderer, WINDOW_WIDTH/2, WINDOW_WIDTH/2);
-        f2.RenderDrawForm(renderer, WINDOW_WIDTH/2, WINDOW_WIDTH/2);
-        f3.RenderDrawForm(renderer, WINDOW_WIDTH/2, WINDOW_WIDTH/2);
-        //board.RenderDrawContainer(renderer, WINDOW_WIDTH/2, WINDOW_WIDTH/2);
+        RenderDrawAxes(renderer, WINDOW_WIDTH/2, WINDOW_WIDTH/4);
+        board.RenderDrawContainer(renderer, WINDOW_WIDTH/2, WINDOW_WIDTH/4);
         SDL_RenderPresent(renderer);
         
     }

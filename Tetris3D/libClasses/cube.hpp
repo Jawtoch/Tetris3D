@@ -31,6 +31,8 @@ private:
      */
     bool exist;
     
+    int colors[3];
+    
 public:
     
     /**
@@ -51,6 +53,24 @@ public:
      @return the size of the cube
      */
     double getSize();
+    
+    /**
+     Set the rgb colors value of the cube
+     
+     @param r the red componment
+     @param g the green componment
+     @param b the blue componment
+     */
+    void setColors(Uint8 r, Uint8 g, Uint8 b);
+    
+    /**
+     Put the rgb colors value of the cube into the pointers
+     
+     @param r the red componment
+     @param g the green componment
+     @param b the blue componment
+     */
+    void getColors(Uint8 *r, Uint8 *g, Uint8 *b);
     
     /**
      Return the state of the cube, if it exist or not

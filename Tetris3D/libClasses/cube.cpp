@@ -13,6 +13,9 @@
 Cube::Cube() {
     size = 0.;
     exist = false;
+    colors[0] = 0;
+    colors[1] = 0;
+    colors[2] = 0;
 };
 
 Cube::Cube(double size) {
@@ -22,10 +25,25 @@ Cube::Cube(double size) {
     } else {
         exist = true;
     }
+    colors[0] = 0;
+    colors[1] = 0;
+    colors[2] = 0;
 };
 
 double Cube::getSize() {
     return this->size;
+};
+
+void Cube::setColors(Uint8 r, Uint8 g, Uint8 b) {
+    colors[0] = r;
+    colors[1] = g;
+    colors[2] = b;
+};
+
+void Cube::getColors(Uint8 *r, Uint8 *g, Uint8 *b) {
+    *r = colors[0];
+    *g = colors[1];
+    *b = colors[2];
 };
 
 bool Cube::doesExist() {

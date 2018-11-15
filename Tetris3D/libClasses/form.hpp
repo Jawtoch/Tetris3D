@@ -14,7 +14,6 @@
 #include "point3D.hpp"
 #include "cube.hpp"
 
-
 /**
  This structure is intended to represent a form, composed of cubes. The form dimension is 3x3x3
  */

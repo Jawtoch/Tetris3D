@@ -9,43 +9,84 @@
 #include "container.hpp"
 
 Container::Container() {
-    size = 3;
-    for(int i = 0; i < size; i++) {
-        forms[i] = Form();
-    }
 }
 
 Container::~Container() {
 }
 
-void Container::extendFrom(unsigned int delta) {
-    Form newContainer[3];
-    for(int i = 0; i < size + delta; i++) {
-        newContainer[i] = forms[i];
-    }
-    *forms = *newContainer;
-};
-
-void Container::shrinkFrom(unsigned int delta) {
-    Form newContainer[3];
-    for(int i = 0; i < size - delta; i++) {
-        newContainer[i] = forms[i];
-    }
-    *forms = *newContainer;
-};
-
 void Container::addForm(Form addedForm) {
-    //extendFrom(1);
-    forms[size] = addedForm;
+    forms.insert(std::make_pair(getSize(), addedForm));
+};
+
+Form* Container::getForm(int index) {
+    std::map<int, Form>::iterator it = forms.begin();
+    for(int i = 0; i < getSize(); i++) {
+        if (i == index) {
+            return &(it->second);
+        }
+        it++;
+    }
+    return NULL;
 };
 
 int Container::getSize() {
-    return size;
+    return (int)forms.size();
 };
 
 void Container::RenderDrawContainer(SDL_Renderer* renderer, int shiftX, int shiftY) {
-    for(int i = 0; i < size; i++) {
-        if (forms[i].doesExist())
-            forms[i].RenderDrawForm(renderer, shiftX, shiftY);
+    std::map<int, Form>::iterator it = forms.begin();
+    
+    Cube*** plateau = createArray(CONTAINER_MAX_SIZE, CONTAINER_MAX_SIZE, CONTAINER_MAX_SIZE);
+    
+    while (it != forms.end()) {
+        
+        Point3D org = it->second.getOrigin();
+        Cube*** el = it->second.getElements();
+        for(int i = 0; i < FORM_MAX_SIZE; i++) {
+            for(int j = 0; j < FORM_MAX_SIZE; j++) {
+                for(int k = 0; k < FORM_MAX_SIZE; k++) {
+                    plateau[(int)org.getX() + i][(int)org.getY() + j][(int)org.getZ() + k] = el[i][j][k];
+                }
+            }
+        }
+        //it->second.RenderDrawForm(renderer, shiftX, shiftY);
+        it++;
     }
+    
+    Cube* c = new Cube;
+    
+    for(int i = 0; i < CONTAINER_MAX_SIZE; i++) {
+        for(int j = 0; j < CONTAINER_MAX_SIZE; j++) {
+            for(int k = CONTAINER_MAX_SIZE - 1; k >= 0; k--) {
+                c = &plateau[i][j][k];
+                if (c->doesExist()) {
+                    Uint8 SavedR = 0;
+                    Uint8 SavedG = 0;
+                    Uint8 SavedB = 0;
+                    Uint8 SavedA = 0;
+                    int test = SDL_GetRenderDrawColor(renderer, &SavedR, &SavedG, &SavedB, &SavedA);
+                    if (test != 0)
+                        SDL_GetError();
+                    
+                    Uint8 r = 0;
+                    Uint8 g = 0;
+                    Uint8 b = 0;
+                    Uint8 a = 255;
+                    c->getColors(&r, &g, &b);
+                    test = SDL_SetRenderDrawColor(renderer, r, g, b, a);
+                    if (test != 0)
+                        SDL_GetError();
+                    c->RenderDrawCube(renderer, i, j, k, shiftX, shiftY);
+                }
+            }
+        }
+    }
+    /*
+    std::map<int, Form>::iterator it = forms.begin();
+    
+    while (it != forms.end()) {
+        it->second.RenderDrawForm(renderer, shiftX, shiftY);
+        it++;
+    }*/
+    
 };
