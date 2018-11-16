@@ -45,7 +45,8 @@ void Container::RenderDrawContainer(SDL_Renderer* renderer, int shiftX, int shif
         for(int i = 0; i < FORM_MAX_SIZE; i++) {
             for(int j = 0; j < FORM_MAX_SIZE; j++) {
                 for(int k = 0; k < FORM_MAX_SIZE; k++) {
-                    plateau[(int)org.getX() + i][(int)org.getY() + j][(int)org.getZ() + k] = el[i][j][k];
+                    if (el[i][j][k].doesExist())
+                        plateau[(int)org.getX() + i][(int)org.getY() + j][(int)org.getZ() + k] = el[i][j][k];
                 }
             }
         }

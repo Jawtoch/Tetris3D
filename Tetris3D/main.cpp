@@ -89,7 +89,7 @@ int main(int argc, const char * argv[]) {
     int selector = 0;
     
     int gameover = 0;
-    const Uint8 *keystate;
+    //const Uint8 *keystate;
     int temps = 0;
     
     while (!gameover) {
@@ -106,42 +106,38 @@ int main(int argc, const char * argv[]) {
                 case SDL_KEYDOWN:
                     switch (event->key.keysym.sym) {
                         case SDLK_ESCAPE:
-                        //case SDLK_q:
                             gameover = 1;
                             break;
-                            /* do nothing for other keys */
+                        case SDLK_RETURN:
+                            selector += 1;
+                            if (selector == board.getSize())
+                                selector = 0;
+                            break;
+                        case SDLK_q:
+                            board.getForm(selector)->move(-1, 0, 0);
+                            break;
+                        case SDLK_d:
+                            board.getForm(selector)->move(1, 0, 0);
+                            break;
+                        case SDLK_z:
+                            board.getForm(selector)->move(0, 0, -1);
+                            break;
+                        case SDLK_s:
+                            board.getForm(selector)->move(0, 0, 1);
+                            break;
+                        case SDLK_a:
+                            board.getForm(selector)->move(0, -1, 0);
+                            break;
+                        case SDLK_e:
+                            board.getForm(selector)->move(0, 1, 0);
+                            break;
                         default:
                             break;
                     }
                     break;
             }
         }
-        if (temps%50 == 0) {
-            keystate = SDL_GetKeyboardState(NULL);
-            if (keystate[SDL_SCANCODE_RETURN]) {
-                selector += 1;
-                if (selector == board.getSize())
-                    selector = 0;
-            }
-            if (keystate[SDL_SCANCODE_Q]) {
-                board.getForm(selector)->move(-1, 0, 0);
-            }
-            if (keystate[SDL_SCANCODE_D]) {
-                board.getForm(selector)->move(1, 0, 0);
-            }
-            if (keystate[SDL_SCANCODE_Z]) {
-                board.getForm(selector)->move(0, 0, -1);
-            }
-            if (keystate[SDL_SCANCODE_S]) {
-                board.getForm(selector)->move(0, 0, 1);
-            }
-            if (keystate[SDL_SCANCODE_A]) {
-                board.getForm(selector)->move(0, -1, 0);
-            }
-            if (keystate[SDL_SCANCODE_E]) {
-                board.getForm(selector)->move(0, 1, 0);
-            }
-        }
+
         SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
         SDL_RenderClear(renderer);
         SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
