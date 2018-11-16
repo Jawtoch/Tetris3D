@@ -35,6 +35,8 @@ double Point3D::getZ() {
 }
 
 Point2D Point3D::toPoint2D() {
-    return Point2D(getX() + getY(), (getX() + getY()) * cos(ANGLE) + 2 * getZ() * cos(ANGLE));
+    double a = (getX() + getY());
+    double b = (getX() + getY()) * cos(ANGLE) + 2 * getZ() * cos(ANGLE);
+    return Point2D(a,b);
 }
 // End Point3D Methods

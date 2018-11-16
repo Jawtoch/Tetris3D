@@ -9,21 +9,26 @@
 #include "segment.hpp"
 
 Segment::Segment() {
-    p1 = Point2D();
-    p2 = Point2D();
+    p1 = new Point2D();
+    p2 = new Point2D();
+}
+
+Segment::~Segment() {
+    delete p1;
+    delete p2;
 }
 
 Segment::Segment(Point2D a, Point2D b) {
-    p1 = a;
-    p2 = b;
+    p1 = new Point2D(a.getX(), a.getY());
+    p2 = new Point2D(b.getX(), b.getY());
 }
 
 Point2D Segment::getP1() {
-    return p1;
+    return *p1;
 }
 
 Point2D Segment::getP2() {
-    return p2;
+    return *p2;
 }
 
 Point2D Segment::center() {
