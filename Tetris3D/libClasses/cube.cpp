@@ -78,7 +78,7 @@ void Cube::RenderDrawCube(SDL_Renderer *renderer, int x, int y, int z, int shift
     
 };
 
-Cube*** creatseArray(int xSize, int ySize, int zSize) {
+Cube*** createArray(int xSize, int ySize, int zSize) {
     Cube*** array;
     array = new Cube**[xSize];
     for(int x = 0; x < xSize; ++x) {
