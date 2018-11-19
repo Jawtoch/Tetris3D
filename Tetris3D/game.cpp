@@ -6,3 +6,18 @@
 //
 
 #include "game.hpp"
+
+/*
+
+ ->récupère la ligne
+    -> cherche les trois axes
+    -> si les trois non présents
+        -> ERREUR
+    -> sinon
+        -> switch
+            -> si x
+                -> x = ?
+            -> si y
+            ...
+ 
+ */

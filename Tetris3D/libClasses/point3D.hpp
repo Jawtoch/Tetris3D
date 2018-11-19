@@ -45,7 +45,7 @@ public:
      Constructor of a 3D point, of given x,y and z coordinates
      */
     Point3D(double a, double b, double c);
-    
+        
     /**
      Return the x coodinate of the 3D point
      

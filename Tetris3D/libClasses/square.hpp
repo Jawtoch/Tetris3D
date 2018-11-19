@@ -40,7 +40,7 @@ public:
      @param hd A 2D point representing the top right angle
      */
     Square(Point2D bg, Point2D bd, Point2D hg, Point2D hd);
-    
+
     /**
      Return the bottom left angle of the square
 

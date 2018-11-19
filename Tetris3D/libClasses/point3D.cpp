@@ -22,6 +22,7 @@ Point3D::Point3D(double a, double b, double c) {
     z = c;
 }
 
+
 double Point3D::getX() {
     return x;
 }

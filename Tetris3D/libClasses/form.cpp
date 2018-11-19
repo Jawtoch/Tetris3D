@@ -20,6 +20,9 @@ Form::Form() {
 }
 
 Form ::~Form() {
+    delete color;
+    if (elements != NULL)
+        freeArray(elements, FORM_MAX_SIZE, FORM_MAX_SIZE, FORM_MAX_SIZE);
 }
 
 Form::Form(Cube*** elements) {
@@ -31,10 +34,10 @@ Form::Form(Cube*** elements) {
     exist = true;
     
     origin = Point3D();
-    this->elements = createArray(3, 3, 3);
-    for (int i = 0; i < 3; i++) {
-        for (int j = 0; j < 3; j++) {
-            for (int k = 0; k < 3; k++) {
+    this->elements = createArray(FORM_MAX_SIZE, FORM_MAX_SIZE, FORM_MAX_SIZE);
+    for (int i = 0; i < FORM_MAX_SIZE; i++) {
+        for (int j = 0; j < FORM_MAX_SIZE; j++) {
+            for (int k = 0; k < FORM_MAX_SIZE; k++) {
                 elements[i][j][k].setColors(color[0], color[1], color[2]);
                 this->elements[i][j][k] = elements[i][j][k];
             }
@@ -47,11 +50,11 @@ Point3D Form::getOrigin() {
 }
 
 void Form::addElement(Cube e, unsigned int x, unsigned int y, unsigned int z) {
-    if (x > 3 || y > 3 || z > 3) {
+    if (x >= FORM_MAX_SIZE || y >= FORM_MAX_SIZE || z >= FORM_MAX_SIZE) {
         std::cout << "------\nWARNING -- Invalid parameter in fuction “addElement“ -- Index out of array bound. The element was not added to the form.\n" << std::endl;
     } else {
         if (elements == NULL)
-            this->elements = createArray(3, 3, 3);
+            this->elements = createArray(FORM_MAX_SIZE, FORM_MAX_SIZE, FORM_MAX_SIZE);
         e.setColors(color[0], color[1], color[2]);
         elements[x][y][z] = e;
     }
@@ -91,9 +94,9 @@ void Form::RenderDrawForm(SDL_Renderer* renderer, int shiftX, int shiftY) {
     SDL_SetRenderDrawColor(renderer, this->color[0], this->color[1], this->color[2], 255);
     
     Cube *c = new Cube(sizeof(Cube));
-    for(int i = 0; i < 3; i++) {
-        for(int j = 0; j < 3; j++) {
-            for(int k = 2; k >= 0; k--) {
+    for(int i = 0; i < FORM_MAX_SIZE; i++) {
+        for(int j = 0; j < FORM_MAX_SIZE; j++) {
+            for(int k = 2; k >= FORM_MAX_SIZE; k--) {
                 *c = getElements()[i][j][k];
                 if (c->doesExist())
                     c->RenderDrawCube(renderer,

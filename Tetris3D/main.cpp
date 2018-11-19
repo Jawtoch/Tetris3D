@@ -89,7 +89,6 @@ int main(int argc, const char * argv[]) {
     int selector = 0;
     
     int gameover = 0;
-    //const Uint8 *keystate;
     int temps = 0;
     
     while (!gameover) {

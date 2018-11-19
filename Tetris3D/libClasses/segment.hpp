@@ -19,12 +19,12 @@ private:
     /**
      A segment's point
      */
-    Point2D *p1;
+    Point2D p1;
     
     /**
      A segment's point
      */
-    Point2D *p2;
+    Point2D p2;
     
 public:
     
@@ -32,8 +32,6 @@ public:
      Constructor of an empty segment defined by two 2D points, both are on (0,0) coordinates
      */
     Segment();
-    
-    ~Segment();
     
     /**
      Constructor of a segment defined by two 2D points, "a" and "b"
