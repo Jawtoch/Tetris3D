@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A26F675721AC4C0B00860931 /* form.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A255283D2182234000CF733A /* form.cpp */; };
 		A27AD13E21949FD2005C0DE7 /* libClasses.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A27AD13D21949FD1005C0DE7 /* libClasses.a */; };
 		A2917968216D3A9D0086294B /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A2917967216D3A9D0086294B /* main.cpp */; };
 		A2917972216D3AE30086294B /* game.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A291796E216D3AE30086294B /* game.cpp */; };
@@ -205,6 +206,7 @@
 			files = (
 				A2917968216D3A9D0086294B /* main.cpp in Sources */,
 				A2917972216D3AE30086294B /* game.cpp in Sources */,
+				A26F675721AC4C0B00860931 /* form.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

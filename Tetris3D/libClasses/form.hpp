@@ -10,6 +10,7 @@
 #define form_hpp
 
 #include <stdio.h>
+#include <iterator>
 
 #include "point3D.hpp"
 #include "cube.hpp"
@@ -27,11 +28,6 @@ private:
     Point3D origin;
     
     /**
-     An array of cubes, elements the form, of dimension 3x3x3
-     */
-    Cube*** elements;
-    
-    /**
      An array of 3 integers (red, green, blue)
      */
     int* color;
@@ -40,6 +36,13 @@ private:
      Tell if the form exist or not. If true, the form exist, and if false, not
      */
     bool exist;
+    
+protected:
+    
+    /**
+     An array of cubes, elements the form, of dimension 3x3x3
+     */
+    Cube*** elements;
     
 public:
     
@@ -107,4 +110,12 @@ public:
     
 };
 
+class FormIterator {
+private:
+    Form* myForm;
+public:
+    FormIterator(Form *f);
+    Cube* next();
+    Cube* hasNext();
+};
 #endif /* form_hpp */

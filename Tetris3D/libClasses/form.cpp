@@ -64,7 +64,7 @@ Cube*** Form::getElements() {
     return elements;
 }
 
-void Form::move(int x, int y, int z) {
+void Form::move(int x, int y, int z) { // ERREUR
     bool out = true;
     for(int i = 0; i < FORM_MAX_SIZE; i++) {
         for(int j = 0; j < FORM_MAX_SIZE; j++) {
@@ -73,8 +73,8 @@ void Form::move(int x, int y, int z) {
                     Point3D org = getOrigin();
                     if (
                     ((org.getX() + i + x >= CONTAINER_MAX_SIZE) || (org.getX() + i + x < 0))
-                    || ((org.getY() + i + y >= CONTAINER_MAX_SIZE) || (org.getY() + i + y < 0))
-                    || ((org.getZ() + i + z >= CONTAINER_MAX_SIZE) || (org.getZ() + i + z < 0))
+                    || ((org.getY() + j + y >= CONTAINER_MAX_SIZE) || (org.getY() + j + y < 0))
+                    || ((org.getZ() + k + z >= CONTAINER_MAX_SIZE) || (org.getZ() + k + z < 0))
                     ){
                         out = false;
                     }
@@ -108,4 +108,16 @@ void Form::RenderDrawForm(SDL_Renderer* renderer, int shiftX, int shiftY) {
         }
     }
     delete c;
+};
+
+//\\//\\//\\
+
+FormIterator::FormIterator(Form *f) {
+    myForm = f;
+};
+Cube* FormIterator::next() {
+    return NULL;
+};
+Cube* FormIterator::hasNext() {
+    return NULL;
 };
