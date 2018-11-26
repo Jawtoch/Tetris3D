@@ -15,26 +15,30 @@ int file_ok(char* name_file){
     	exit(EXIT_FAILURE) ;
 	}
 	else{
+		int d = 0 ;
+		int ligne = 0;
 		char pointeur ;
-		while( ((pointeur = (char)fgetc(file)) != '\n') && (pointeur != EOF)){
-			switch(pointeur){
-				case 'x':
-					pointeur = (char)fgetc(file) ;
-					break ;
-				case 'y':
-					pointeur = (char)fgetc(file) ;
-					break ;
-				case 'z':
-					pointeur = (char)fgetc(file) ;
-					break ;
-				default:
-					ok = 0 ;
-					printf("Il y a une erreur dans le fichier a la position %lu du curseur\n", ftell(file)); // il y a un nombre supérieur à 10
-					pointeur = (char)fgetc(file) ;
-					break ;
+		do{
+			while( (d!=1) && (pointeur = (char)fgetc(file)) != '\n' ){
+				switch(pointeur){
+					case 'x':
+						pointeur = (char)fgetc(file) ;
+						break ;
+					case 'y':
+						pointeur = (char)fgetc(file) ;
+						break ;
+					case 'z':
+						pointeur = (char)fgetc(file) ;
+						break ;
+					default:
+						d = 1 ;
+						ok = 0 ;
+						printf("Il y a un probleme dans le fichier à la ligne %d\n", ligne); // il y a un nombre supérieur à 10
+						break ;
+				}
 			}
-		}
-
+			ligne++ ;
+		}while( (d!=1) && (pointeur != EOF) ) ;
 	}
 	fclose(file) ;
 	return ok ;
