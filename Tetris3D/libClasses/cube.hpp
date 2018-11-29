@@ -73,6 +73,13 @@ public:
     void getColors(Uint8 *r, Uint8 *g, Uint8 *b);
     
     /**
+     Set the state of the cube, if it exist or not
+     
+     @param b the state of cube
+     */
+    void setExist(bool b);
+    
+    /**
      Return the state of the cube, if it exist or not
      
      @return the state of cube

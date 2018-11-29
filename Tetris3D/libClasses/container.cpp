@@ -9,9 +9,11 @@
 #include "container.hpp"
 
 Container::Container() {
+    elements = createArray(CONTAINER_MAX_SIZE, CONTAINER_MAX_SIZE, CONTAINER_MAX_SIZE);
 }
 
 Container::~Container() {
+    freeArray(elements, CONTAINER_MAX_SIZE, CONTAINER_MAX_SIZE, CONTAINER_MAX_SIZE);
 }
 
 void Container::addForm(Form &addedForm) {
@@ -33,8 +35,8 @@ int Container::getSize() {
     return (int)forms.size();
 };
 
-void Container::RenderDrawContainer(SDL_Renderer* renderer, int shiftX, int shiftY) {
-    std::map<int, Form*>::iterator it = forms.begin();
+void Container::update() {
+    std::map<int, Form*>::const_iterator it = forms.begin();
     
     Cube*** plateau = createArray(CONTAINER_MAX_SIZE, CONTAINER_MAX_SIZE, CONTAINER_MAX_SIZE);
     
@@ -47,7 +49,62 @@ void Container::RenderDrawContainer(SDL_Renderer* renderer, int shiftX, int shif
             for(int j = 0; j < FORM_MAX_SIZE; j++) {
                 for(int k = 0; k < FORM_MAX_SIZE; k++) {
                     if (el[i][j][k].doesExist()) {
-                        std::cout << "x= " << org->getX() + i << " y = " << org->getY() + j << " z = " << org->getZ() + k << std::endl;
+                        plateau[(int)org->getX() + i][(int)org->getY() + j][(int)org->getZ() + k] = el[i][j][k];
+                        
+                    }
+                    
+                }
+            }
+        }
+        it++;
+    }
+    delete org;
+    
+    Cube c;
+    bool del = true;
+    
+    for(int i = 0; i < CONTAINER_MAX_SIZE; i++) {
+        del = true;
+        for(int j = 0; j < CONTAINER_MAX_SIZE; j++) {
+            for(int k = 0; k < CONTAINER_MAX_SIZE; k++) {
+                c = plateau[i][j][k];
+                if (!c.doesExist()) {
+                    del = false;
+                    
+                }
+            }
+        }
+        
+        if (del) {
+            for(int j = 0; j < CONTAINER_MAX_SIZE; j++) {
+                for(int k = 0; k < CONTAINER_MAX_SIZE; k++) {
+                    c = plateau[i][j][k];
+                    c.setExist(false);
+                }
+            }
+        }
+        
+        
+    }
+    freeArray(plateau, CONTAINER_MAX_SIZE, CONTAINER_MAX_SIZE, CONTAINER_MAX_SIZE);
+    
+}
+
+void Container::RenderDrawContainer(SDL_Renderer* renderer, int shiftX, int shiftY) {
+    update();
+    std::map<int, Form*>::const_iterator it = forms.begin();
+    
+    Cube*** plateau = createArray(CONTAINER_MAX_SIZE, CONTAINER_MAX_SIZE, CONTAINER_MAX_SIZE);
+    
+    Point3D *org = new Point3D;
+    while (it != forms.end()) {
+        
+        *org = it->second->getOrigin();
+        Cube*** el = it->second->getElements();
+        for(int i = 0; i < FORM_MAX_SIZE; i++) {
+            for(int j = 0; j < FORM_MAX_SIZE; j++) {
+                for(int k = 0; k < FORM_MAX_SIZE; k++) {
+                    if (el[i][j][k].doesExist()) {
                         plateau[(int)org->getX() + i][(int)org->getY() + j][(int)org->getZ() + k] = el[i][j][k];
                         
                     }

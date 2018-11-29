@@ -25,6 +25,8 @@ private:
      */
     std::map<int, Form*> forms;
     
+    Cube*** elements;
+    
 public:
     
     /**
@@ -32,17 +34,15 @@ public:
      */
     Container();
     
-    /**
-     Destructor of a container, with no forms inside.
-     */
     ~Container();
-    
     /**
      Add form to the container
      
      @param addedForm The form which shoud be added
      */
     void addForm(Form &addedForm);
+    
+    void update();
     
     /**
      Return the choosen form from the container

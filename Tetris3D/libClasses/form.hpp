@@ -37,8 +37,6 @@ private:
      */
     bool exist;
     
-protected:
-    
     /**
      An array of cubes, elements the form, of dimension 3x3x3
      */

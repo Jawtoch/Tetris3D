@@ -50,6 +50,10 @@ bool Cube::doesExist() {
     return exist;
 };
 
+void Cube::setExist(bool b) {
+    exist = b;
+};
+
 void Cube::RenderDrawCube(SDL_Renderer *renderer, int x, int y, int z, int shiftX, int shiftY) {
     int a = x * getSize();
     int b = y * getSize();

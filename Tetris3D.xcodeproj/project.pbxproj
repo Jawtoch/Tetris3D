@@ -7,7 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		A26F675721AC4C0B00860931 /* form.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A255283D2182234000CF733A /* form.cpp */; };
+		A2142FF721AFF5800013A631 /* point2D.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A255283121821D4200CF733A /* point2D.cpp */; };
+		A2142FFC21AFF5890013A631 /* segment.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A255283421821DDD00CF733A /* segment.cpp */; };
+		A2142FFD21AFF5890013A631 /* square.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A255283721821FC800CF733A /* square.cpp */; };
+		A2142FFE21AFF5890013A631 /* point3D.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A255283A2182218400CF733A /* point3D.cpp */; };
+		A2142FFF21AFF5890013A631 /* cube.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A2C6323821862CDC006EE1BD /* cube.cpp */; };
+		A214300021AFF5890013A631 /* form.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A255283D2182234000CF733A /* form.cpp */; };
+		A214300221AFF67D0013A631 /* container.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A2C6323421862051006EE1BD /* container.cpp */; };
 		A27AD13E21949FD2005C0DE7 /* libClasses.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A27AD13D21949FD1005C0DE7 /* libClasses.a */; };
 		A2917968216D3A9D0086294B /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A2917967216D3A9D0086294B /* main.cpp */; };
 		A2917972216D3AE30086294B /* game.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A291796E216D3AE30086294B /* game.cpp */; };
@@ -205,8 +211,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				A2917968216D3A9D0086294B /* main.cpp in Sources */,
+				A2142FF721AFF5800013A631 /* point2D.cpp in Sources */,
+				A2142FFD21AFF5890013A631 /* square.cpp in Sources */,
 				A2917972216D3AE30086294B /* game.cpp in Sources */,
-				A26F675721AC4C0B00860931 /* form.cpp in Sources */,
+				A214300221AFF67D0013A631 /* container.cpp in Sources */,
+				A2142FFC21AFF5890013A631 /* segment.cpp in Sources */,
+				A214300021AFF5890013A631 /* form.cpp in Sources */,
+				A2142FFE21AFF5890013A631 /* point3D.cpp in Sources */,
+				A2142FFF21AFF5890013A631 /* cube.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
