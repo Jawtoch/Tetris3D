@@ -91,12 +91,21 @@ bool Form::doesExist() {
 };
 
 void Form::RenderDrawForm(SDL_Renderer* renderer, int shiftX, int shiftY) {
+    
+    Uint8 SavedR = 0;
+    Uint8 SavedG = 0;
+    Uint8 SavedB = 0;
+    Uint8 SavedA = 0;
+    int test = SDL_GetRenderDrawColor(renderer, &SavedR, &SavedG, &SavedB, &SavedA);
+    if (test != 0)
+        SDL_GetError();
+    
     SDL_SetRenderDrawColor(renderer, this->color[0], this->color[1], this->color[2], 255);
     
     Cube *c = new Cube(sizeof(Cube));
     for(int i = 0; i < FORM_MAX_SIZE; i++) {
         for(int j = 0; j < FORM_MAX_SIZE; j++) {
-            for(int k = 2; k >= FORM_MAX_SIZE; k--) {
+            for(int k = 0; k < FORM_MAX_SIZE; k++) {
                 *c = getElements()[i][j][k];
                 if (c->doesExist())
                     c->RenderDrawCube(renderer,
@@ -108,16 +117,6 @@ void Form::RenderDrawForm(SDL_Renderer* renderer, int shiftX, int shiftY) {
         }
     }
     delete c;
-};
-
-//\\//\\//\\
-
-FormIterator::FormIterator(Form *f) {
-    myForm = f;
-};
-Cube* FormIterator::next() {
-    return NULL;
-};
-Cube* FormIterator::hasNext() {
-    return NULL;
+    
+    SDL_SetRenderDrawColor(renderer, SavedR, SavedG, SavedB, SavedA);
 };

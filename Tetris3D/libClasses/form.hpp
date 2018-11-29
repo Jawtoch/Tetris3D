@@ -107,13 +107,4 @@ public:
     void RenderDrawForm(SDL_Renderer* renderer, int shiftX, int shiftY);
     
 };
-
-class FormIterator {
-private:
-    Form* myForm;
-public:
-    FormIterator(Form *f);
-    Cube* next();
-    Cube* hasNext();
-};
 #endif /* form_hpp */

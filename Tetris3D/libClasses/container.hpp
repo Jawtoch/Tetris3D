@@ -23,7 +23,7 @@ private:
     /**
      An array of forms which contains all the forms which need to be manipulated during the game
      */
-    std::map<int, Form*> forms;
+    Form* currentForm;
     
     Cube*** elements;
     
@@ -40,7 +40,7 @@ public:
      
      @param addedForm The form which shoud be added
      */
-    void addForm(Form &addedForm);
+    void addForm(Form addedForm);
     
     void update();
     

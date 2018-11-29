@@ -21,5 +21,5 @@
 #include "libClasses/cube.hpp"
 #include "libClasses/form.hpp"
 #include "libClasses/container.hpp"
-
+#include "libClasses/formGenerator.hpp"
 #endif /* game_hpp */

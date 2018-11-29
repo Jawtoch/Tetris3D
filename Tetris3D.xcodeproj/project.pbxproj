@@ -14,6 +14,7 @@
 		A2142FFF21AFF5890013A631 /* cube.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A2C6323821862CDC006EE1BD /* cube.cpp */; };
 		A214300021AFF5890013A631 /* form.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A255283D2182234000CF733A /* form.cpp */; };
 		A214300221AFF67D0013A631 /* container.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A2C6323421862051006EE1BD /* container.cpp */; };
+		A214300521B000180013A631 /* formGenerator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A214300321B000180013A631 /* formGenerator.cpp */; };
 		A27AD13E21949FD2005C0DE7 /* libClasses.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A27AD13D21949FD1005C0DE7 /* libClasses.a */; };
 		A2917968216D3A9D0086294B /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A2917967216D3A9D0086294B /* main.cpp */; };
 		A2917972216D3AE30086294B /* game.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A291796E216D3AE30086294B /* game.cpp */; };
@@ -33,6 +34,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		A214300321B000180013A631 /* formGenerator.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = formGenerator.cpp; sourceTree = "<group>"; };
+		A214300421B000180013A631 /* formGenerator.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = formGenerator.hpp; sourceTree = "<group>"; };
 		A255283121821D4200CF733A /* point2D.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = point2D.cpp; sourceTree = "<group>"; };
 		A255283221821D4200CF733A /* point2D.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = point2D.hpp; sourceTree = "<group>"; };
 		A255283421821DDD00CF733A /* segment.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = segment.cpp; sourceTree = "<group>"; };
@@ -96,6 +99,8 @@
 				A255283E2182234000CF733A /* form.hpp */,
 				A2C6323421862051006EE1BD /* container.cpp */,
 				A2C6323521862051006EE1BD /* container.hpp */,
+				A214300321B000180013A631 /* formGenerator.cpp */,
+				A214300421B000180013A631 /* formGenerator.hpp */,
 			);
 			path = libClasses;
 			sourceTree = "<group>";
@@ -217,6 +222,7 @@
 				A214300221AFF67D0013A631 /* container.cpp in Sources */,
 				A2142FFC21AFF5890013A631 /* segment.cpp in Sources */,
 				A214300021AFF5890013A631 /* form.cpp in Sources */,
+				A214300521B000180013A631 /* formGenerator.cpp in Sources */,
 				A2142FFE21AFF5890013A631 /* point3D.cpp in Sources */,
 				A2142FFF21AFF5890013A631 /* cube.cpp in Sources */,
 			);
