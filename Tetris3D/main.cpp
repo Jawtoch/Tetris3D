@@ -70,7 +70,7 @@ int main(int argc, const char * argv[]) {
     
     Form f1 = Form(T);
     freeArray(T,3,3,3);
-    generate.addForm(f1);
+    //generate.addForm(f1);
     
     //Second form
     T = createArray(3, 3, 3);
@@ -81,7 +81,7 @@ int main(int argc, const char * argv[]) {
     T[1][2][0] = Cube(20);
     Form f2 = Form(T);
     freeArray(T,3,3,3);
-    generate.addForm(f2);
+    //generate.addForm(f2);
     
     //Third form
     T = createArray(3, 3, 3);
@@ -91,7 +91,15 @@ int main(int argc, const char * argv[]) {
     T[0][0][2] = Cube(20);
     Form f3 = Form(T);
     freeArray(T,3,3,3);
-    generate.addForm(f3);
+    //generate.addForm(f3);
+    
+    //Third form
+    T = createArray(3, 3, 3);
+    
+    T[0][0][0] = Cube(20);
+    Form f4 = Form(T);
+    freeArray(T,3,3,3);
+    generate.addForm(f4);
     
     Form *currentForm = generate.getForm();
     

@@ -41,26 +41,46 @@ void Container::update() {
     Cube c;
     bool del;
     
-    for(int i = 0; i < CONTAINER_MAX_SIZE; i++) {
+    for(int z = 0; z < CONTAINER_MAX_SIZE; z++) {
         del = true;
-        for(int j = 0; j < CONTAINER_MAX_SIZE; j++) {
-            for(int k = 0; k < CONTAINER_MAX_SIZE; k++) {
-                c = elements[i][j][k];
-                if (!c.doesExist()) {
+        
+        for(int x = 0; x < CONTAINER_MAX_SIZE; x++) {
+            for(int y = 0; y < CONTAINER_MAX_SIZE; y++) {
+                if (!elements[x][y][z].doesExist()) {
                     del = false;
                 }
             }
         }
         
         if (del) {
-            for(int j = 0; j < CONTAINER_MAX_SIZE; j++) {
-                for(int k = 0; k < CONTAINER_MAX_SIZE; k++) {
-                    c = elements[i][j][k];
-                    c.setExist(false);
+            for(int x = 0; x < CONTAINER_MAX_SIZE; x++) {
+                for(int y = 0; y < CONTAINER_MAX_SIZE; y++) {
+                    elements[x][y][z].setExist(false);
                 }
             }
         }
+        
     }
+        /*
+         
+         FormGenerator fG = FormGenerator();
+        form1.txt
+        form2.txt
+        
+         String sD = "form";
+         String sF = ".txt";
+         
+         for(int i = 1; i < NB_DE_FORMES; i++) {
+         String myForm = sD + i + sF;
+         int*** out = file_to_form(myForm);
+         Cube*** mesCubes = UneFonction(out);
+         
+         fg.add(mesCubes)
+         
+         }
+         
+         
+         */
 }
 
 void Container::RenderDrawContainer(SDL_Renderer* renderer, int shiftX, int shiftY) {
