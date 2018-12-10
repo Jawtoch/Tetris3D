@@ -7,6 +7,20 @@
 
 #include "game.hpp"
 
+#define NB_PIECES 10
+
+int main() {
+    
+    FormGenerator generator = FormGenerator();
+    
+    for(int i = 0; i < NB_PIECES; i++) {
+        string s = "form" + i + ".txt"; // a revoir
+        int*** piece = file_to_array(s); // existe deja
+        Cube*** c = intVersCube(piece); // a écrire
+        generator.addForm(c); // existe deja
+    
+}
+
 /*
 
  ->récupère la ligne

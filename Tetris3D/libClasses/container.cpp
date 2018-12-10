@@ -58,29 +58,18 @@ void Container::update() {
                     elements[x][y][z].setExist(false);
                 }
             }
+            
+            for(int k = z; k > 0; k--) {
+                for(int i = 0; i < CONTAINER_MAX_SIZE; i++) {
+                    for (int j = 0; j < CONTAINER_MAX_SIZE; j++) {
+                        elements[i][j][k] = elements[i][j][k - 1];
+                        elements[i][j][k - 1].setExist(false);
+                    }
+                }
+            }
         }
         
     }
-        /*
-         
-         FormGenerator fG = FormGenerator();
-        form1.txt
-        form2.txt
-        
-         String sD = "form";
-         String sF = ".txt";
-         
-         for(int i = 1; i < NB_DE_FORMES; i++) {
-         String myForm = sD + i + sF;
-         int*** out = file_to_form(myForm);
-         Cube*** mesCubes = UneFonction(out);
-         
-         fg.add(mesCubes)
-         
-         }
-         
-         
-         */
 }
 
 void Container::RenderDrawContainer(SDL_Renderer* renderer, int shiftX, int shiftY) {

@@ -10,7 +10,7 @@
 #define point2D_hpp
 
 #define FORM_MAX_SIZE 3
-#define CONTAINER_MAX_SIZE 10
+#define CONTAINER_MAX_SIZE 3
 
 #include <stdio.h>
 
