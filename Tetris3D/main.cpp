@@ -70,7 +70,7 @@ int main(int argc, const char * argv[]) {
     
     Form f1 = Form(T);
     freeArray(T,3,3,3);
-    //generate.addForm(f1);
+    generate.addForm(f1);
     
     //Second form
     T = createArray(3, 3, 3);
@@ -81,7 +81,7 @@ int main(int argc, const char * argv[]) {
     T[1][2][0] = Cube(20);
     Form f2 = Form(T);
     freeArray(T,3,3,3);
-    //generate.addForm(f2);
+    generate.addForm(f2);
     
     //Third form
     T = createArray(3, 3, 3);
@@ -91,7 +91,7 @@ int main(int argc, const char * argv[]) {
     T[0][0][2] = Cube(20);
     Form f3 = Form(T);
     freeArray(T,3,3,3);
-    //generate.addForm(f3);
+    generate.addForm(f3);
     
     //Third form
     T = createArray(3, 3, 3);
@@ -104,13 +104,58 @@ int main(int argc, const char * argv[]) {
     Form *currentForm = generate.getForm();
     
     int gameover = 0;
-    int temps = 0;
     
+    time_t now, begining;
+    time(&begining);
+    time(&now);
+    
+    int count = 0, seconds = 0;
+    bool refresh = false;
     while (!gameover) {
-        temps += 1;
+        
+        refresh = false;
+        
+        time(&now);
+        if ((int)difftime(now, begining) != seconds) {
+            seconds = (int)difftime(now, begining);
+            count++;
+            std::cout << seconds << std::endl;
+            if (count == DIFFICULTE) {
+                std::cout << "down" << std::endl;
+                count = 0;
+                bool placedForm = currentForm->move(0, 0, 1, board.getElements());
+                if (!placedForm) { // Form cannot go down anymore
+                    // Check if the form is inside the container
+                    bool out = true;
+                    for(int i = 0; i < FORM_MAX_SIZE; i++) {
+                        for(int j = 0; j < FORM_MAX_SIZE; j++) {
+                            for(int k = 0; k < FORM_MAX_SIZE; k++) {
+                                if (currentForm->getElements()[i][j][k].doesExist()) {
+                                    Point3D org = currentForm->getOrigin();
+                                    if ((org.getX() + i >= CONTAINER_MAX_SIZE) || (org.getY() + j >= CONTAINER_MAX_SIZE) || (org.getZ() + k >= CONTAINER_MAX_SIZE)) {
+                                        out = false;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    
+                    if (out) {
+                        board.addForm(*currentForm);
+                        currentForm = generate.getForm();
+                    } else {
+                        gameover = 1;
+                    }
+                    
+                }
+                refresh = true;
+            }
+        }
+        
         /* look for an event */
         if (SDL_PollEvent(event)) {
             /* an event was found */
+            refresh = true;
             switch (event->type) {
                     /* close button clicked */
                 case SDL_QUIT:
@@ -122,33 +167,35 @@ int main(int argc, const char * argv[]) {
                         case SDLK_ESCAPE:
                             gameover = 1;
                             break;
-                        case SDLK_RETURN:
+                        /*case SDLK_RETURN:
                             board.addForm(*currentForm);
                             currentForm = generate.getForm();
-                            break;
+                            break;*/
                         case SDLK_q:
-                            currentForm->move(-1, 0, 0);
+                            currentForm->move(-1, 0, 0, board.getElements());
                             break;
                         case SDLK_d:
-                            currentForm->move(1, 0, 0);
+                            currentForm->move(1, 0, 0, board.getElements());
                             break;
-                        case SDLK_z:
-                            currentForm->move(0, 0, -1);
+                        /*case SDLK_z:
+                            currentForm->move(0, 0, -1, board.getElements());
                             break;
                         case SDLK_s:
-                            currentForm->move(0, 0, 1);
-                            break;
+                            currentForm->move(0, 0, 1, board.getElements());
+                            break;*/
                         case SDLK_a:
-                            currentForm->move(0, -1, 0);
+                            currentForm->move(0, -1, 0, board.getElements());
                             break;
                         case SDLK_e:
-                            currentForm->move(0, 1, 0);
+                            currentForm->move(0, 1, 0, board.getElements());
                             break;
                         default:
                             break;
                     }
                     break;
             }
+        }
+        if (refresh) {
             SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
             SDL_RenderClear(renderer);
             SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);

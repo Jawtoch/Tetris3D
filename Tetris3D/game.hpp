@@ -8,6 +8,8 @@
 #ifndef game_hpp
 #define game_hpp
 
+#define DIFFICULTE 5
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>

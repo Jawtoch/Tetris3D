@@ -23,8 +23,6 @@ private:
     /**
      An array of forms which contains all the forms which need to be manipulated during the game
      */
-    Form* currentForm;
-    
     Cube*** elements;
     
 public:
@@ -45,18 +43,11 @@ public:
     void update();
     
     /**
-     Return the choosen form from the container
+     Return the elements of the container
      
-     @return the form
+     @return the elements
      */
-    Form* getForm(int index);
-    
-    /**
-     Return the size of the container
-     
-     @return the size of the container
-     */
-    int getSize();
+    Cube*** getElements();
     
     /**
      Add the container to the renderer

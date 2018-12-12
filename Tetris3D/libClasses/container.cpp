@@ -29,13 +29,9 @@ void Container::addForm(Form addedForm) {
     }
 };
 
-Form* Container::getForm(int index) {
-    return currentForm;
-};
-
-int Container::getSize() {
-    return 0;
-};
+Cube*** Container::getElements() {
+    return elements;
+}
 
 void Container::update() {
     Cube c;

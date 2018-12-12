@@ -72,6 +72,13 @@ public:
     Cube*** getElements();
     
     /**
+     Set the origin of the form
+     
+     @param org The origin of the form
+     */
+    void setOrigin(Point3D org);
+    
+    /**
      Add a given element to the form, on given coordinates (each coordinate in [0;3[)
      
      @param e The element who shoud be added
@@ -90,7 +97,7 @@ public:
      @param y The shift on the y axis
      @param z The shift on the z axis
      */
-    void move(int x, int y, int z);
+    bool move(int x, int y, int z, Cube*** elements);
     
     /**
      Return the state of the form, if it exist or not

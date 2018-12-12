@@ -57,6 +57,11 @@ void Form::addElement(Cube e, unsigned int x, unsigned int y, unsigned int z) {
             this->elements = createArray(FORM_MAX_SIZE, FORM_MAX_SIZE, FORM_MAX_SIZE);
         e.setColors(color[0], color[1], color[2]);
         elements[x][y][z] = e;
+        
+        color[0] = rand()%256;
+        color[1] = rand()%256;
+        color[2] = rand()%256;
+        exist = true;
     }
 }
 
@@ -64,7 +69,11 @@ Cube*** Form::getElements() {
     return elements;
 }
 
-void Form::move(int x, int y, int z) { // ERREUR
+void Form::setOrigin(Point3D org) {
+    this->origin = org;
+}
+
+bool Form::move(int x, int y, int z, Cube*** elements) {
     bool out = true;
     for(int i = 0; i < FORM_MAX_SIZE; i++) {
         for(int j = 0; j < FORM_MAX_SIZE; j++) {
@@ -74,16 +83,23 @@ void Form::move(int x, int y, int z) { // ERREUR
                     if (
                     ((org.getX() + i + x >= CONTAINER_MAX_SIZE) || (org.getX() + i + x < 0))
                     || ((org.getY() + j + y >= CONTAINER_MAX_SIZE) || (org.getY() + j + y < 0))
-                    || ((org.getZ() + k + z >= CONTAINER_MAX_SIZE) || (org.getZ() + k + z < 0))
-                    ){
+                    /*|| ((org.getZ() + k + z >= CONTAINER_MAX_SIZE) || (org.getZ() + k + z < 0))*/
+                    ) /* le déplacement est hors des limites du conteneur*/ {
                         out = false;
+                    } else {
+                        if (elements[(int)org.getX() + i + x][(int)org.getY() + j + y][(int)org.getZ() + k + z].doesExist()) {
+                            out = false;
+                        }
                     }
                 }
             }
         }
     }
-    if (out)
+    if (out) {
         origin = Point3D(getOrigin().getX() + x, getOrigin().getY() + y, getOrigin().getZ() + z);
+        return true;
+    }
+    return false;
 };
 
 bool Form::doesExist() {
@@ -120,3 +136,4 @@ void Form::RenderDrawForm(SDL_Renderer* renderer, int shiftX, int shiftY) {
     
     SDL_SetRenderDrawColor(renderer, SavedR, SavedG, SavedB, SavedA);
 };
+
