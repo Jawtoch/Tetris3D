@@ -7,31 +7,181 @@
 
 #include "game.hpp"
 
-#define NB_PIECES 10
-
-int main() {
-    
-    FormGenerator generator = FormGenerator();
-    
-    for(int i = 0; i < NB_PIECES; i++) {
-        string s = "form" + i + ".txt"; // a revoir
-        int*** piece = file_to_array(s); // existe deja
-        Cube*** c = intVersCube(piece); // a écrire
-        generator.addForm(c); // existe deja
-    
+Game::Game() {
+    nbForms = 10;
+    difficuly = 3;
+    windowsWidth = 600;
+    formMaxSize = 3;
+    containerMaxSize = 10;
 }
 
-/*
+void Game::start() {
+    
+    SDL_Event *event = new SDL_Event;
+    SDL_Renderer *renderer;
+    SDL_Window *window;
+    SDL_Init(SDL_INIT_VIDEO);
+    SDL_CreateWindowAndRenderer(windowsWidth, windowsWidth, 0, &window, &renderer);
+    SDL_SetWindowTitle(window, "Tetris3D");
+    SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
+    SDL_RenderClear(renderer);
+    SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
+    
+    FormGenerator generate = FormGenerator(containerMaxSize, formMaxSize);
+    
+    Container board = Container(containerMaxSize, formMaxSize);
+    Cube*** T = createArray(formMaxSize, formMaxSize, formMaxSize);
+    
+    //First form
+    T[0][0][0] = Cube(20);
+    T[0][0][1] = Cube(20);
+    T[0][0][2] = Cube(20);
+    T[0][1][0] = Cube(20);
+    T[0][1][1] = Cube(20);
+    T[0][1][2] = Cube(20);
+    T[0][2][0] = Cube(20);
+    T[0][2][1] = Cube(20);
+    T[0][2][2] = Cube(20);
+    
+    Form f1 = Form(T, containerMaxSize, formMaxSize);
+    freeArray(T,formMaxSize,formMaxSize,formMaxSize);
+    //generate.addForm(f1);
+    
+    //Second form
+    T = createArray(formMaxSize, formMaxSize, formMaxSize);
+    
+    T[0][0][0] = Cube(20);
+    T[1][0][0] = Cube(20);
+    T[1][1][0] = Cube(20);
+    T[1][2][0] = Cube(20);
+    Form f2 = Form(T, containerMaxSize, formMaxSize);
+    freeArray(T,formMaxSize,formMaxSize,formMaxSize);
+    //generate.addForm(f2);
+    
+    //Third form
+    T = createArray(formMaxSize, formMaxSize, formMaxSize);
+    
+    T[0][0][0] = Cube(20);
+    T[0][0][1] = Cube(20);
+    T[0][0][2] = Cube(20);
+    Form f3 = Form(T, containerMaxSize, formMaxSize);
+    freeArray(T,formMaxSize,formMaxSize,formMaxSize);
+    //generate.addForm(f3);
+    
+    //Third form
+    T = createArray(formMaxSize, formMaxSize, formMaxSize);
+    
+    T[0][0][0] = Cube(20);
+    Form f4 = Form(T, containerMaxSize, formMaxSize);
+    freeArray(T,formMaxSize,formMaxSize,formMaxSize);
+    generate.addForm(f4);
+    
+    Form *currentForm = generate.getForm();
+    
+    int gameover = 0;
+    int score = 0;
+    time_t now, begining;
+    time(&begining);
+    time(&now);
+    
+    int count = 0, seconds = 0;
+    bool refresh = false;
+    while (!gameover) {
+        
+        refresh = false;
+        
+        time(&now);
+        if ((int)difftime(now, begining) != seconds) {
+            seconds = (int)difftime(now, begining);
+            count++;
+            if (count == difficuly) {
+                count = 0;
+                bool placedForm = currentForm->move(0, 0, 1, board.getElements());
+                if (!placedForm) { // Form cannot go down anymore
+                    score+= currentForm->getScore();
+                    board.addForm(*currentForm);
+                    std::cout << "Score : " << score << std::endl;
+                    currentForm = generate.getForm();
+                }
+                refresh = true;
+            }
+        }
+        
+        /* look for an event */
+        if (SDL_PollEvent(event)) {
+            /* an event was found */
+            refresh = true;
+            switch (event->type) {
+                    /* close button clicked */
+                case SDL_QUIT:
+                    gameover = 1;
+                    break;
+                    /* handle the keyboard */
+                case SDL_KEYDOWN:
+                    switch (event->key.keysym.sym) {
+                        case SDLK_ESCAPE:
+                            gameover = 1;
+                            break;
+                        case SDLK_q:
+                            currentForm->move(-1, 0, 0, board.getElements());
+                            break;
+                        case SDLK_d:
+                            currentForm->move(1, 0, 0, board.getElements());
+                            break;
+                        case SDLK_s:
+                            currentForm->move(0, -1, 0, board.getElements());
+                            break;
+                        case SDLK_z:
+                            currentForm->move(0, 1, 0, board.getElements());
+                            break;
+                        default:
+                            break;
+                    }
+                    break;
+            }
+        }
+        if (refresh) {
+            SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
+            SDL_RenderClear(renderer);
+            SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+            board.RenderDrawContainer(renderer, windowsWidth/2, windowsWidth/8, *currentForm);
+            RenderDrawBorders(renderer, windowsWidth/2, windowsWidth/8);
+            SDL_RenderPresent(renderer);
+        }
+    }
+    delete event;
+    SDL_DestroyRenderer(renderer);
+    SDL_DestroyWindow(window);
+    SDL_Quit();
+    
+    std::cout << "Gameover, your score is " << score << std::endl;
+}
 
- ->récupère la ligne
-    -> cherche les trois axes
-    -> si les trois non présents
-        -> ERREUR
-    -> sinon
-        -> switch
-            -> si x
-                -> x = ?
-            -> si y
-            ...
- 
- */
+void Game::RenderDrawBorders(SDL_Renderer *renderer, int shiftX, int shiftY) {
+    Cube cub = Cube(20 * containerMaxSize);
+
+    int a = 0, b = 0, c = 0;
+
+    Point2D A = Point2D(a - b + shiftX, (a + b) * cos(ANGLE) + 2 * c * cos(ANGLE) + shiftY);
+    Point2D B = Point2D(a - b + cub.getSize() + shiftX, (a + b + cub.getSize()) * cos(ANGLE) + 2 * (c) * cos(ANGLE) + shiftY);
+    Point2D C = Point2D(a - b + shiftX, (a + b + 2 * cub.getSize()) * cos(ANGLE) + 2 * c * cos(ANGLE) + shiftY);
+    Point2D D = Point2D(a - b - cub.getSize() + shiftX, (a + b + cub.getSize()) * cos(ANGLE) + 2 * c * cos(ANGLE) + shiftY);
+    Point2D E = Point2D(a - b + shiftX, (a + b) * cos(ANGLE) + 2 * (c + cub.getSize()) * cos(ANGLE) + shiftY);
+    Point2D F = Point2D(a - b + cub.getSize() + shiftX, (a + b + cub.getSize()) * cos(ANGLE) + 2 * (c + cub.getSize()) * cos(ANGLE) + shiftY);
+    Point2D G = Point2D(a - b + shiftX, (a + b + 2 * cub.getSize()) * cos(ANGLE) + 2 * (c + cub.getSize()) * cos(ANGLE) + shiftY);
+    Point2D H = Point2D(a - b - cub.getSize() + shiftX, (a + b + cub.getSize()) * cos(ANGLE) + 2 * (c + cub.getSize()) * cos(ANGLE) + shiftY);
+    
+    Square s1 = Square(A, B, C, D);
+    Square s2 = Square(B, C, G, F);
+    Square s3 = Square(C, D, H, G);
+    Square s4 = Square(A, D, H, E);
+    Square s5 = Square(A, B, F, E);
+    
+    s1.RenderDrawSquare(renderer);
+    s2.RenderDrawSquare(renderer);
+    s3.RenderDrawSquare(renderer);
+    s4.RenderDrawSquare(renderer);
+    s5.RenderDrawSquare(renderer);
+    
+    
+}
