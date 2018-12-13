@@ -83,7 +83,7 @@ void Container::RenderDrawContainer(SDL_Renderer* renderer, int shiftX, int shif
     
     for(int i = 0; i < CONTAINER_MAX_SIZE; i++) {
         for(int j = 0; j < CONTAINER_MAX_SIZE; j++) {
-            for(int k = 0; k < CONTAINER_MAX_SIZE; k++) {
+            for(int k = CONTAINER_MAX_SIZE - 1; k > -1; k--) {
                 c = elements[i][j][k];
                 if (c.doesExist()) {
                     

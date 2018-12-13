@@ -102,6 +102,22 @@ bool Form::move(int x, int y, int z, Cube*** elements) {
     return false;
 };
 
+int Form::getScore() {
+    
+    int score = 0;
+    
+    for(int i = 0; i < FORM_MAX_SIZE; i++) {
+        for(int j = 0; j < FORM_MAX_SIZE; j++) {
+            for(int k = 0; k < FORM_MAX_SIZE; k++) {
+                if (getElements()[i][j][k].doesExist())
+                    score++;
+            }
+        }
+    }
+    
+    return score;
+}
+
 bool Form::doesExist() {
     return exist;
 };

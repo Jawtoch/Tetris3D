@@ -18,6 +18,7 @@
 		A27AD13E21949FD2005C0DE7 /* libClasses.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A27AD13D21949FD1005C0DE7 /* libClasses.a */; };
 		A2917968216D3A9D0086294B /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A2917967216D3A9D0086294B /* main.cpp */; };
 		A291797D216D3B550086294B /* SDL2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A2917978216D3B550086294B /* SDL2.framework */; };
+		A2D4876621C2C700007EC767 /* SDL_ttf.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A2917976216D3B550086294B /* SDL_ttf.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -72,6 +73,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A2D4876621C2C700007EC767 /* SDL_ttf.framework in Frameworks */,
 				A27AD13E21949FD2005C0DE7 /* libClasses.a in Frameworks */,
 				A291797D216D3B550086294B /* SDL2.framework in Frameworks */,
 			);

@@ -78,6 +78,7 @@ public:
      */
     void setOrigin(Point3D org);
     
+    int getScore();
     /**
      Add a given element to the form, on given coordinates (each coordinate in [0;3[)
      

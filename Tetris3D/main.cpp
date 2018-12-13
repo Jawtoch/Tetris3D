@@ -104,7 +104,7 @@ int main(int argc, const char * argv[]) {
     Form *currentForm = generate.getForm();
     
     int gameover = 0;
-    
+    int score = 0;
     time_t now, begining;
     time(&begining);
     time(&now);
@@ -125,8 +125,9 @@ int main(int argc, const char * argv[]) {
                 count = 0;
                 bool placedForm = currentForm->move(0, 0, 1, board.getElements());
                 if (!placedForm) { // Form cannot go down anymore
-                    std::cout << "Cannot go down anymore" << std::endl;
+                    score+= currentForm->getScore();
                     board.addForm(*currentForm);
+                    std::cout << "Score : " << score << std::endl;
                     currentForm = generate.getForm();
                 }
                 refresh = true;
@@ -148,22 +149,12 @@ int main(int argc, const char * argv[]) {
                         case SDLK_ESCAPE:
                             gameover = 1;
                             break;
-                        /*case SDLK_RETURN:
-                            board.addForm(*currentForm);
-                            currentForm = generate.getForm();
-                            break;*/
                         case SDLK_q:
                             currentForm->move(-1, 0, 0, board.getElements());
                             break;
                         case SDLK_d:
                             currentForm->move(1, 0, 0, board.getElements());
                             break;
-                        /*case SDLK_z:
-                            currentForm->move(0, 0, -1, board.getElements());
-                            break;
-                        case SDLK_s:
-                            currentForm->move(0, 0, 1, board.getElements());
-                            break;*/
                         case SDLK_a:
                             currentForm->move(0, -1, 0, board.getElements());
                             break;
@@ -190,5 +181,8 @@ int main(int argc, const char * argv[]) {
     SDL_DestroyRenderer(renderer);
     SDL_DestroyWindow(window);
     SDL_Quit();
+    
+    std::cout << "Gameover, your score is " << score << std::endl;
+    
     return 1;
 }
