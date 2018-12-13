@@ -125,28 +125,9 @@ int main(int argc, const char * argv[]) {
                 count = 0;
                 bool placedForm = currentForm->move(0, 0, 1, board.getElements());
                 if (!placedForm) { // Form cannot go down anymore
-                    // Check if the form is inside the container
-                    bool out = true;
-                    for(int i = 0; i < FORM_MAX_SIZE; i++) {
-                        for(int j = 0; j < FORM_MAX_SIZE; j++) {
-                            for(int k = 0; k < FORM_MAX_SIZE; k++) {
-                                if (currentForm->getElements()[i][j][k].doesExist()) {
-                                    Point3D org = currentForm->getOrigin();
-                                    if ((org.getX() + i >= CONTAINER_MAX_SIZE) || (org.getY() + j >= CONTAINER_MAX_SIZE) || (org.getZ() + k >= CONTAINER_MAX_SIZE)) {
-                                        out = false;
-                                    }
-                                }
-                            }
-                        }
-                    }
-                    
-                    if (out) {
-                        board.addForm(*currentForm);
-                        currentForm = generate.getForm();
-                    } else {
-                        gameover = 1;
-                    }
-                    
+                    std::cout << "Cannot go down anymore" << std::endl;
+                    board.addForm(*currentForm);
+                    currentForm = generate.getForm();
                 }
                 refresh = true;
             }

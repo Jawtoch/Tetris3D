@@ -8,7 +8,7 @@
 #ifndef game_hpp
 #define game_hpp
 
-#define DIFFICULTE 5
+#define DIFFICULTE 3
 
 #include <stdio.h>
 #include <stdlib.h>

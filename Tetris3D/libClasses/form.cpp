@@ -83,7 +83,7 @@ bool Form::move(int x, int y, int z, Cube*** elements) {
                     if (
                     ((org.getX() + i + x >= CONTAINER_MAX_SIZE) || (org.getX() + i + x < 0))
                     || ((org.getY() + j + y >= CONTAINER_MAX_SIZE) || (org.getY() + j + y < 0))
-                    /*|| ((org.getZ() + k + z >= CONTAINER_MAX_SIZE) || (org.getZ() + k + z < 0))*/
+                    || ((org.getZ() + k + z >= CONTAINER_MAX_SIZE) || (org.getZ() + k + z < 0))
                     ) /* le déplacement est hors des limites du conteneur*/ {
                         out = false;
                     } else {

@@ -20,6 +20,6 @@ Form* FormGenerator::getForm() {
     //return forms.at((rand() % forms.size()));
     Cube*** el = forms.at((rand() % forms.size()))->getElements();
     Form *f = new Form(el);
-    f->setOrigin(Point3D((int)CONTAINER_MAX_SIZE/2, (int)CONTAINER_MAX_SIZE/2, - FORM_MAX_SIZE));
+    f->setOrigin(Point3D((int)CONTAINER_MAX_SIZE/2, (int)CONTAINER_MAX_SIZE/2, 0));
     return f;
 }
