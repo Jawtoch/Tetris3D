@@ -19,6 +19,7 @@ int*** file_to_array(char* name_file){
 
 	FILE* file = fopen(name_file,"r") ;
 	int*** array = NULL;
+	int*** verif = NULL ;
 
 	if(file == NULL){
 		fprintf(stderr,"fopen() failed in file %s at line # %d", __FILE__,__LINE__) ;
@@ -26,12 +27,16 @@ int*** file_to_array(char* name_file){
 	}
 	else{
 		array = new int**[TAILLE_MAX_PIECE] ;
+		verif = new int**[TAILLE_MAX_PIECE] ;
 		for(int i=0;i<TAILLE_MAX_PIECE;i++){
 			array[i] = new int*[TAILLE_MAX_PIECE] ;
+			verif[i] = new int*[TAILLE_MAX_PIECE] ;
 			for(int j=0;j<TAILLE_MAX_PIECE;j++){
 				array[i][j] = new int[TAILLE_MAX_PIECE] ;
+				verif[i][j] = new int[TAILLE_MAX_PIECE] ;
 				for(int k=0;k<TAILLE_MAX_PIECE;k++){
-					array[i][j][k] = 0 ; 
+					array[i][j][k] = 0 ;
+					verif[i][j][k] = 0 ; 
 				}
 			}
 		}
@@ -55,24 +60,24 @@ int*** file_to_array(char* name_file){
 			//printf("%d %c %d %c %d %c %d\n", nread, a, x, b, y, c, z);
 			if (nread!=6 && nread!=0) {
 				fprintf(stderr,"Le format de la ligne %d du fichier est incorrecte\n", ligne);
-				freeArray(array, TAILLE_MAX, TAILLE_MAX, TAILLE_MAX) ;
+				freeArray(array, TAILLE_MAX_PIECE, TAILLE_MAX_PIECE, TAILLE_MAX_PIECE) ;
 				return NULL ;;
 			}
 			if(a=='x'&& b=='y' && c=='z'){
 				if(ligne>1){
 					if(fabs(x-temp1)>1){
 						fprintf(stderr,"La structure de la forme est impossible, voir ligne fichier %d et ligne code %d\n", ligne, __LINE__);
-						freeArray(array, TAILLE_MAX, TAILLE_MAX, TAILLE_MAX) ;
+						freeArray(array, TAILLE_MAX_PIECE, TAILLE_MAX_PIECE, TAILLE_MAX_PIECE) ;
 						return NULL ;
 					}
 					if(fabs(y-temp2)>1){
 						fprintf(stderr,"La structure de la forme est impossible, voir ligne fichier %d et ligne code %d\n", ligne, __LINE__);
-						freeArray(array, TAILLE_MAX, TAILLE_MAX, TAILLE_MAX) ;
+						freeArray(array, TAILLE_MAX_PIECE, TAILLE_MAX_PIECE, TAILLE_MAX_PIECE) ;
 						return NULL ;
 					}
 					if(fabs(z-temp3)>1){
 						fprintf(stderr,"La structure de la forme est impossible, voir ligne fichier %d et ligne code %d\n", ligne, __LINE__);
-						freeArray(array, TAILLE_MAX, TAILLE_MAX, TAILLE_MAX) ;
+						freeArray(array, TAILLE_MAX_PIECE, TAILLE_MAX_PIECE, TAILLE_MAX_PIECE) ;
 						return NULL ;
 					}
 				}
@@ -85,17 +90,17 @@ int*** file_to_array(char* name_file){
 				if(ligne>1){
 					if(fabs(x-temp1)>1){
 						fprintf(stderr,"La structure de la forme est impossible, voir ligne fichier %d et ligne code %d\n", ligne, __LINE__);
-						freeArray(array, TAILLE_MAX, TAILLE_MAX, TAILLE_MAX) ;
+						freeArray(array, TAILLE_MAX_PIECE, TAILLE_MAX_PIECE, TAILLE_MAX_PIECE) ;
 						return NULL ;
 					}
 					if(fabs(z-temp3)>1){
 						fprintf(stderr,"La structure de la forme est impossible, voir ligne fichier %d et ligne code %d\n", ligne, __LINE__);
-						freeArray(array, TAILLE_MAX, TAILLE_MAX, TAILLE_MAX) ;
+						freeArray(array, TAILLE_MAX_PIECE, TAILLE_MAX_PIECE, TAILLE_MAX_PIECE) ;
 						return NULL ;
 					}
 					if(fabs(y-temp2)>1){
 						fprintf(stderr,"La structure de la forme est impossible, voir ligne fichier %d et ligne code %d\n", ligne, __LINE__);
-						freeArray(array, TAILLE_MAX, TAILLE_MAX, TAILLE_MAX) ;
+						freeArray(array, TAILLE_MAX_PIECE, TAILLE_MAX_PIECE, TAILLE_MAX_PIECE) ;
 						return NULL ;
 					}
 				}
@@ -108,17 +113,17 @@ int*** file_to_array(char* name_file){
 				if(ligne>1){
 					if(fabs(y-temp2)>1){
 						fprintf(stderr,"La structure de la forme est impossible, voir ligne fichier %d et ligne code %d\n", ligne, __LINE__);
-						freeArray(array, TAILLE_MAX, TAILLE_MAX, TAILLE_MAX) ;
+						freeArray(array, TAILLE_MAX_PIECE, TAILLE_MAX_PIECE, TAILLE_MAX_PIECE) ;
 						return NULL ;
 					}
 					if(fabs(x-temp1)>1){
 						fprintf(stderr,"La structure de la forme est impossible, voir ligne fichier %d et ligne code %d\n", ligne, __LINE__);
-						freeArray(array, TAILLE_MAX, TAILLE_MAX, TAILLE_MAX) ;
+						freeArray(array, TAILLE_MAX_PIECE, TAILLE_MAX_PIECE, TAILLE_MAX_PIECE) ;
 						return NULL ; 
 					}
 					if(fabs(z-temp3)>1){
 						fprintf(stderr,"La structure de la forme est impossible, voir ligne fichier %d et ligne code %d\n", ligne, __LINE__);
-						freeArray(array, TAILLE_MAX, TAILLE_MAX, TAILLE_MAX) ;
+						freeArray(array, TAILLE_MAX_PIECE, TAILLE_MAX_PIECE, TAILLE_MAX_PIECE) ;
 						return NULL ; 
 					}
 				}
@@ -131,17 +136,17 @@ int*** file_to_array(char* name_file){
 				if(ligne>1){
 					if(fabs(y-temp2)>1){
 						fprintf(stderr,"La structure de la forme est impossible, voir ligne fichier %d et ligne code %d\n", ligne, __LINE__);
-						freeArray(array, TAILLE_MAX, TAILLE_MAX, TAILLE_MAX) ;
+						freeArray(array, TAILLE_MAX_PIECE, TAILLE_MAX_PIECE, TAILLE_MAX_PIECE) ;
 						return NULL ;
 					}
 					if(fabs(z-temp3)>1){
 						fprintf(stderr,"La structure de la forme est impossible, voir ligne fichier %d et ligne code %d\n", ligne, __LINE__);
-						freeArray(array, TAILLE_MAX, TAILLE_MAX, TAILLE_MAX) ;
+						freeArray(array, TAILLE_MAX_PIECE, TAILLE_MAX_PIECE, TAILLE_MAX_PIECE) ;
 						return NULL ;
 					}
 					if(fabs(x-temp1)>1){
 						fprintf(stderr,"La structure de la forme est impossible, voir ligne fichier %d et ligne code %d\n", ligne, __LINE__);
-						freeArray(array, TAILLE_MAX, TAILLE_MAX, TAILLE_MAX) ;
+						freeArray(array, TAILLE_MAX_PIECE, TAILLE_MAX_PIECE, TAILLE_MAX_PIECE) ;
 						return NULL ;
 					}
 				}
@@ -154,17 +159,17 @@ int*** file_to_array(char* name_file){
 				if(ligne>1){
 					if(fabs(z-temp3)>1){
 						fprintf(stderr,"La structure de la forme est impossible, voir ligne fichier %d et ligne code %d\n", ligne, __LINE__);
-						freeArray(array, TAILLE_MAX, TAILLE_MAX, TAILLE_MAX) ;
+						freeArray(array, TAILLE_MAX_PIECE, TAILLE_MAX_PIECE, TAILLE_MAX_PIECE) ;
 						return NULL ;
 					}
 					if(fabs(y-temp2)>1){
 						fprintf(stderr,"La structure de la forme est impossible, voir ligne fichier %d et ligne code %d\n", ligne, __LINE__);
-						freeArray(array, TAILLE_MAX, TAILLE_MAX, TAILLE_MAX) ;
+						freeArray(array, TAILLE_MAX_PIECE, TAILLE_MAX_PIECE, TAILLE_MAX_PIECE) ;
 						return NULL ;
 					}
 					if(fabs(x-temp1)>1){
 						fprintf(stderr,"La structure de la forme est impossible, voir ligne fichier %d et ligne code %d\n", ligne, __LINE__);
-						freeArray(array, TAILLE_MAX, TAILLE_MAX, TAILLE_MAX) ;
+						freeArray(array, TAILLE_MAX_PIECE, TAILLE_MAX_PIECE, TAILLE_MAX_PIECE) ;
 						return NULL ;
 					}
 				}
@@ -177,17 +182,17 @@ int*** file_to_array(char* name_file){
 				if(ligne!=1){
 					if(fabs(z-temp3)>1){
 						fprintf(stderr,"La structure de la forme est impossible, voir ligne fichier %d et ligne code %d\n", ligne, __LINE__);
-						freeArray(array, TAILLE_MAX, TAILLE_MAX, TAILLE_MAX) ;
+						freeArray(array, TAILLE_MAX_PIECE, TAILLE_MAX_PIECE, TAILLE_MAX_PIECE) ;
 						return NULL ;
 					}
 					if(fabs(x-temp1)>1){
 						fprintf(stderr,"La structure de la forme est impossible, voir ligne fichier %d et ligne code %d\n", ligne, __LINE__);
-						freeArray(array, TAILLE_MAX, TAILLE_MAX, TAILLE_MAX) ;
+						freeArray(array, TAILLE_MAX_PIECE, TAILLE_MAX_PIECE, TAILLE_MAX_PIECE) ;
 						return NULL ;
 					}
 					if(fabs(y-temp2)>1){
 						fprintf(stderr,"La structure de la forme est impossible, voir ligne fichier %d et ligne code %d\n", ligne, __LINE__);
-						freeArray(array, TAILLE_MAX, TAILLE_MAX, TAILLE_MAX) ;
+						freeArray(array, TAILLE_MAX_PIECE, TAILLE_MAX_PIECE, TAILLE_MAX_PIECE) ;
 						return NULL ;
 					}
 				}
@@ -195,6 +200,94 @@ int*** file_to_array(char* name_file){
 				temp2 = x ;
 				temp3 = y ;
 				array[z][x][y] = 1 ;
+				if((z-1)>=0 && (x-1)>= 0 && (y-1)>= 0){
+					verif[z-1][x-1][y-1] = 1 ;
+				}
+				if((z-1)>=0 && (x-1)>=0){
+					verif[z-1][x-1][y] = 1 ;
+				}
+				if((z-1)>=0 && (y-1)>=0){
+					verif[z-1][x][y-1] = 1 ;
+				}
+				if((x-1)>=0 && (y-1)>=0){
+					verif[z][x-1][y-1] = 1 ;
+				}
+				if((x-1)>=0){
+					verif[z][x-1][y] = 1 ;
+				}
+				if((y-1)>=0){
+					verif[z][x][y-1] = 1 ;
+				}
+				if((z-1)>=0){
+					verif[z-1][x][y] = 1 ;
+				}
+				// 7 cas sur 26 pour l'instant
+
+				if((z+1)<=TAILLE_MAX_PIECE && (x+1)<=TAILLE_MAX_PIECE && (y+1)<=TAILLE_MAX_PIECE){
+					verif[z+1][x+1][y+1] = 1 ;
+				}
+				if((z+1)<=TAILLE_MAX_PIECE && (x+1)<=TAILLE_MAX_PIECE){
+					verif[z+1][x+1][y] = 1 ;
+				}
+				if((z+1)<=TAILLE_MAX_PIECE && (y+1)<=TAILLE_MAX_PIECE){
+					verif[z+1][x][y+1] = 1 ;
+				}
+				if((x+1)<=TAILLE_MAX_PIECE && (y+1)<=TAILLE_MAX_PIECE){
+					verif[z][x+1][y+1] = 1 ;
+				}
+				if((x+1)<=TAILLE_MAX_PIECE){
+					verif[z][x+1][y] = 1 ;
+				}
+				if((y+1)<=TAILLE_MAX_PIECE){
+					verif[z][x][y+1] = 1 ;
+				}
+				if((z+1)<=TAILLE_MAX_PIECE){
+					verif[z+1][x][y] = 1 ;
+				}
+				// 14 cas sur 26 pour l'instant
+
+				if((z-1)>=0 && (x-1)>=0 && (y+1)<=TAILLE_MAX_PIECE){
+					verif[z-1][x-1][y+1] = 1 ;
+				}
+				if((z-1)>=0 && (x+1)<=TAILLE_MAX_PIECE && (y-1)>=0){
+					verif[z-1][x+1][y-1] = 1 ;
+				}
+				if((z+1)<=TAILLE_MAX_PIECE && (x-1)>=0 && (y-1)>=0){
+					verif[z+1][x-1][y-1] = 1 ;
+				}
+				// 17 cas sur 26 
+
+				if((z-1)>=0 && (x+1)<=TAILLE_MAX_PIECE && (y+1)<=TAILLE_MAX_PIECE){
+					verif[z-1][x+1][y+1] = 1 ;
+				}
+				if((z+1)<=TAILLE_MAX_PIECE && (x+1)<=TAILLE_MAX_PIECE && (y-1)>=0){
+					verif[z+1][x+1][y-1] = 1 ;
+				}
+				if((z+1)<=TAILLE_MAX_PIECE && (x-1)>=0 && (y+1)<=TAILLE_MAX_PIECE){
+					verif[z+1][x-1][y+1] = 1 ;
+				}
+				// 20 cas sur 26 pour l'instant
+
+				if((z-1)>=0 && (x+1)<=TAILLE_MAX_PIECE){
+					verif[z-1][x+1][y] = 1 ;
+				}
+				if((z+1)<=TAILLE_MAX_PIECE && (x-1)>=0){
+					verif[z+1][x-1][y] = 1 ;
+				}
+				if((z-1)>=0 && (y+1)<=TAILLE_MAX_PIECE){
+					verif[z-1][x][y+1] = 1 ;
+				}
+				if((z+1)<=TAILLE_MAX_PIECE && (y-1)>=0){
+					verif[z+1][x][y-1] = 1 ;
+				}
+				if((x-1)>=0 && (y+1)<=TAILLE_MAX_PIECE){
+					verif[z][x-1][y+1] = 1 ;
+				}
+				if((x+1)<=TAILLE_MAX_PIECE && (y-1)>=0){
+					verif[z][x+1][y-1] = 1 ;
+				}
+				// 26 cas sur 26 :)
+
 			}
 			else{
 				fprintf(stderr,"Le format de la ligne %d est incorrecte\n", ligne);
@@ -204,6 +297,7 @@ int*** file_to_array(char* name_file){
 		}
 		delete[] chaine ;
 		fclose(file) ;
+		freeArray(verif, TAILLE_MAX_PIECE, TAILLE_MAX_PIECE, TAILLE_MAX_PIECE) ;
 	}
 	return array ;
 }
