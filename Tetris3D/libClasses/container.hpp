@@ -54,7 +54,7 @@ public:
      
      @param renderer A structure representing rendering state
      */
-    void RenderDrawContainer(SDL_Renderer* renderer, int shiftX, int shiftY);
+    void RenderDrawContainer(SDL_Renderer* renderer, int shiftX, int shiftY, Form &currentForm);
 };
 
 #endif /* container_hpp */

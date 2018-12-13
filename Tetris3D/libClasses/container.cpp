@@ -68,11 +68,11 @@ void Container::update() {
     }
 }
 
-void Container::RenderDrawContainer(SDL_Renderer* renderer, int shiftX, int shiftY) {
+void Container::RenderDrawContainer(SDL_Renderer* renderer, int shiftX, int shiftY, Form &currentForm) {
     update();
 
     Cube c;
-    
+    bool found;
     Uint8 SavedR = 0;
     Uint8 SavedG = 0;
     Uint8 SavedB = 0;
@@ -84,7 +84,25 @@ void Container::RenderDrawContainer(SDL_Renderer* renderer, int shiftX, int shif
     for(int i = 0; i < CONTAINER_MAX_SIZE; i++) {
         for(int j = 0; j < CONTAINER_MAX_SIZE; j++) {
             for(int k = CONTAINER_MAX_SIZE - 1; k > -1; k--) {
-                c = elements[i][j][k];
+                found = false;
+                if(
+                   (i >= currentForm.getOrigin().getX() && i < currentForm.getOrigin().getX() + FORM_MAX_SIZE) &&
+                   (j >= currentForm.getOrigin().getY() && j < currentForm.getOrigin().getY() + FORM_MAX_SIZE) &&
+                   (k >= currentForm.getOrigin().getZ() && k < currentForm.getOrigin().getZ() + FORM_MAX_SIZE)
+                   ) {
+                    int indexI = i - (int)currentForm.getOrigin().getX();
+                    int indexJ = j -  (int)currentForm.getOrigin().getY();
+                    int indexK = k - (int)currentForm.getOrigin().getZ();
+                    
+                    if (currentForm.getElements()[indexI][indexJ][indexK].doesExist()) {
+                        found = true;
+                        c = currentForm.getElements()[indexI][indexJ][indexK];
+                    }
+                }
+                
+                if (!found) {
+                    c = elements[i][j][k];
+                }
                 if (c.doesExist()) {
                     
                     Uint8 r = 0;

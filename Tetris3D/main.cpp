@@ -119,9 +119,7 @@ int main(int argc, const char * argv[]) {
         if ((int)difftime(now, begining) != seconds) {
             seconds = (int)difftime(now, begining);
             count++;
-            std::cout << seconds << std::endl;
             if (count == DIFFICULTE) {
-                std::cout << "down" << std::endl;
                 count = 0;
                 bool placedForm = currentForm->move(0, 0, 1, board.getElements());
                 if (!placedForm) { // Form cannot go down anymore
@@ -155,10 +153,10 @@ int main(int argc, const char * argv[]) {
                         case SDLK_d:
                             currentForm->move(1, 0, 0, board.getElements());
                             break;
-                        case SDLK_a:
+                        case SDLK_s:
                             currentForm->move(0, -1, 0, board.getElements());
                             break;
-                        case SDLK_e:
+                        case SDLK_z:
                             currentForm->move(0, 1, 0, board.getElements());
                             break;
                         default:
@@ -172,8 +170,8 @@ int main(int argc, const char * argv[]) {
             SDL_RenderClear(renderer);
             SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
             RenderDrawAxes(renderer, WINDOW_WIDTH/2, WINDOW_WIDTH/8);
-            board.RenderDrawContainer(renderer, WINDOW_WIDTH/2, WINDOW_WIDTH/8);
-            currentForm->RenderDrawForm(renderer, WINDOW_WIDTH/2, WINDOW_WIDTH/8);
+            board.RenderDrawContainer(renderer, WINDOW_WIDTH/2, WINDOW_WIDTH/8, *currentForm);
+            //currentForm->RenderDrawForm(renderer, WINDOW_WIDTH/2, WINDOW_WIDTH/8);
             SDL_RenderPresent(renderer);
         }
     }
