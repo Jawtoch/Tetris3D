@@ -8,18 +8,20 @@
 
 #include "container.hpp"
 
-Container::Container() {
-    elements = createArray(CONTAINER_MAX_SIZE, CONTAINER_MAX_SIZE, CONTAINER_MAX_SIZE);
+Container::Container(int containerMaxSize, int formMaxSize) {
+    this->containerMaxSize = containerMaxSize;
+    this->formMaxSize = formMaxSize;
+    elements = createArray(this->containerMaxSize, this->containerMaxSize, this->containerMaxSize);
 }
 
 Container::~Container() {
-    freeArray(elements, CONTAINER_MAX_SIZE, CONTAINER_MAX_SIZE, CONTAINER_MAX_SIZE);
+    freeArray(elements, containerMaxSize, containerMaxSize, containerMaxSize);
 }
 
 void Container::addForm(Form addedForm) {
-    for(int i = 0; i < FORM_MAX_SIZE; i++) {
-        for(int j = 0; j < FORM_MAX_SIZE; j++) {
-            for(int k = 0; k < FORM_MAX_SIZE; k++) {
+    for(int i = 0; i < this->formMaxSize; i++) {
+        for(int j = 0; j < this->formMaxSize; j++) {
+            for(int k = 0; k < this->formMaxSize; k++) {
                 
                 if (addedForm.getElements()[i][j][k].doesExist()) {
                     elements[i + (int)addedForm.getOrigin().getX()][j + (int)addedForm.getOrigin().getY()][k + (int)addedForm.getOrigin().getZ()] = addedForm.getElements()[i][j][k];
@@ -37,11 +39,11 @@ void Container::update() {
     Cube c;
     bool del;
     
-    for(int z = 0; z < CONTAINER_MAX_SIZE; z++) {
+    for(int z = 0; z < this->containerMaxSize; z++) {
         del = true;
         
-        for(int x = 0; x < CONTAINER_MAX_SIZE; x++) {
-            for(int y = 0; y < CONTAINER_MAX_SIZE; y++) {
+        for(int x = 0; x < this->containerMaxSize; x++) {
+            for(int y = 0; y < this->containerMaxSize; y++) {
                 if (!elements[x][y][z].doesExist()) {
                     del = false;
                 }
@@ -49,15 +51,15 @@ void Container::update() {
         }
         
         if (del) {
-            for(int x = 0; x < CONTAINER_MAX_SIZE; x++) {
-                for(int y = 0; y < CONTAINER_MAX_SIZE; y++) {
+            for(int x = 0; x < this->containerMaxSize; x++) {
+                for(int y = 0; y < this->containerMaxSize; y++) {
                     elements[x][y][z].setExist(false);
                 }
             }
             
             for(int k = z; k > 0; k--) {
-                for(int i = 0; i < CONTAINER_MAX_SIZE; i++) {
-                    for (int j = 0; j < CONTAINER_MAX_SIZE; j++) {
+                for(int i = 0; i < this->containerMaxSize; i++) {
+                    for (int j = 0; j < this->containerMaxSize; j++) {
                         elements[i][j][k] = elements[i][j][k - 1];
                         elements[i][j][k - 1].setExist(false);
                     }
@@ -81,14 +83,14 @@ void Container::RenderDrawContainer(SDL_Renderer* renderer, int shiftX, int shif
     if (test != 0)
         SDL_GetError();
     
-    for(int i = 0; i < CONTAINER_MAX_SIZE; i++) {
-        for(int j = 0; j < CONTAINER_MAX_SIZE; j++) {
-            for(int k = CONTAINER_MAX_SIZE - 1; k > -1; k--) {
+    for(int i = 0; i < this->containerMaxSize; i++) {
+        for(int j = 0; j < this->containerMaxSize; j++) {
+            for(int k = this->containerMaxSize - 1; k > -1; k--) {
                 found = false;
                 if(
-                   (i >= currentForm.getOrigin().getX() && i < currentForm.getOrigin().getX() + FORM_MAX_SIZE) &&
-                   (j >= currentForm.getOrigin().getY() && j < currentForm.getOrigin().getY() + FORM_MAX_SIZE) &&
-                   (k >= currentForm.getOrigin().getZ() && k < currentForm.getOrigin().getZ() + FORM_MAX_SIZE)
+                   (i >= currentForm.getOrigin().getX() && i < currentForm.getOrigin().getX() + this->formMaxSize) &&
+                   (j >= currentForm.getOrigin().getY() && j < currentForm.getOrigin().getY() + this->formMaxSize) &&
+                   (k >= currentForm.getOrigin().getZ() && k < currentForm.getOrigin().getZ() + this->formMaxSize)
                    ) {
                     int indexI = i - (int)currentForm.getOrigin().getX();
                     int indexJ = j -  (int)currentForm.getOrigin().getY();
@@ -104,19 +106,9 @@ void Container::RenderDrawContainer(SDL_Renderer* renderer, int shiftX, int shif
                     c = elements[i][j][k];
                 }
                 if (c.doesExist()) {
-                    
-                    Uint8 r = 0;
-                    Uint8 g = 0;
-                    Uint8 b = 0;
-                    Uint8 a = 255;
-                    c.getColors(&r, &g, &b);
-                    test = SDL_SetRenderDrawColor(renderer, r, g, b, a);
-                    if (test != 0)
-                        SDL_GetError();
                     c.RenderDrawCube(renderer, i, j, k, shiftX, shiftY);
                 }
             }
         }
     }
-    SDL_SetRenderDrawColor(renderer, SavedR, SavedG, SavedB, SavedA);
 };

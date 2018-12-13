@@ -9,9 +9,9 @@
 #ifndef segment_hpp
 #define segment_hpp
 
-#include <stdio.h>
 #include <SDL2/SDL.h>
 #include "point2D.hpp"
+
 class Segment {
     
 private:

@@ -9,19 +9,18 @@
 #ifndef formGenerator_hpp
 #define formGenerator_hpp
 
-#include <stdio.h>
 #include <map>
-#include <cassert>
-#include <cstdlib>
 #include "form.hpp"
 
 class FormGenerator {
     
 private:
     std::map<int, Form*> forms;
+    int containerMaxSize;
+    int formMaxSize;
 
 public:
-    FormGenerator();
+    FormGenerator(int containerMaxSize, int formMaxSize);
     void addForm(Form &addedForm);
     Form* getForm();
 };

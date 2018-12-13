@@ -8,10 +8,6 @@
 #ifndef container_hpp
 #define container_hpp
 
-#include <stdio.h>
-#include <map>
-#include <cassert>
-
 #include "form.hpp"
 
 /**
@@ -25,14 +21,20 @@ private:
      */
     Cube*** elements;
     
+    int containerMaxSize;
+    int formMaxSize;
 public:
     
     /**
      Constructor of a container, with no forms inside.
      */
-    Container();
+    Container(int containerMaxSize, int formMaxSize);
     
+    /**
+     Destructor of a container
+     */
     ~Container();
+    
     /**
      Add form to the container
      

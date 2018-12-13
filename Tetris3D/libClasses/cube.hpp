@@ -9,8 +9,6 @@
 #ifndef cube_hpp
 #define cube_hpp
 
-#include <stdio.h>
-#include <SDL2/SDL.h>
 #include <iostream>
 
 #include "point2D.hpp"
@@ -31,7 +29,7 @@ private:
      */
     bool exist;
     
-    int colors[3];
+    int colors[4];
     
 public:
     
@@ -61,7 +59,7 @@ public:
      @param g the green componment
      @param b the blue componment
      */
-    void setColors(Uint8 r, Uint8 g, Uint8 b);
+    void setColors(Uint8 r, Uint8 g, Uint8 b, Uint8 a);
     
     /**
      Put the rgb colors value of the cube into the pointers
@@ -70,7 +68,7 @@ public:
      @param g the green componment
      @param b the blue componment
      */
-    void getColors(Uint8 *r, Uint8 *g, Uint8 *b);
+    void getColors(Uint8 *r, Uint8 *g, Uint8 *b, Uint8 *a);
     
     /**
      Set the state of the cube, if it exist or not

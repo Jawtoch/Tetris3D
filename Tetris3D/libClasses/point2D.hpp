@@ -9,11 +9,6 @@
 #ifndef point2D_hpp
 #define point2D_hpp
 
-#define FORM_MAX_SIZE 3
-#define CONTAINER_MAX_SIZE 6
-
-#include <stdio.h>
-
 class Point2D {
     
 private:

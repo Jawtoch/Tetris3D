@@ -19,6 +19,7 @@
 		A2917968216D3A9D0086294B /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A2917967216D3A9D0086294B /* main.cpp */; };
 		A291797D216D3B550086294B /* SDL2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A2917978216D3B550086294B /* SDL2.framework */; };
 		A2D4876621C2C700007EC767 /* SDL_ttf.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A2917976216D3B550086294B /* SDL_ttf.framework */; };
+		A2D4876821C2D4BA007EC767 /* game.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A291796E216D3AE30086294B /* game.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -219,6 +220,7 @@
 				A2917968216D3A9D0086294B /* main.cpp in Sources */,
 				A22E8FDD21BECAA900158E60 /* square.cpp in Sources */,
 				A22E8FDB21BECAA900158E60 /* point2D.cpp in Sources */,
+				A2D4876821C2D4BA007EC767 /* game.cpp in Sources */,
 				A22E8FE121BECAA900158E60 /* container.cpp in Sources */,
 				A22E8FDC21BECAA900158E60 /* segment.cpp in Sources */,
 				A22E8FE021BECAA900158E60 /* form.cpp in Sources */,

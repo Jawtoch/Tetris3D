@@ -16,6 +16,7 @@ Cube::Cube() {
     colors[0] = 0;
     colors[1] = 0;
     colors[2] = 0;
+    colors[3] = 0;
 };
 
 Cube::Cube(double size) {
@@ -28,22 +29,25 @@ Cube::Cube(double size) {
     colors[0] = 0;
     colors[1] = 0;
     colors[2] = 0;
+    colors[3] = 0;
 };
 
 double Cube::getSize() {
     return this->size;
 };
 
-void Cube::setColors(Uint8 r, Uint8 g, Uint8 b) {
+void Cube::setColors(Uint8 r, Uint8 g, Uint8 b, Uint8 a) {
     colors[0] = r;
     colors[1] = g;
     colors[2] = b;
+    colors[3] = a;
 };
 
-void Cube::getColors(Uint8 *r, Uint8 *g, Uint8 *b) {
+void Cube::getColors(Uint8 *r, Uint8 *g, Uint8 *b, Uint8 *a) {
     *r = colors[0];
     *g = colors[1];
     *b = colors[2];
+    *a = colors[3];
 };
 
 bool Cube::doesExist() {
@@ -73,11 +77,23 @@ void Cube::RenderDrawCube(SDL_Renderer *renderer, int x, int y, int z, int shift
     Square s2 = Square(B, C, G, F);
     Square s3 = Square(C, D, H, G);
     
+    Uint8 SavedR = 0;
+    Uint8 SavedG = 0;
+    Uint8 SavedB = 0;
+    Uint8 SavedA = 0;
+    int test = SDL_GetRenderDrawColor(renderer, &SavedR, &SavedG, &SavedB, &SavedA);
+    if (test != 0)
+        SDL_GetError();
+    SDL_SetRenderDrawColor(renderer, this->colors[0], this->colors[1], this->colors[2], this->colors[3]);
+    
     s1.fill(renderer);
-    s1.RenderDrawSquare(renderer);
     s2.fill(renderer);
-    s2.RenderDrawSquare(renderer);
     s3.fill(renderer);
+    
+    SDL_SetRenderDrawColor(renderer, SavedR, SavedG, SavedB, SavedA);
+    
+    s1.RenderDrawSquare(renderer);
+    s2.RenderDrawSquare(renderer);
     s3.RenderDrawSquare(renderer);
     
 };

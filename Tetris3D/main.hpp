@@ -9,6 +9,5 @@
 #define main_hpp
 
 #include "game.hpp"
-#include <time.h>
 
 #endif /* main_hpp */

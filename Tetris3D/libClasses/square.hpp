@@ -9,8 +9,6 @@
 #ifndef square_hpp
 #define square_hpp
 
-#include <stdio.h>
-#include <SDL2/SDL.h>
 #include "point2D.hpp"
 #include "segment.hpp"
 

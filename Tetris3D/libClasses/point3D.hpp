@@ -9,7 +9,6 @@
 #ifndef point3D_hpp
 #define point3D_hpp
 
-#include <stdio.h>
 #include <math.h>
 #include "point2D.hpp"
 

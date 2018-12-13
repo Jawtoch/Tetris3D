@@ -9,9 +9,6 @@
 #ifndef form_hpp
 #define form_hpp
 
-#include <stdio.h>
-#include <iterator>
-
 #include "point3D.hpp"
 #include "cube.hpp"
 
@@ -42,20 +39,28 @@ private:
      */
     Cube*** elements;
     
+    int containerMaxSize;
+    int formMaxSize;
+    
 public:
     
     /**
      Constructor of an empty form, of origin in (0,0,0), zero elements and black color
      */
-    Form();
+    Form(int containerMaxSize,int formMaxSize);
+    
+    /**
+     Destructor of a form
+     */
     
     ~Form();
+    
     /**
      Constructor of a form, of origin in (0,0,0), random color, and given elements
      
      @param elements The elements who compose the form
      */
-    Form(Cube*** elements);
+    Form(Cube*** elements, int containerMaxSize,int formMaxSize);
     
     /**
      Return the origin of the form
