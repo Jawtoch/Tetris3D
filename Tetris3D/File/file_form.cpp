@@ -3,9 +3,9 @@
 #include <iostream>
 #include <math.h>
 
-#define TAILLE_MAX 10
+#define TAILLE_MAX_PIECE 6
 
-void freeArray(Cube*** cTab, int xSize, int ySize, int zSize) {
+void freeArray(int*** cTab, int xSize, int ySize, int zSize) {
     for(int i = 0; i < xSize; i++) {
         for(int j = 0; j < ySize; j++) {
             delete[] cTab[i][j];
@@ -25,12 +25,12 @@ int*** file_to_array(char* name_file){
     	exit(EXIT_FAILURE) ;
 	}
 	else{
-		array = new int**[TAILLE_MAX] ;
-		for(int i=0;i<TAILLE_MAX;i++){
-			array[i] = new int*[TAILLE_MAX] ;
-			for(int j=0;j<TAILLE_MAX;j++){
-				array[i][j] = new int[TAILLE_MAX] ;
-				for(int k=0;k<TAILLE_MAX;k++){
+		array = new int**[TAILLE_MAX_PIECE] ;
+		for(int i=0;i<TAILLE_MAX_PIECE;i++){
+			array[i] = new int*[TAILLE_MAX_PIECE] ;
+			for(int j=0;j<TAILLE_MAX_PIECE;j++){
+				array[i][j] = new int[TAILLE_MAX_PIECE] ;
+				for(int k=0;k<TAILLE_MAX_PIECE;k++){
 					array[i][j][k] = 0 ; 
 				}
 			}
@@ -54,24 +54,24 @@ int*** file_to_array(char* name_file){
 			nread = sscanf(chaine, "%c%d%c%d%c%d", &a, &x, &b, &y, &c, &z);
 			//printf("%d %c %d %c %d %c %d\n", nread, a, x, b, y, c, z);
 			if (nread!=6 && nread!=0) {
-				fprintf(stderr,"%s","Le format de la ligne %d est incorrecte\n", ligne);
+				fprintf(stderr,"Le format de la ligne %d du fichier est incorrecte\n", ligne);
 				freeArray(array, TAILLE_MAX, TAILLE_MAX, TAILLE_MAX) ;
 				return NULL ;;
 			}
 			if(a=='x'&& b=='y' && c=='z'){
 				if(ligne>1){
 					if(fabs(x-temp1)>1){
-						fprintf(stderr,"%s","La structure de la forme est impossible, voir ligne %d\n", ligne);
+						fprintf(stderr,"La structure de la forme est impossible, voir ligne fichier %d et ligne code %d\n", ligne, __LINE__);
 						freeArray(array, TAILLE_MAX, TAILLE_MAX, TAILLE_MAX) ;
 						return NULL ;
 					}
 					if(fabs(y-temp2)>1){
-						fprintf(stderr,"%s","La structure de la forme est impossible, voir ligne %d\n", ligne);
+						fprintf(stderr,"La structure de la forme est impossible, voir ligne fichier %d et ligne code %d\n", ligne, __LINE__);
 						freeArray(array, TAILLE_MAX, TAILLE_MAX, TAILLE_MAX) ;
 						return NULL ;
 					}
 					if(fabs(z-temp3)>1){
-						fprintf(stderr,"%s","La structure de la forme est impossible, voir ligne %d\n", ligne);
+						fprintf(stderr,"La structure de la forme est impossible, voir ligne fichier %d et ligne code %d\n", ligne, __LINE__);
 						freeArray(array, TAILLE_MAX, TAILLE_MAX, TAILLE_MAX) ;
 						return NULL ;
 					}
@@ -84,17 +84,17 @@ int*** file_to_array(char* name_file){
 			else if(a=='x' && b=='z'&& c=='y'){
 				if(ligne>1){
 					if(fabs(x-temp1)>1){
-						fprintf(stderr,"%s","La structure de la forme est impossible, voir ligne %d\n", ligne);
+						fprintf(stderr,"La structure de la forme est impossible, voir ligne fichier %d et ligne code %d\n", ligne, __LINE__);
 						freeArray(array, TAILLE_MAX, TAILLE_MAX, TAILLE_MAX) ;
 						return NULL ;
 					}
 					if(fabs(z-temp3)>1){
-						fprintf(stderr,"%s","La structure de la forme est impossible, voir ligne %d\n", ligne);
+						fprintf(stderr,"La structure de la forme est impossible, voir ligne fichier %d et ligne code %d\n", ligne, __LINE__);
 						freeArray(array, TAILLE_MAX, TAILLE_MAX, TAILLE_MAX) ;
 						return NULL ;
 					}
 					if(fabs(y-temp2)>1){
-						fprintf(stderr,"%s","La structure de la forme est impossible, voir ligne %d\n", ligne);
+						fprintf(stderr,"La structure de la forme est impossible, voir ligne fichier %d et ligne code %d\n", ligne, __LINE__);
 						freeArray(array, TAILLE_MAX, TAILLE_MAX, TAILLE_MAX) ;
 						return NULL ;
 					}
@@ -107,17 +107,17 @@ int*** file_to_array(char* name_file){
 			else if(a=='y'&& b=='x' && c=='z'){
 				if(ligne>1){
 					if(fabs(y-temp2)>1){
-						fprintf(stderr,"%s","La structure de la forme est impossible, voir ligne %d\n", ligne);
+						fprintf(stderr,"La structure de la forme est impossible, voir ligne fichier %d et ligne code %d\n", ligne, __LINE__);
 						freeArray(array, TAILLE_MAX, TAILLE_MAX, TAILLE_MAX) ;
 						return NULL ;
 					}
 					if(fabs(x-temp1)>1){
-						fprintf(stderr,"%s","La structure de la forme est impossible, voir ligne %d\n", ligne);
+						fprintf(stderr,"La structure de la forme est impossible, voir ligne fichier %d et ligne code %d\n", ligne, __LINE__);
 						freeArray(array, TAILLE_MAX, TAILLE_MAX, TAILLE_MAX) ;
 						return NULL ; 
 					}
 					if(fabs(z-temp3)>1){
-						fprintf(stderr,"%s","La structure de la forme est impossible, voir ligne %d\n", ligne);
+						fprintf(stderr,"La structure de la forme est impossible, voir ligne fichier %d et ligne code %d\n", ligne, __LINE__);
 						freeArray(array, TAILLE_MAX, TAILLE_MAX, TAILLE_MAX) ;
 						return NULL ; 
 					}
@@ -130,17 +130,17 @@ int*** file_to_array(char* name_file){
 			else if(a=='y'&& b=='z' && c=='x'){
 				if(ligne>1){
 					if(fabs(y-temp2)>1){
-						fprintf(stderr,"%s","La structure de la forme est impossible, voir ligne %d\n", ligne);
+						fprintf(stderr,"La structure de la forme est impossible, voir ligne fichier %d et ligne code %d\n", ligne, __LINE__);
 						freeArray(array, TAILLE_MAX, TAILLE_MAX, TAILLE_MAX) ;
 						return NULL ;
 					}
 					if(fabs(z-temp3)>1){
-						fprintf(stderr,"%s","La structure de la forme est impossible, voir ligne %d\n", ligne);
+						fprintf(stderr,"La structure de la forme est impossible, voir ligne fichier %d et ligne code %d\n", ligne, __LINE__);
 						freeArray(array, TAILLE_MAX, TAILLE_MAX, TAILLE_MAX) ;
 						return NULL ;
 					}
 					if(fabs(x-temp1)>1){
-						fprintf(stderr,"%s","La structure de la forme est impossible, voir ligne %d\n", ligne);
+						fprintf(stderr,"La structure de la forme est impossible, voir ligne fichier %d et ligne code %d\n", ligne, __LINE__);
 						freeArray(array, TAILLE_MAX, TAILLE_MAX, TAILLE_MAX) ;
 						return NULL ;
 					}
@@ -153,17 +153,17 @@ int*** file_to_array(char* name_file){
 			else if(a=='z'&& b=='y' && c=='x'){
 				if(ligne>1){
 					if(fabs(z-temp3)>1){
-						fprintf(stderr,"%s","La structure de la forme est impossible, voir ligne %d\n", ligne);
+						fprintf(stderr,"La structure de la forme est impossible, voir ligne fichier %d et ligne code %d\n", ligne, __LINE__);
 						freeArray(array, TAILLE_MAX, TAILLE_MAX, TAILLE_MAX) ;
 						return NULL ;
 					}
 					if(fabs(y-temp2)>1){
-						fprintf(stderr,"%s","La structure de la forme est impossible, voir ligne %d\n", ligne);
+						fprintf(stderr,"La structure de la forme est impossible, voir ligne fichier %d et ligne code %d\n", ligne, __LINE__);
 						freeArray(array, TAILLE_MAX, TAILLE_MAX, TAILLE_MAX) ;
 						return NULL ;
 					}
 					if(fabs(x-temp1)>1){
-						fprintf(stderr,"%s","La structure de la forme est impossible, voir ligne %d\n", ligne);
+						fprintf(stderr,"La structure de la forme est impossible, voir ligne fichier %d et ligne code %d\n", ligne, __LINE__);
 						freeArray(array, TAILLE_MAX, TAILLE_MAX, TAILLE_MAX) ;
 						return NULL ;
 					}
@@ -176,17 +176,17 @@ int*** file_to_array(char* name_file){
 			else if(a=='z'&& b=='x' && c=='y'){
 				if(ligne!=1){
 					if(fabs(z-temp3)>1){
-						fprintf(stderr,"%s","La structure de la forme est impossible, voir ligne %d\n", ligne);
+						fprintf(stderr,"La structure de la forme est impossible, voir ligne fichier %d et ligne code %d\n", ligne, __LINE__);
 						freeArray(array, TAILLE_MAX, TAILLE_MAX, TAILLE_MAX) ;
 						return NULL ;
 					}
 					if(fabs(x-temp1)>1){
-						fprintf(stderr,"%s","La structure de la forme est impossible, voir ligne %d\n", ligne);
+						fprintf(stderr,"La structure de la forme est impossible, voir ligne fichier %d et ligne code %d\n", ligne, __LINE__);
 						freeArray(array, TAILLE_MAX, TAILLE_MAX, TAILLE_MAX) ;
 						return NULL ;
 					}
 					if(fabs(y-temp2)>1){
-						fprintf(stderr,"%s","La structure de la forme est impossible, voir ligne %d\n", ligne);
+						fprintf(stderr,"La structure de la forme est impossible, voir ligne fichier %d et ligne code %d\n", ligne, __LINE__);
 						freeArray(array, TAILLE_MAX, TAILLE_MAX, TAILLE_MAX) ;
 						return NULL ;
 					}
@@ -197,7 +197,7 @@ int*** file_to_array(char* name_file){
 				array[z][x][y] = 1 ;
 			}
 			else{
-				fprintf(stderr,"%s","Le format de la ligne %d est incorrecte\n", ligne);
+				fprintf(stderr,"Le format de la ligne %d est incorrecte\n", ligne);
 				return NULL ;
 			}
 			ligne++ ;
@@ -208,7 +208,7 @@ int*** file_to_array(char* name_file){
 	return array ;
 }
 
-int main(){
+/*int main(){
 	//file_to_array((char*)"form3.txt") ;
 	return 0 ;
-}
+}*/
