@@ -16,6 +16,7 @@ point3D.cpp
 cube.cpp
 form.cpp
 container.cpp
+formGenerator.cpp
     )
     
 SET(HEADERS
@@ -26,6 +27,7 @@ point3D.hpp
 cube.hpp
 form.hpp
 container.hpp
+formGenerator.hpp
     )
 
 FIND_PACKAGE(SDL2 REQUIRED)
