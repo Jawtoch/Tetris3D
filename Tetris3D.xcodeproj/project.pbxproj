@@ -109,17 +109,10 @@
 				A2C6323521862051006EE1BD /* container.hpp */,
 				A214300321B000180013A631 /* formGenerator.cpp */,
 				A214300421B000180013A631 /* formGenerator.hpp */,
+				A26E336D21C57EBF00D7DA8B /* file_form.cpp */,
 				A26E337021C57F5D00D7DA8B /* file_form.hpp */,
 			);
 			path = libClasses;
-			sourceTree = "<group>";
-		};
-		A26E336C21C57EBF00D7DA8B /* File */ = {
-			isa = PBXGroup;
-			children = (
-				A26E336D21C57EBF00D7DA8B /* file_form.cpp */,
-			);
-			path = File;
 			sourceTree = "<group>";
 		};
 		A27AD1432194A1DB005C0DE7 /* cmake */ = {
@@ -151,7 +144,6 @@
 			isa = PBXGroup;
 			children = (
 				A255282D2181F0B300CF733A /* libClasses */,
-				A26E336C21C57EBF00D7DA8B /* File */,
 				A2917970216D3AE30086294B /* main.hpp */,
 				A2917967216D3A9D0086294B /* main.cpp */,
 				A291796E216D3AE30086294B /* game.cpp */,
