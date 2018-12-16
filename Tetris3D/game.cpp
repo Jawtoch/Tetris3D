@@ -29,7 +29,7 @@ void Game::start() {
     
     FormGenerator generate = FormGenerator(containerMaxSize, formMaxSize);
     for(int i = 0; i < nbForms; i++) {
-        Form *f = new Form(choose_form(0, formMaxSize), containerMaxSize, formMaxSize);
+        Form *f = new Form(choose_form(i, formMaxSize), containerMaxSize, formMaxSize);
         generate.addForm(*f);
     }
     Container board = Container(containerMaxSize, formMaxSize);

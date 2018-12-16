@@ -26,7 +26,6 @@ void FormGenerator::addForm(Form &addedForm) {
 
 Form* FormGenerator::getForm() {
     int rnd = rand() % forms.size();
-    std::cout << rnd << std::endl;
     Cube*** el = forms.at(rnd)->getElements();
     Form *f = new Form(el, containerMaxSize, formMaxSize);
     f->setOrigin(Point3D((int)containerMaxSize/2, (int)containerMaxSize/2, 0));
