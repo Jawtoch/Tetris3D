@@ -109,7 +109,6 @@
 				A2C6323521862051006EE1BD /* container.hpp */,
 				A214300321B000180013A631 /* formGenerator.cpp */,
 				A214300421B000180013A631 /* formGenerator.hpp */,
-				A26E336D21C57EBF00D7DA8B /* file_form.cpp */,
 				A26E337021C57F5D00D7DA8B /* file_form.hpp */,
 			);
 			path = libClasses;
@@ -118,6 +117,7 @@
 		A26E336C21C57EBF00D7DA8B /* File */ = {
 			isa = PBXGroup;
 			children = (
+				A26E336D21C57EBF00D7DA8B /* file_form.cpp */,
 			);
 			path = File;
 			sourceTree = "<group>";
