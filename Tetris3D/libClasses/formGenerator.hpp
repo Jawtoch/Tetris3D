@@ -21,6 +21,7 @@ private:
 
 public:
     FormGenerator(int containerMaxSize, int formMaxSize);
+    ~FormGenerator();
     void addForm(Form &addedForm);
     Form* getForm();
 };

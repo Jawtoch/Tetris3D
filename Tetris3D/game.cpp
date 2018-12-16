@@ -8,7 +8,7 @@
 #include "game.hpp"
 
 Game::Game() {
-    nbForms = 10;
+    nbForms = 3;
     difficuly = 3;
     windowsWidth = 600;
     formMaxSize = 3;
@@ -28,55 +28,11 @@ void Game::start() {
     SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
     
     FormGenerator generate = FormGenerator(containerMaxSize, formMaxSize);
-    
+    for(int i = 0; i < nbForms; i++) {
+        Form *f = new Form(choose_form(0, formMaxSize), containerMaxSize, formMaxSize);
+        generate.addForm(*f);
+    }
     Container board = Container(containerMaxSize, formMaxSize);
-    Cube*** T = createArray(formMaxSize, formMaxSize, formMaxSize);
-    
-    //First form
-    T[0][0][0] = Cube(20);
-    T[0][0][1] = Cube(20);
-    T[0][0][2] = Cube(20);
-    T[0][1][0] = Cube(20);
-    T[0][1][1] = Cube(20);
-    T[0][1][2] = Cube(20);
-    T[0][2][0] = Cube(20);
-    T[0][2][1] = Cube(20);
-    T[0][2][2] = Cube(20);
-    
-    Form f1 = Form(T, containerMaxSize, formMaxSize);
-    freeArray(T,formMaxSize,formMaxSize,formMaxSize);
-    //generate.addForm(f1);
-    
-    //Second form
-    T = createArray(formMaxSize, formMaxSize, formMaxSize);
-    
-    T[0][0][0] = Cube(20);
-    T[1][0][0] = Cube(20);
-    T[1][1][0] = Cube(20);
-    T[1][2][0] = Cube(20);
-    Form f2 = Form(T, containerMaxSize, formMaxSize);
-    freeArray(T,formMaxSize,formMaxSize,formMaxSize);
-    //generate.addForm(f2);
-    
-    //Third form
-    T = createArray(formMaxSize, formMaxSize, formMaxSize);
-    
-    T[0][0][0] = Cube(20);
-    T[0][0][1] = Cube(20);
-    T[0][0][2] = Cube(20);
-    Form f3 = Form(T, containerMaxSize, formMaxSize);
-    freeArray(T,formMaxSize,formMaxSize,formMaxSize);
-    //generate.addForm(f3);
-    
-    //Third form
-    T = createArray(formMaxSize, formMaxSize, formMaxSize);
-    
-    T[0][0][0] = Cube(20);
-    Form f4 = Form(T, containerMaxSize, formMaxSize);
-    freeArray(T,formMaxSize,formMaxSize,formMaxSize);
-    generate.addForm(f4);
-    
-    Form *currentForm = generate.getForm();
     
     int gameover = 0;
     int score = 0;
@@ -86,6 +42,9 @@ void Game::start() {
     
     int count = 0, seconds = 0;
     bool refresh = false;
+    
+    Form *currentForm = generate.getForm();
+    
     while (!gameover) {
         
         refresh = false;

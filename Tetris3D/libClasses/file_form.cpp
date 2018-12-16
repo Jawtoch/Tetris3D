@@ -1,11 +1,6 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <iostream>
-#include <math.h>
+#include "file_form.hpp"
 
-#define TAILLE_MAX_PIECE 6
-
-void freeArray(int*** cTab, int xSize, int ySize, int zSize) {
+void freeArrayInteger(int*** cTab, int xSize, int ySize, int zSize) {
     for(int i = 0; i < xSize; i++) {
         for(int j = 0; j < ySize; j++) {
             delete[] cTab[i][j];
@@ -15,7 +10,7 @@ void freeArray(int*** cTab, int xSize, int ySize, int zSize) {
     delete[] cTab;
 }
 
-int*** file_to_array(char* name_file){
+int*** file_to_array(char* name_file, int formMaxSize){
 
 	FILE* file = fopen(name_file,"r") ;
 	int*** array = NULL;
@@ -26,15 +21,15 @@ int*** file_to_array(char* name_file){
     	exit(EXIT_FAILURE) ;
 	}
 	else{
-		array = new int**[TAILLE_MAX_PIECE] ;
-		verif = new int**[TAILLE_MAX_PIECE] ;
-		for(int i=0;i<TAILLE_MAX_PIECE;i++){
-			array[i] = new int*[TAILLE_MAX_PIECE] ;
-			verif[i] = new int*[TAILLE_MAX_PIECE] ;
-			for(int j=0;j<TAILLE_MAX_PIECE;j++){
-				array[i][j] = new int[TAILLE_MAX_PIECE] ;
-				verif[i][j] = new int[TAILLE_MAX_PIECE] ;
-				for(int k=0;k<TAILLE_MAX_PIECE;k++){
+		array = new int**[formMaxSize] ;
+		verif = new int**[formMaxSize] ;
+		for(int i=0;i<formMaxSize;i++){
+			array[i] = new int*[formMaxSize] ;
+			verif[i] = new int*[formMaxSize] ;
+			for(int j=0;j<formMaxSize;j++){
+				array[i][j] = new int[formMaxSize] ;
+				verif[i][j] = new int[formMaxSize] ;
+				for(int k=0;k<formMaxSize;k++){
 					array[i][j][k] = 0 ;
 					verif[i][j][k] = 0 ; 
 				}
@@ -60,26 +55,26 @@ int*** file_to_array(char* name_file){
 			//printf("%d %c %d %c %d %c %d\n", nread, a, x, b, y, c, z);
 			if (nread!=6 && nread!=0) {
 				fprintf(stderr,"Le format de la ligne %d du fichier est incorrecte\n", ligne);
-				freeArray(array, TAILLE_MAX_PIECE, TAILLE_MAX_PIECE, TAILLE_MAX_PIECE) ;
-				freeArray(verif, TAILLE_MAX_PIECE, TAILLE_MAX_PIECE, TAILLE_MAX_PIECE) ;
+				freeArrayInteger(array, formMaxSize, formMaxSize, formMaxSize) ;
+				freeArrayInteger(verif, formMaxSize, formMaxSize, formMaxSize) ;
 				return NULL ;;
 			}
 			if(a=='x'&& b=='y' && c=='z'){
 				if(ligne>1){
 					if(verif[x][y][z] == 1){
 						fprintf(stderr,"La structure de la forme est impossible, voir ligne fichier %d et ligne code %d\n", ligne, __LINE__);
-						freeArray(array, TAILLE_MAX_PIECE, TAILLE_MAX_PIECE, TAILLE_MAX_PIECE) ;
-						freeArray(verif, TAILLE_MAX_PIECE, TAILLE_MAX_PIECE, TAILLE_MAX_PIECE) ;
+						freeArrayInteger(array, formMaxSize, formMaxSize, formMaxSize) ;
+						freeArrayInteger(verif, formMaxSize, formMaxSize, formMaxSize) ;
 						return NULL ;
 					}
 					/*if(fabs(y-temp2)>1){
 						fprintf(stderr,"La structure de la forme est impossible, voir ligne fichier %d et ligne code %d\n", ligne, __LINE__);
-						freeArray(array, TAILLE_MAX_PIECE, TAILLE_MAX_PIECE, TAILLE_MAX_PIECE) ;
+						freeArray(array, formMaxSize, formMaxSize, formMaxSize) ;
 						return NULL ;
 					}
 					if(fabs(z-temp3)>1){
 						fprintf(stderr,"La structure de la forme est impossible, voir ligne fichier %d et ligne code %d\n", ligne, __LINE__);
-						freeArray(array, TAILLE_MAX_PIECE, TAILLE_MAX_PIECE, TAILLE_MAX_PIECE) ;
+						freeArray(array, formMaxSize, formMaxSize, formMaxSize) ;
 						return NULL ;
 					}*/
 				}
@@ -111,67 +106,67 @@ int*** file_to_array(char* name_file){
 				}
 				// 7 cas sur 26 pour l'instant
 
-				if((x+1)<=TAILLE_MAX_PIECE && (y+1)<=TAILLE_MAX_PIECE && (z+1)<=TAILLE_MAX_PIECE){
+				if((x+1)<=formMaxSize && (y+1)<=formMaxSize && (z+1)<=formMaxSize){
 					verif[x+1][y+1][z+1] = 1 ;
 				}
-				if((x+1)<=TAILLE_MAX_PIECE && (y+1)<=TAILLE_MAX_PIECE){
+				if((x+1)<=formMaxSize && (y+1)<=formMaxSize){
 					verif[x+1][y+1][z] = 1 ;
 				}
-				if((x+1)<=TAILLE_MAX_PIECE && (z+1)<=TAILLE_MAX_PIECE){
+				if((x+1)<=formMaxSize && (z+1)<=formMaxSize){
 					verif[x+1][y][z+1] = 1 ;
 				}
-				if((y+1)<=TAILLE_MAX_PIECE && (z+1)<=TAILLE_MAX_PIECE){
+				if((y+1)<=formMaxSize && (z+1)<=formMaxSize){
 					verif[x][y+1][z+1] = 1 ;
 				}
-				if((y+1)<=TAILLE_MAX_PIECE){
+				if((y+1)<=formMaxSize){
 					verif[x][y+1][z] = 1 ;
 				}
-				if((z+1)<=TAILLE_MAX_PIECE){
+				if((z+1)<=formMaxSize){
 					verif[x][y][z+1] = 1 ;
 				}
-				if((x+1)<=TAILLE_MAX_PIECE){
+				if((x+1)<=formMaxSize){
 					verif[x+1][y][z] = 1 ;
 				}
 				// 14 cas sur 26 pour l'instant
 
-				if((x-1)>=0 && (y-1)>=0 && (z+1)<=TAILLE_MAX_PIECE){
+				if((x-1)>=0 && (y-1)>=0 && (z+1)<=formMaxSize){
 					verif[x-1][y-1][z+1] = 1 ;
 				}
-				if((x-1)>=0 && (y+1)<=TAILLE_MAX_PIECE && (z-1)>=0){
+				if((x-1)>=0 && (y+1)<=formMaxSize && (z-1)>=0){
 					verif[x-1][y+1][z-1] = 1 ;
 				}
-				if((x+1)<=TAILLE_MAX_PIECE && (y-1)>=0 && (z-1)>=0){
+				if((x+1)<=formMaxSize && (y-1)>=0 && (z-1)>=0){
 					verif[x+1][y-1][z-1] = 1 ;
 				}
 				// 17 cas sur 26 
 
-				if((x-1)>=0 && (y+1)<=TAILLE_MAX_PIECE && (z+1)<=TAILLE_MAX_PIECE){
+				if((x-1)>=0 && (y+1)<=formMaxSize && (z+1)<=formMaxSize){
 					verif[x-1][y+1][z+1] = 1 ;
 				}
-				if((x+1)<=TAILLE_MAX_PIECE && (y+1)<=TAILLE_MAX_PIECE && (z-1)>=0){
+				if((x+1)<=formMaxSize && (y+1)<=formMaxSize && (z-1)>=0){
 					verif[x+1][y+1][z-1] = 1 ;
 				}
-				if((x+1)<=TAILLE_MAX_PIECE && (y-1)>=0 && (z+1)<=TAILLE_MAX_PIECE){
+				if((x+1)<=formMaxSize && (y-1)>=0 && (z+1)<=formMaxSize){
 					verif[x+1][y-1][z+1] = 1 ;
 				}
 				// 20 cas sur 26 pour l'instant
 
-				if((x-1)>=0 && (y+1)<=TAILLE_MAX_PIECE){
+				if((x-1)>=0 && (y+1)<=formMaxSize){
 					verif[x-1][y+1][z] = 1 ;
 				}
-				if((x+1)<=TAILLE_MAX_PIECE && (z-1)>=0){
+				if((x+1)<=formMaxSize && (z-1)>=0){
 					verif[x+1][y][z-1] = 1 ;
 				}
-				if((x-1)>=0 && (z+1)<=TAILLE_MAX_PIECE){
+				if((x-1)>=0 && (z+1)<=formMaxSize){
 					verif[x-1][y][z+1] = 1 ;
 				}
-				if((x+1)<=TAILLE_MAX_PIECE && (z-1)>=0){
+				if((x+1)<=formMaxSize && (z-1)>=0){
 					verif[x+1][y][z-1] = 1 ;
 				}
-				if((y-1)>=0 && (z+1)<=TAILLE_MAX_PIECE){
+				if((y-1)>=0 && (z+1)<=formMaxSize){
 					verif[x][y-1][z+1] = 1 ;
 				}
-				if((y+1)<=TAILLE_MAX_PIECE && (z-1)>=0){
+				if((y+1)<=formMaxSize && (z-1)>=0){
 					verif[x][y+1][z-1] = 1 ;
 				}
 				// 26 cas sur 26 :)
@@ -180,18 +175,18 @@ int*** file_to_array(char* name_file){
 				if(ligne>1){
 					if(verif[x][z][y] != 1){
 						fprintf(stderr,"La structure de la forme est impossible, voir ligne fichier %d et ligne code %d\n", ligne, __LINE__);
-						freeArray(array, TAILLE_MAX_PIECE, TAILLE_MAX_PIECE, TAILLE_MAX_PIECE) ;
-						freeArray(verif, TAILLE_MAX_PIECE, TAILLE_MAX_PIECE, TAILLE_MAX_PIECE) ;
+						freeArrayInteger(array, formMaxSize, formMaxSize, formMaxSize) ;
+						freeArrayInteger(verif, formMaxSize, formMaxSize, formMaxSize) ;
 						return NULL ;
 					}
 					/*if(fabs(z-temp3)>1){
 						fprintf(stderr,"La structure de la forme est impossible, voir ligne fichier %d et ligne code %d\n", ligne, __LINE__);
-						freeArray(array, TAILLE_MAX_PIECE, TAILLE_MAX_PIECE, TAILLE_MAX_PIECE) ;
+						freeArray(array, formMaxSize, formMaxSize, formMaxSize) ;
 						return NULL ;
 					}
 					if(fabs(y-temp2)>1){
 						fprintf(stderr,"La structure de la forme est impossible, voir ligne fichier %d et ligne code %d\n", ligne, __LINE__);
-						freeArray(array, TAILLE_MAX_PIECE, TAILLE_MAX_PIECE, TAILLE_MAX_PIECE) ;
+						freeArray(array, formMaxSize, formMaxSize, formMaxSize) ;
 						return NULL ;
 					}*/
 				}
@@ -223,67 +218,67 @@ int*** file_to_array(char* name_file){
 				}
 				// 7 cas sur 26 pour l'instant
 
-				if((x+1)<=TAILLE_MAX_PIECE && (z+1)<=TAILLE_MAX_PIECE && (y+1)<=TAILLE_MAX_PIECE){
+				if((x+1)<=formMaxSize && (z+1)<=formMaxSize && (y+1)<=formMaxSize){
 					verif[x+1][z+1][y+1] = 1 ;
 				}
-				if((x+1)<=TAILLE_MAX_PIECE && (z+1)<=TAILLE_MAX_PIECE){
+				if((x+1)<=formMaxSize && (z+1)<=formMaxSize){
 					verif[x+1][z+1][y] = 1 ;
 				}
-				if((x+1)<=TAILLE_MAX_PIECE && (y+1)<=TAILLE_MAX_PIECE){
+				if((x+1)<=formMaxSize && (y+1)<=formMaxSize){
 					verif[x+1][z][y+1] = 1 ;
 				}
-				if((z+1)<=TAILLE_MAX_PIECE && (y+1)<=TAILLE_MAX_PIECE){
+				if((z+1)<=formMaxSize && (y+1)<=formMaxSize){
 					verif[x][z+1][y+1] = 1 ;
 				}
-				if((z+1)<=TAILLE_MAX_PIECE){
+				if((z+1)<=formMaxSize){
 					verif[x][z+1][y] = 1 ;
 				}
-				if((y+1)<=TAILLE_MAX_PIECE){
+				if((y+1)<=formMaxSize){
 					verif[x][z][y+1] = 1 ;
 				}
-				if((x+1)<=TAILLE_MAX_PIECE){
+				if((x+1)<=formMaxSize){
 					verif[x+1][z][y] = 1 ;
 				}
 				// 14 cas sur 26 pour l'instant
 
-				if((x-1)>=0 && (z-1)>=0 && (y+1)<=TAILLE_MAX_PIECE){
+				if((x-1)>=0 && (z-1)>=0 && (y+1)<=formMaxSize){
 					verif[x-1][z-1][y+1] = 1 ;
 				}
-				if((x-1)>=0 && (z+1)<=TAILLE_MAX_PIECE && (y-1)>=0){
+				if((x-1)>=0 && (z+1)<=formMaxSize && (y-1)>=0){
 					verif[x-1][z+1][y-1] = 1 ;
 				}
-				if((x+1)<=TAILLE_MAX_PIECE && (z-1)>=0 && (y-1)>=0){
+				if((x+1)<=formMaxSize && (z-1)>=0 && (y-1)>=0){
 					verif[x+1][z-1][y-1] = 1 ;
 				}
 				// 17 cas sur 26 
 
-				if((x-1)>=0 && (z+1)<=TAILLE_MAX_PIECE && (y+1)<=TAILLE_MAX_PIECE){
+				if((x-1)>=0 && (z+1)<=formMaxSize && (y+1)<=formMaxSize){
 					verif[x-1][z+1][y+1] = 1 ;
 				}
-				if((x+1)<=TAILLE_MAX_PIECE && (z+1)<=TAILLE_MAX_PIECE && (y-1)>=0){
+				if((x+1)<=formMaxSize && (z+1)<=formMaxSize && (y-1)>=0){
 					verif[x+1][z+1][y-1] = 1 ;
 				}
-				if((x+1)<=TAILLE_MAX_PIECE && (z-1)>=0 && (y+1)<=TAILLE_MAX_PIECE){
+				if((x+1)<=formMaxSize && (z-1)>=0 && (y+1)<=formMaxSize){
 					verif[x+1][z-1][y+1] = 1 ;
 				}
 				// 20 cas sur 26 pour l'instant
 
-				if((x-1)>=0 && (z+1)<=TAILLE_MAX_PIECE){
+				if((x-1)>=0 && (z+1)<=formMaxSize){
 					verif[x-1][z+1][y] = 1 ;
 				}
-				if((x+1)<=TAILLE_MAX_PIECE && (y-1)>=0){
+				if((x+1)<=formMaxSize && (y-1)>=0){
 					verif[x+1][z][y-1] = 1 ;
 				}
-				if((x-1)>=0 && (y+1)<=TAILLE_MAX_PIECE){
+				if((x-1)>=0 && (y+1)<=formMaxSize){
 					verif[x-1][z][y+1] = 1 ;
 				}
-				if((x+1)<=TAILLE_MAX_PIECE && (y-1)>=0){
+				if((x+1)<=formMaxSize && (y-1)>=0){
 					verif[x+1][z][y-1] = 1 ;
 				}
-				if((z-1)>=0 && (y+1)<=TAILLE_MAX_PIECE){
+				if((z-1)>=0 && (y+1)<=formMaxSize){
 					verif[x][z-1][y+1] = 1 ;
 				}
-				if((z+1)<=TAILLE_MAX_PIECE && (y-1)>=0){
+				if((z+1)<=formMaxSize && (y-1)>=0){
 					verif[x][z+1][y-1] = 1 ;
 				}
 				// 26 cas sur 26 :)
@@ -293,18 +288,18 @@ int*** file_to_array(char* name_file){
 				if(ligne>1){
 					if(verif[y][x][z] != 1){
 						fprintf(stderr,"La structure de la forme est impossible, voir ligne fichier %d et ligne code %d\n", ligne, __LINE__);
-						freeArray(array, TAILLE_MAX_PIECE, TAILLE_MAX_PIECE, TAILLE_MAX_PIECE) ;
-						freeArray(verif, TAILLE_MAX_PIECE, TAILLE_MAX_PIECE, TAILLE_MAX_PIECE) ;
+						freeArrayInteger(array, formMaxSize, formMaxSize, formMaxSize) ;
+						freeArrayInteger(verif, formMaxSize, formMaxSize, formMaxSize) ;
 						return NULL ;
 					}
 					/*if(fabs(x-temp1)>1){
 						fprintf(stderr,"La structure de la forme est impossible, voir ligne fichier %d et ligne code %d\n", ligne, __LINE__);
-						freeArray(array, TAILLE_MAX_PIECE, TAILLE_MAX_PIECE, TAILLE_MAX_PIECE) ;
+						freeArray(array, formMaxSize, formMaxSize, formMaxSize) ;
 						return NULL ; 
 					}
 					if(fabs(z-temp3)>1){
 						fprintf(stderr,"La structure de la forme est impossible, voir ligne fichier %d et ligne code %d\n", ligne, __LINE__);
-						freeArray(array, TAILLE_MAX_PIECE, TAILLE_MAX_PIECE, TAILLE_MAX_PIECE) ;
+						freeArray(array, formMaxSize, formMaxSize, formMaxSize) ;
 						return NULL ; 
 					}*/
 				}
@@ -336,67 +331,67 @@ int*** file_to_array(char* name_file){
 				}
 				// 7 cas sur 26 pour l'instant
 
-				if((y+1)<=TAILLE_MAX_PIECE && (x+1)<=TAILLE_MAX_PIECE && (z+1)<=TAILLE_MAX_PIECE){
+				if((y+1)<=formMaxSize && (x+1)<=formMaxSize && (z+1)<=formMaxSize){
 					verif[y+1][x+1][z+1] = 1 ;
 				}
-				if((y+1)<=TAILLE_MAX_PIECE && (x+1)<=TAILLE_MAX_PIECE){
+				if((y+1)<=formMaxSize && (x+1)<=formMaxSize){
 					verif[y+1][x+1][z] = 1 ;
 				}
-				if((y+1)<=TAILLE_MAX_PIECE && (z+1)<=TAILLE_MAX_PIECE){
+				if((y+1)<=formMaxSize && (z+1)<=formMaxSize){
 					verif[y+1][x][z+1] = 1 ;
 				}
-				if((x+1)<=TAILLE_MAX_PIECE && (z+1)<=TAILLE_MAX_PIECE){
+				if((x+1)<=formMaxSize && (z+1)<=formMaxSize){
 					verif[y][x+1][z+1] = 1 ;
 				}
-				if((x+1)<=TAILLE_MAX_PIECE){
+				if((x+1)<=formMaxSize){
 					verif[y][x+1][z] = 1 ;
 				}
-				if((z+1)<=TAILLE_MAX_PIECE){
+				if((z+1)<=formMaxSize){
 					verif[y][x][z+1] = 1 ;
 				}
-				if((y+1)<=TAILLE_MAX_PIECE){
+				if((y+1)<=formMaxSize){
 					verif[y+1][x][z] = 1 ;
 				}
 				// 14 cas sur 26 pour l'instant
 
-				if((y-1)>=0 && (x-1)>=0 && (z+1)<=TAILLE_MAX_PIECE){
+				if((y-1)>=0 && (x-1)>=0 && (z+1)<=formMaxSize){
 					verif[y-1][x-1][z+1] = 1 ;
 				}
-				if((y-1)>=0 && (x+1)<=TAILLE_MAX_PIECE && (z-1)>=0){
+				if((y-1)>=0 && (x+1)<=formMaxSize && (z-1)>=0){
 					verif[y-1][x+1][z-1] = 1 ;
 				}
-				if((y+1)<=TAILLE_MAX_PIECE && (x-1)>=0 && (z-1)>=0){
+				if((y+1)<=formMaxSize && (x-1)>=0 && (z-1)>=0){
 					verif[y+1][x-1][z-1] = 1 ;
 				}
 				// 17 cas sur 26 
 
-				if((y-1)>=0 && (x+1)<=TAILLE_MAX_PIECE && (z+1)<=TAILLE_MAX_PIECE){
+				if((y-1)>=0 && (x+1)<=formMaxSize && (z+1)<=formMaxSize){
 					verif[y-1][x+1][z+1] = 1 ;
 				}
-				if((y+1)<=TAILLE_MAX_PIECE && (x+1)<=TAILLE_MAX_PIECE && (z-1)>=0){
+				if((y+1)<=formMaxSize && (x+1)<=formMaxSize && (z-1)>=0){
 					verif[y+1][x+1][z-1] = 1 ;
 				}
-				if((y+1)<=TAILLE_MAX_PIECE && (x-1)>=0 && (z+1)<=TAILLE_MAX_PIECE){
+				if((y+1)<=formMaxSize && (x-1)>=0 && (z+1)<=formMaxSize){
 					verif[y+1][x-1][z+1] = 1 ;
 				}
 				// 20 cas sur 26 pour l'instant
 
-				if((y-1)>=0 && (x+1)<=TAILLE_MAX_PIECE){
+				if((y-1)>=0 && (x+1)<=formMaxSize){
 					verif[y-1][x+1][z] = 1 ;
 				}
-				if((y+1)<=TAILLE_MAX_PIECE && (z-1)>=0){
+				if((y+1)<=formMaxSize && (z-1)>=0){
 					verif[y+1][x][z-1] = 1 ;
 				}
-				if((y-1)>=0 && (z+1)<=TAILLE_MAX_PIECE){
+				if((y-1)>=0 && (z+1)<=formMaxSize){
 					verif[y-1][x][z+1] = 1 ;
 				}
-				if((y+1)<=TAILLE_MAX_PIECE && (z-1)>=0){
+				if((y+1)<=formMaxSize && (z-1)>=0){
 					verif[y+1][x][z-1] = 1 ;
 				}
-				if((x-1)>=0 && (z+1)<=TAILLE_MAX_PIECE){
+				if((x-1)>=0 && (z+1)<=formMaxSize){
 					verif[y][x-1][z+1] = 1 ;
 				}
-				if((x+1)<=TAILLE_MAX_PIECE && (z-1)>=0){
+				if((x+1)<=formMaxSize && (z-1)>=0){
 					verif[y][x+1][z-1] = 1 ;
 				}
 				// 26 cas sur 26 :)
@@ -406,18 +401,18 @@ int*** file_to_array(char* name_file){
 				if(ligne>1){
 					if(verif[y][z][x] != 1){
 						fprintf(stderr,"La structure de la forme est impossible, voir ligne fichier %d et ligne code %d\n", ligne, __LINE__);
-						freeArray(array, TAILLE_MAX_PIECE, TAILLE_MAX_PIECE, TAILLE_MAX_PIECE) ;
-						freeArray(verif, TAILLE_MAX_PIECE, TAILLE_MAX_PIECE, TAILLE_MAX_PIECE) ;
+						freeArrayInteger(array, formMaxSize, formMaxSize, formMaxSize) ;
+						freeArrayInteger(verif, formMaxSize, formMaxSize, formMaxSize) ;
 						return NULL ;
 					}
 					/*if(fabs(z-temp3)>1){
 						fprintf(stderr,"La structure de la forme est impossible, voir ligne fichier %d et ligne code %d\n", ligne, __LINE__);
-						freeArray(array, TAILLE_MAX_PIECE, TAILLE_MAX_PIECE, TAILLE_MAX_PIECE) ;
+						freeArray(array, formMaxSize, formMaxSize, formMaxSize) ;
 						return NULL ;
 					}
 					if(fabs(x-temp1)>1){
 						fprintf(stderr,"La structure de la forme est impossible, voir ligne fichier %d et ligne code %d\n", ligne, __LINE__);
-						freeArray(array, TAILLE_MAX_PIECE, TAILLE_MAX_PIECE, TAILLE_MAX_PIECE) ;
+						freeArray(array, formMaxSize, formMaxSize, formMaxSize) ;
 						return NULL ;
 					}*/
 				}
@@ -449,67 +444,67 @@ int*** file_to_array(char* name_file){
 				}
 				// 7 cas sur 26 pour l'instant
 
-				if((y+1)<=TAILLE_MAX_PIECE && (z+1)<=TAILLE_MAX_PIECE && (x+1)<=TAILLE_MAX_PIECE){
+				if((y+1)<=formMaxSize && (z+1)<=formMaxSize && (x+1)<=formMaxSize){
 					verif[y+1][z+1][x+1] = 1 ;
 				}
-				if((y+1)<=TAILLE_MAX_PIECE && (z+1)<=TAILLE_MAX_PIECE){
+				if((y+1)<=formMaxSize && (z+1)<=formMaxSize){
 					verif[y+1][z+1][x] = 1 ;
 				}
-				if((y+1)<=TAILLE_MAX_PIECE && (x+1)<=TAILLE_MAX_PIECE){
+				if((y+1)<=formMaxSize && (x+1)<=formMaxSize){
 					verif[y+1][z][x+1] = 1 ;
 				}
-				if((z+1)<=TAILLE_MAX_PIECE && (x+1)<=TAILLE_MAX_PIECE){
+				if((z+1)<=formMaxSize && (x+1)<=formMaxSize){
 					verif[y][z+1][x+1] = 1 ;
 				}
-				if((z+1)<=TAILLE_MAX_PIECE){
+				if((z+1)<=formMaxSize){
 					verif[y][z+1][x] = 1 ;
 				}
-				if((x+1)<=TAILLE_MAX_PIECE){
+				if((x+1)<=formMaxSize){
 					verif[y][z][x+1] = 1 ;
 				}
-				if((y+1)<=TAILLE_MAX_PIECE){
+				if((y+1)<=formMaxSize){
 					verif[y+1][z][x] = 1 ;
 				}
 				// 14 cas sur 26 pour l'instant
 
-				if((y-1)>=0 && (z-1)>=0 && (x+1)<=TAILLE_MAX_PIECE){
+				if((y-1)>=0 && (z-1)>=0 && (x+1)<=formMaxSize){
 					verif[y-1][z-1][x+1] = 1 ;
 				}
-				if((y-1)>=0 && (z+1)<=TAILLE_MAX_PIECE && (x-1)>=0){
+				if((y-1)>=0 && (z+1)<=formMaxSize && (x-1)>=0){
 					verif[y-1][z+1][x-1] = 1 ;
 				}
-				if((y+1)<=TAILLE_MAX_PIECE && (z-1)>=0 && (x-1)>=0){
+				if((y+1)<=formMaxSize && (z-1)>=0 && (x-1)>=0){
 					verif[y+1][z-1][x-1] = 1 ;
 				}
 				// 17 cas sur 26 
 
-				if((y-1)>=0 && (z+1)<=TAILLE_MAX_PIECE && (x+1)<=TAILLE_MAX_PIECE){
+				if((y-1)>=0 && (z+1)<=formMaxSize && (x+1)<=formMaxSize){
 					verif[y-1][z+1][x+1] = 1 ;
 				}
-				if((y+1)<=TAILLE_MAX_PIECE && (z+1)<=TAILLE_MAX_PIECE && (x-1)>=0){
+				if((y+1)<=formMaxSize && (z+1)<=formMaxSize && (x-1)>=0){
 					verif[y+1][z+1][x-1] = 1 ;
 				}
-				if((y+1)<=TAILLE_MAX_PIECE && (z-1)>=0 && (x+1)<=TAILLE_MAX_PIECE){
+				if((y+1)<=formMaxSize && (z-1)>=0 && (x+1)<=formMaxSize){
 					verif[y+1][z-1][x+1] = 1 ;
 				}
 				// 20 cas sur 26 pour l'instant
 
-				if((y-1)>=0 && (z+1)<=TAILLE_MAX_PIECE){
+				if((y-1)>=0 && (z+1)<=formMaxSize){
 					verif[y-1][z+1][x] = 1 ;
 				}
-				if((y+1)<=TAILLE_MAX_PIECE && (x-1)>=0){
+				if((y+1)<=formMaxSize && (x-1)>=0){
 					verif[y+1][z][x-1] = 1 ;
 				}
-				if((y-1)>=0 && (x+1)<=TAILLE_MAX_PIECE){
+				if((y-1)>=0 && (x+1)<=formMaxSize){
 					verif[y-1][z][x+1] = 1 ;
 				}
-				if((y+1)<=TAILLE_MAX_PIECE && (x-1)>=0){
+				if((y+1)<=formMaxSize && (x-1)>=0){
 					verif[y+1][z][x-1] = 1 ;
 				}
-				if((z-1)>=0 && (x+1)<=TAILLE_MAX_PIECE){
+				if((z-1)>=0 && (x+1)<=formMaxSize){
 					verif[y][z-1][x+1] = 1 ;
 				}
-				if((z+1)<=TAILLE_MAX_PIECE && (x-1)>=0){
+				if((z+1)<=formMaxSize && (x-1)>=0){
 					verif[y][z+1][x-1] = 1 ;
 				}
 				// 26 cas sur 26 :)
@@ -519,18 +514,18 @@ int*** file_to_array(char* name_file){
 				if(ligne>1){
 					if(verif[z][y][x] != 1){
 						fprintf(stderr,"La structure de la forme est impossible, voir ligne fichier %d et ligne code %d\n", ligne, __LINE__);
-						freeArray(array, TAILLE_MAX_PIECE, TAILLE_MAX_PIECE, TAILLE_MAX_PIECE) ;
-						freeArray(verif, TAILLE_MAX_PIECE, TAILLE_MAX_PIECE, TAILLE_MAX_PIECE) ;
+						freeArrayInteger(array, formMaxSize, formMaxSize, formMaxSize) ;
+						freeArrayInteger(verif, formMaxSize, formMaxSize, formMaxSize) ;
 						return NULL ;
 					}
 					/*if(fabs(y-temp2)>1){
 						fprintf(stderr,"La structure de la forme est impossible, voir ligne fichier %d et ligne code %d\n", ligne, __LINE__);
-						freeArray(array, TAILLE_MAX_PIECE, TAILLE_MAX_PIECE, TAILLE_MAX_PIECE) ;
+						freeArray(array, formMaxSize, formMaxSize, formMaxSize) ;
 						return NULL ;
 					}
 					if(fabs(x-temp1)>1){
 						fprintf(stderr,"La structure de la forme est impossible, voir ligne fichier %d et ligne code %d\n", ligne, __LINE__);
-						freeArray(array, TAILLE_MAX_PIECE, TAILLE_MAX_PIECE, TAILLE_MAX_PIECE) ;
+						freeArray(array, formMaxSize, formMaxSize, formMaxSize) ;
 						return NULL ;
 					}*/
 				}
@@ -561,67 +556,67 @@ int*** file_to_array(char* name_file){
 				}
 				// 7 cas sur 26 pour l'instant
 
-				if((z+1)<=TAILLE_MAX_PIECE && (y+1)<=TAILLE_MAX_PIECE && (x+1)<=TAILLE_MAX_PIECE){
+				if((z+1)<=formMaxSize && (y+1)<=formMaxSize && (x+1)<=formMaxSize){
 					verif[z+1][y+1][x+1] = 1 ;
 				}
-				if((z+1)<=TAILLE_MAX_PIECE && (y+1)<=TAILLE_MAX_PIECE){
+				if((z+1)<=formMaxSize && (y+1)<=formMaxSize){
 					verif[z+1][y+1][x] = 1 ;
 				}
-				if((z+1)<=TAILLE_MAX_PIECE && (x+1)<=TAILLE_MAX_PIECE){
+				if((z+1)<=formMaxSize && (x+1)<=formMaxSize){
 					verif[z+1][y][x+1] = 1 ;
 				}
-				if((y+1)<=TAILLE_MAX_PIECE && (x+1)<=TAILLE_MAX_PIECE){
+				if((y+1)<=formMaxSize && (x+1)<=formMaxSize){
 					verif[z][y+1][x+1] = 1 ;
 				}
-				if((y+1)<=TAILLE_MAX_PIECE){
+				if((y+1)<=formMaxSize){
 					verif[z][y+1][x] = 1 ;
 				}
-				if((x+1)<=TAILLE_MAX_PIECE){
+				if((x+1)<=formMaxSize){
 					verif[z][y][x+1] = 1 ;
 				}
-				if((z+1)<=TAILLE_MAX_PIECE){
+				if((z+1)<=formMaxSize){
 					verif[z+1][y][x] = 1 ;
 				}
 				// 14 cas sur 26 pour l'instant
 
-				if((z-1)>=0 && (y-1)>=0 && (x+1)<=TAILLE_MAX_PIECE){
+				if((z-1)>=0 && (y-1)>=0 && (x+1)<=formMaxSize){
 					verif[z-1][y-1][x+1] = 1 ;
 				}
-				if((z-1)>=0 && (y+1)<=TAILLE_MAX_PIECE && (x-1)>=0){
+				if((z-1)>=0 && (y+1)<=formMaxSize && (x-1)>=0){
 					verif[z-1][y+1][x-1] = 1 ;
 				}
-				if((z+1)<=TAILLE_MAX_PIECE && (y-1)>=0 && (x-1)>=0){
+				if((z+1)<=formMaxSize && (y-1)>=0 && (x-1)>=0){
 					verif[z+1][y-1][x-1] = 1 ;
 				}
 				// 17 cas sur 26 
 
-				if((z-1)>=0 && (y+1)<=TAILLE_MAX_PIECE && (x+1)<=TAILLE_MAX_PIECE){
+				if((z-1)>=0 && (y+1)<=formMaxSize && (x+1)<=formMaxSize){
 					verif[z-1][y+1][x+1] = 1 ;
 				}
-				if((z+1)<=TAILLE_MAX_PIECE && (y+1)<=TAILLE_MAX_PIECE && (x-1)>=0){
+				if((z+1)<=formMaxSize && (y+1)<=formMaxSize && (x-1)>=0){
 					verif[z+1][y+1][x-1] = 1 ;
 				}
-				if((z+1)<=TAILLE_MAX_PIECE && (y-1)>=0 && (x+1)<=TAILLE_MAX_PIECE){
+				if((z+1)<=formMaxSize && (y-1)>=0 && (x+1)<=formMaxSize){
 					verif[z+1][y-1][x+1] = 1 ;
 				}
 				// 20 cas sur 26 pour l'instant
 
-				if((z-1)>=0 && (y+1)<=TAILLE_MAX_PIECE){
+				if((z-1)>=0 && (y+1)<=formMaxSize){
 					verif[z-1][y+1][x] = 1 ;
 				}
-				if((z+1)<=TAILLE_MAX_PIECE && (x-1)>=0){
+				if((z+1)<=formMaxSize && (x-1)>=0){
 					verif[z+1][y][x-1] = 1 ;
 				}
-				if((z-1)>=0 && (x+1)<=TAILLE_MAX_PIECE){
+				if((z-1)>=0 && (x+1)<=formMaxSize){
 					verif[z-1][y][x+1] = 1 ;
 				}
-				if((z+1)<=TAILLE_MAX_PIECE && (x-1)>=0){
+				if((z+1)<=formMaxSize && (x-1)>=0){
 					verif[z+1][y][x-1] = 1 ;
 				}
-				if((y-1)>=0 && (x+1)<=TAILLE_MAX_PIECE){
+				if((y-1)>=0 && (x+1)<=formMaxSize){
 					verif[z][y-1][x+1] = 1 ;
 				}
-				if((y+1)<=TAILLE_MAX_PIECE && (x-1)>=0){
+				if((y+1)<=formMaxSize && (x-1)>=0){
 					verif[z][y+1][x-1] = 1 ;
 				}
 				// 26 cas sur 26 :)
@@ -630,18 +625,18 @@ int*** file_to_array(char* name_file){
 				if(ligne!=1){
 					if(verif[z][x][y] != 1){
 						fprintf(stderr,"La structure de la forme est impossible, voir ligne fichier %d et ligne code %d\n", ligne, __LINE__);
-						freeArray(array, TAILLE_MAX_PIECE, TAILLE_MAX_PIECE, TAILLE_MAX_PIECE) ;
-						freeArray(verif, TAILLE_MAX_PIECE, TAILLE_MAX_PIECE, TAILLE_MAX_PIECE) ;
+						freeArrayInteger(array, formMaxSize, formMaxSize, formMaxSize) ;
+						freeArrayInteger(verif, formMaxSize, formMaxSize, formMaxSize) ;
 						return NULL ;
 					}
 					/*if(fabs(x-temp1)>1){
 						fprintf(stderr,"La structure de la forme est impossible, voir ligne fichier %d et ligne code %d\n", ligne, __LINE__);
-						freeArray(array, TAILLE_MAX_PIECE, TAILLE_MAX_PIECE, TAILLE_MAX_PIECE) ;
+						freeArray(array, formMaxSize, formMaxSize, formMaxSize) ;
 						return NULL ;
 					}
 					if(fabs(y-temp2)>1){
 						fprintf(stderr,"La structure de la forme est impossible, voir ligne fichier %d et ligne code %d\n", ligne, __LINE__);
-						freeArray(array, TAILLE_MAX_PIECE, TAILLE_MAX_PIECE, TAILLE_MAX_PIECE) ;
+						freeArray(array, formMaxSize, formMaxSize, formMaxSize) ;
 						return NULL ;
 					}*/
 				}
@@ -672,67 +667,67 @@ int*** file_to_array(char* name_file){
 				}
 				// 7 cas sur 26 pour l'instant
 
-				if((z+1)<=TAILLE_MAX_PIECE && (x+1)<=TAILLE_MAX_PIECE && (y+1)<=TAILLE_MAX_PIECE){
+				if((z+1)<=formMaxSize && (x+1)<=formMaxSize && (y+1)<=formMaxSize){
 					verif[z+1][x+1][y+1] = 1 ;
 				}
-				if((z+1)<=TAILLE_MAX_PIECE && (x+1)<=TAILLE_MAX_PIECE){
+				if((z+1)<=formMaxSize && (x+1)<=formMaxSize){
 					verif[z+1][x+1][y] = 1 ;
 				}
-				if((z+1)<=TAILLE_MAX_PIECE && (y+1)<=TAILLE_MAX_PIECE){
+				if((z+1)<=formMaxSize && (y+1)<=formMaxSize){
 					verif[z+1][x][y+1] = 1 ;
 				}
-				if((x+1)<=TAILLE_MAX_PIECE && (y+1)<=TAILLE_MAX_PIECE){
+				if((x+1)<=formMaxSize && (y+1)<=formMaxSize){
 					verif[z][x+1][y+1] = 1 ;
 				}
-				if((x+1)<=TAILLE_MAX_PIECE){
+				if((x+1)<=formMaxSize){
 					verif[z][x+1][y] = 1 ;
 				}
-				if((y+1)<=TAILLE_MAX_PIECE){
+				if((y+1)<=formMaxSize){
 					verif[z][x][y+1] = 1 ;
 				}
-				if((z+1)<=TAILLE_MAX_PIECE){
+				if((z+1)<=formMaxSize){
 					verif[z+1][x][y] = 1 ;
 				}
 				// 14 cas sur 26 pour l'instant
 
-				if((z-1)>=0 && (x-1)>=0 && (y+1)<=TAILLE_MAX_PIECE){
+				if((z-1)>=0 && (x-1)>=0 && (y+1)<=formMaxSize){
 					verif[z-1][x-1][y+1] = 1 ;
 				}
-				if((z-1)>=0 && (x+1)<=TAILLE_MAX_PIECE && (y-1)>=0){
+				if((z-1)>=0 && (x+1)<=formMaxSize && (y-1)>=0){
 					verif[z-1][x+1][y-1] = 1 ;
 				}
-				if((z+1)<=TAILLE_MAX_PIECE && (x-1)>=0 && (y-1)>=0){
+				if((z+1)<=formMaxSize && (x-1)>=0 && (y-1)>=0){
 					verif[z+1][x-1][y-1] = 1 ;
 				}
 				// 17 cas sur 26 
 
-				if((z-1)>=0 && (x+1)<=TAILLE_MAX_PIECE && (y+1)<=TAILLE_MAX_PIECE){
+				if((z-1)>=0 && (x+1)<=formMaxSize && (y+1)<=formMaxSize){
 					verif[z-1][x+1][y+1] = 1 ;
 				}
-				if((z+1)<=TAILLE_MAX_PIECE && (x+1)<=TAILLE_MAX_PIECE && (y-1)>=0){
+				if((z+1)<=formMaxSize && (x+1)<=formMaxSize && (y-1)>=0){
 					verif[z+1][x+1][y-1] = 1 ;
 				}
-				if((z+1)<=TAILLE_MAX_PIECE && (x-1)>=0 && (y+1)<=TAILLE_MAX_PIECE){
+				if((z+1)<=formMaxSize && (x-1)>=0 && (y+1)<=formMaxSize){
 					verif[z+1][x-1][y+1] = 1 ;
 				}
 				// 20 cas sur 26 pour l'instant
 
-				if((z-1)>=0 && (x+1)<=TAILLE_MAX_PIECE){
+				if((z-1)>=0 && (x+1)<=formMaxSize){
 					verif[z-1][x+1][y] = 1 ;
 				}
-				if((z+1)<=TAILLE_MAX_PIECE && (x-1)>=0){
+				if((z+1)<=formMaxSize && (x-1)>=0){
 					verif[z+1][x-1][y] = 1 ;
 				}
-				if((z-1)>=0 && (y+1)<=TAILLE_MAX_PIECE){
+				if((z-1)>=0 && (y+1)<=formMaxSize){
 					verif[z-1][x][y+1] = 1 ;
 				}
-				if((z+1)<=TAILLE_MAX_PIECE && (y-1)>=0){
+				if((z+1)<=formMaxSize && (y-1)>=0){
 					verif[z+1][x][y-1] = 1 ;
 				}
-				if((x-1)>=0 && (y+1)<=TAILLE_MAX_PIECE){
+				if((x-1)>=0 && (y+1)<=formMaxSize){
 					verif[z][x-1][y+1] = 1 ;
 				}
-				if((x+1)<=TAILLE_MAX_PIECE && (y-1)>=0){
+				if((x+1)<=formMaxSize && (y-1)>=0){
 					verif[z][x+1][y-1] = 1 ;
 				}
 				// 26 cas sur 26 :)
@@ -746,12 +741,30 @@ int*** file_to_array(char* name_file){
 		}
 		delete[] chaine ;
 		fclose(file) ;
-		freeArray(verif, TAILLE_MAX_PIECE, TAILLE_MAX_PIECE, TAILLE_MAX_PIECE) ;
+		freeArrayInteger(verif, formMaxSize, formMaxSize, formMaxSize) ;
 	}
 	return array ;
 }
 
-int main(){
-	//file_to_array((char*)"form3.txt") ;
-	return 0 ;
+Form array_to_form(int*** arr, int formMaxSize) {
+    
+    Cube*** T = createArray(formMaxSize, formMaxSize, formMaxSize);
+    
+    for(int i = 0; i < formMaxSize; i++) {
+        for(int j = 0; j < formMaxSize; j++) {
+            for(int k = 0; k < formMaxSize; k++) {
+                if (arr[i][j][k] == 1)
+                    T[i][j][k] = Cube(20);
+            }
+        }
+    }
+    
+    return Form(T, 10, formMaxSize);
+}
+
+int*** choose_form(int nbForm, int formMaxSize){
+    char chaine[10] = "form0.txt" ;
+    chaine[4] = (char)(nbForm +'0') ;
+    int*** array = file_to_array(chaine, formMaxSize) ;
+    return array ;
 }

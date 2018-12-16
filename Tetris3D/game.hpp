@@ -17,6 +17,8 @@
 #include "libClasses/container.hpp"
 #include "libClasses/formGenerator.hpp"
 
+#include "libClasses/file_form.hpp"
+
 class Game {
     int nbForms;
     int difficuly;

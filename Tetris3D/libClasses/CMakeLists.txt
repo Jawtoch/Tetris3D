@@ -17,6 +17,7 @@ cube.cpp
 form.cpp
 container.cpp
 formGenerator.cpp
+file_form.cpp
     )
     
 SET(HEADERS
@@ -28,7 +29,8 @@ cube.hpp
 form.hpp
 container.hpp
 formGenerator.hpp
-    )
+file_form.hpp
+)
 
 FIND_PACKAGE(SDL2 REQUIRED)
 INCLUDE_DIRECTORIES(${SDL2_INCLUDE_DIR})

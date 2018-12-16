@@ -63,6 +63,13 @@ public:
     Form(Cube*** elements, int containerMaxSize,int formMaxSize);
     
     /**
+     Constructor of a form, of origin in (0,0,0), random color, and given existing elements
+     
+     @param elements The elements who compose the form
+     */
+    Form(int*** elements, int containerMaxSize,int formMaxSize);
+    
+    /**
      Return the origin of the form
      
      @return The origin of the form

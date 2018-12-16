@@ -23,7 +23,6 @@ Form::Form(int containerMaxSize,int formMaxSize) {
 }
 
 Form ::~Form() {
-    delete color;
     if (elements != NULL)
         freeArray(elements, formMaxSize, formMaxSize, formMaxSize);
 }
@@ -51,6 +50,33 @@ Form::Form(Cube*** elements, int containerMaxSize,int formMaxSize) {
         }
     }
 }
+
+Form::Form(int*** elements, int containerMaxSize,int formMaxSize) {
+    
+    this->containerMaxSize = containerMaxSize;
+    this->formMaxSize = formMaxSize;
+    
+    color = new int[3];
+    color[0] = rand()%256;
+    color[1] = rand()%256;
+    color[2] = rand()%256;
+    color[3] = rand()%256;
+    exist = true;
+    
+    origin = Point3D();
+    this->elements = createArray(formMaxSize, formMaxSize, formMaxSize);
+    for (int i = 0; i < formMaxSize; i++) {
+        for (int j = 0; j < formMaxSize; j++) {
+            for (int k = 0; k < formMaxSize; k++) {
+                if (elements[i][j][k] == 1) {
+                    this->elements[i][j][k] = Cube(20);
+                    this->elements[i][j][k].setColors(color[0], color[1], color[2], color[3]);
+                }
+            }
+        }
+    }
+}
+
 
 Point3D Form::getOrigin() {
     return origin;

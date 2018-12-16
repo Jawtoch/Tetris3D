@@ -13,13 +13,21 @@ FormGenerator::FormGenerator(int containerMaxSize, int formMaxSize) {
     this->formMaxSize = formMaxSize;
 }
 
+FormGenerator::~FormGenerator() {
+    for(int i = 0; i < forms.size(); i++) {
+        Form *f = forms.at(i);
+        delete f;
+    }
+}
+
 void FormGenerator::addForm(Form &addedForm) {
     forms.insert(std::make_pair(forms.size(), &addedForm));
 }
 
 Form* FormGenerator::getForm() {
-    
-    Cube*** el = forms.at((rand() % forms.size()))->getElements();
+    int rnd = rand() % forms.size();
+    std::cout << rnd << std::endl;
+    Cube*** el = forms.at(rnd)->getElements();
     Form *f = new Form(el, containerMaxSize, formMaxSize);
     f->setOrigin(Point3D((int)containerMaxSize/2, (int)containerMaxSize/2, 0));
     return f;
