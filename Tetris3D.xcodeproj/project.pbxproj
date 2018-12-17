@@ -55,9 +55,6 @@
 		A27AD1402194A189005C0DE7 /* CMakeLists.txt */ = {isa = PBXFileReference; lastKnownFileType = text; name = CMakeLists.txt; path = "/Users/ugocottin/OneDrive/Documents/Cours L2info/Programmation avancée/Tetris3D/Tetris3D/CMakeLists.txt"; sourceTree = "<absolute>"; };
 		A27AD1442194A1F5005C0DE7 /* FindSDL2.cmake */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = FindSDL2.cmake; sourceTree = "<group>"; };
 		A27AD1452194A225005C0DE7 /* CMakeLists.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = CMakeLists.txt; sourceTree = "<group>"; };
-		A27AE5C121C58728008BB345 /* form0.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = form0.txt; path = Tetris3D/form0.txt; sourceTree = SOURCE_ROOT; };
-		A27AE5C221C58728008BB345 /* form1.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = form1.txt; path = Tetris3D/form1.txt; sourceTree = SOURCE_ROOT; };
-		A27AE5C321C58728008BB345 /* form2.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = form2.txt; path = Tetris3D/form2.txt; sourceTree = SOURCE_ROOT; };
 		A28D86B92194AA2B001E3BC8 /* build.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = build.sh; sourceTree = "<group>"; };
 		A2917964216D3A9C0086294B /* Tetris3D */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Tetris3D; sourceTree = BUILT_PRODUCTS_DIR; };
 		A2917967216D3A9D0086294B /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
@@ -73,6 +70,15 @@
 		A2C6323521862051006EE1BD /* container.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = container.hpp; sourceTree = "<group>"; };
 		A2C6323821862CDC006EE1BD /* cube.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = cube.cpp; sourceTree = "<group>"; };
 		A2C6323921862CDC006EE1BD /* cube.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = cube.hpp; sourceTree = "<group>"; };
+		A2D487C521C70DE000B38679 /* form5.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = form5.txt; sourceTree = "<group>"; };
+		A2D487C621C70DE000B38679 /* form1.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = form1.txt; sourceTree = "<group>"; };
+		A2D487C721C70DE000B38679 /* form3.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = form3.txt; sourceTree = "<group>"; };
+		A2D487C821C70DE000B38679 /* form7.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = form7.txt; sourceTree = "<group>"; };
+		A2D487C921C70DE100B38679 /* form8.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = form8.txt; sourceTree = "<group>"; };
+		A2D487CA21C70DE100B38679 /* form4.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = form4.txt; sourceTree = "<group>"; };
+		A2D487CB21C70DE100B38679 /* form9.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = form9.txt; sourceTree = "<group>"; };
+		A2D487CC21C70DE100B38679 /* form6.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = form6.txt; sourceTree = "<group>"; };
+		A2D487CD21C70DE100B38679 /* form2.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = form2.txt; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -152,9 +158,15 @@
 				A27AD13F2194A006005C0DE7 /* conf.sh */,
 				A28D86B92194AA2B001E3BC8 /* build.sh */,
 				A27AD1402194A189005C0DE7 /* CMakeLists.txt */,
-				A27AE5C121C58728008BB345 /* form0.txt */,
-				A27AE5C221C58728008BB345 /* form1.txt */,
-				A27AE5C321C58728008BB345 /* form2.txt */,
+				A2D487C621C70DE000B38679 /* form1.txt */,
+				A2D487CD21C70DE100B38679 /* form2.txt */,
+				A2D487C721C70DE000B38679 /* form3.txt */,
+				A2D487CA21C70DE100B38679 /* form4.txt */,
+				A2D487C521C70DE000B38679 /* form5.txt */,
+				A2D487CC21C70DE100B38679 /* form6.txt */,
+				A2D487C821C70DE000B38679 /* form7.txt */,
+				A2D487C921C70DE100B38679 /* form8.txt */,
+				A2D487CB21C70DE100B38679 /* form9.txt */,
 			);
 			path = Tetris3D;
 			sourceTree = "<group>";

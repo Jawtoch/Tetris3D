@@ -8,7 +8,7 @@
 #include "game.hpp"
 
 Game::Game() {
-    nbForms = 3;
+    nbForms = 9;
     difficuly = 3;
     windowsWidth = 600;
     formMaxSize = 3;
@@ -28,7 +28,7 @@ void Game::start() {
     SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
     
     FormGenerator generate = FormGenerator(containerMaxSize, formMaxSize);
-    for(int i = 0; i < nbForms; i++) {
+    for(int i = 1; i <= nbForms; i++) {
         Form *f = new Form(choose_form(i, formMaxSize), containerMaxSize, formMaxSize);
         generate.addForm(*f);
     }
