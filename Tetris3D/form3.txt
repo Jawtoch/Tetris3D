@@ -1,0 +1,10 @@
+x0y0z0
+x1y0z0
+x2y0z0
+x0y1z0
+x0y2z0
+x0y0z1
+x1y0z1
+x2y0z1
+x0y1z1
+x0y2z1
